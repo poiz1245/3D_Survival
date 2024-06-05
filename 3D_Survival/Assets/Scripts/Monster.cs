@@ -39,6 +39,7 @@ public class Monster : MonoBehaviour
 
         if (hp <= 0)
         {
+            Debug.Log("죽음");
             Invoke("Die", 3f);
         }
     }
@@ -69,6 +70,7 @@ public class Monster : MonoBehaviour
     }
     public void GetDamage(float damage)
     {
+        print("데미지 받는중");
         hp -= damage;
     }
 }
