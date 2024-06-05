@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public BulletPool bulletPool;
     public MonsterSpawner monsterSpawner;
     public BulletSpawner bulletSpawner;
+    public FieldAttack fieldAttack;
     public Player player;
     
 
