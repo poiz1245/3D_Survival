@@ -6,6 +6,7 @@ using UnityEngine;
 public class Monster : MonoBehaviour
 {
     [SerializeField] float moveSpeed;
+    [SerializeField] float rotationSpeed;
     public float hp { get; private set; }
 
     float maxHp = 100;
@@ -22,11 +23,11 @@ public class Monster : MonoBehaviour
     {
         Vector3 moveDir = GameManager.Instance.player.transform.position - transform.position;
 
-        Vector3 targetVelocity = moveDir * moveSpeed;
+        Vector3 targetVelocity = new Vector3(moveDir.x * moveSpeed, rigid.velocity.y, moveDir.z * moveSpeed);
         Vector3 velocityChange = (targetVelocity - rigid.velocity);
 
         Move(velocityChange);
-        Rotate(moveDir);
+        Rotate(moveDir * rotationSpeed);
     }
 
     private void OnEnable()
