@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
+    public int experiencePoints = 10;
+    public int moneyDrop = 10;
+    public GameObject experiencePrefab;
+    public GameObject moneyPrefab;
+
+
     Rigidbody rigid;
     Animator anim;
 
@@ -57,10 +63,17 @@ public class Monster : MonoBehaviour
         }
     }
 
+  
+
     private void Die()
     {
-        gameObject.SetActive(false);
+
+        moneyDrop = 10;
+        experiencePoints = 10;
+        DestroyObject(gameObject);
+        //gameObject.SetActive(false);
     }
+
     private void AnimationSetting()
     {
         if (hp <= 0)
@@ -84,6 +97,7 @@ public class Monster : MonoBehaviour
     }
     public void GetDamage(float damage)
     {
+        print("데미지 받는중");
         hp -= damage;
     }
 }
