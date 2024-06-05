@@ -35,6 +35,6 @@ public class GroundReposition : MonoBehaviour
         {
             transform.Translate(Vector3.forward * playerZDir * groundMoveDis);
         }
-        
+        //Time.timeScale = 0;
     }
 }
