@@ -1355,8 +1355,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87a32418c60e12348b33d20ed80b944a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  experiencePoints: 10
+  moneyDrop: 10
+  experiencePrefab: {fileID: 0}
+  moneyPrefab: {fileID: 0}
+  moveSpeed: 2
   rotationSpeed: 300
+  maxHp: 100
 --- !u!54 &-3013515478513667835
 Rigidbody:
   m_ObjectHideFlags: 0

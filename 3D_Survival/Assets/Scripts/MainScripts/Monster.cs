@@ -16,12 +16,12 @@ public class Monster : MonoBehaviour
 
     [SerializeField] float moveSpeed;
     [SerializeField] float rotationSpeed;
+    [SerializeField] float maxHp = 100;
 
-    float maxHp = 100;
     bool isDead = false;
 
     public float hp { get; private set; }
-    
+
 
     void Start()
     {
@@ -63,15 +63,15 @@ public class Monster : MonoBehaviour
         }
     }
 
-  
+
 
     private void Die()
     {
 
         moneyDrop = 10;
         experiencePoints = 10;
-        DestroyObject(gameObject);
-        //gameObject.SetActive(false);
+        gameObject.SetActive(false); //오브젝트 풀링 사용중 이므로, 파괴가 필요한 오브젝트는 SetActive(false)로 비활성화
+        //DestroyObject(gameObject);
     }
 
     private void AnimationSetting()
@@ -88,7 +88,7 @@ public class Monster : MonoBehaviour
     }
     public void Rotate(Vector3 moveDir)
     {
-        Quaternion deltaRotation = Quaternion.LookRotation(moveDir);
+        Quaternion deltaRotation = Quaternion.LookRotation(new Vector3(moveDir.x, rigid.velocity.y, moveDir.z));
         rigid.MoveRotation(deltaRotation);
     }
     public void Move(Vector3 velocityChange)
@@ -97,7 +97,6 @@ public class Monster : MonoBehaviour
     }
     public void GetDamage(float damage)
     {
-        print("데미지 받는중");
         hp -= damage;
     }
 }
