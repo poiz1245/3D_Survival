@@ -5,12 +5,17 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    [SerializeField] float moveSpeed;
-    public float hp { get; private set; }
-
-    float maxHp = 100;
     Rigidbody rigid;
     Animator anim;
+
+    [SerializeField] float moveSpeed;
+    [SerializeField] float rotationSpeed;
+
+    float maxHp = 100;
+    bool isDead = false;
+
+    public float hp { get; private set; }
+    
 
     void Start()
     {
@@ -22,16 +27,24 @@ public class Monster : MonoBehaviour
     {
         Vector3 moveDir = GameManager.Instance.player.transform.position - transform.position;
 
-        Vector3 targetVelocity = moveDir * moveSpeed;
+        Vector3 targetVelocity = new Vector3(moveDir.x * moveSpeed, rigid.velocity.y, moveDir.z * moveSpeed);
         Vector3 velocityChange = (targetVelocity - rigid.velocity);
 
-        Move(velocityChange);
-        Rotate(moveDir);
+        if (!isDead)
+        {
+            Move(velocityChange);
+            Rotate(moveDir * rotationSpeed);
+        }
+        else
+        {
+            rigid.velocity = Vector3.zero;
+        }
     }
 
     private void OnEnable()
     {
         hp = maxHp;
+        isDead = false;
     }
     private void Update()
     {
@@ -39,7 +52,7 @@ public class Monster : MonoBehaviour
 
         if (hp <= 0)
         {
-            Debug.Log("Á×À½");
+            isDead = true;
             Invoke("Die", 3f);
         }
     }
@@ -53,6 +66,7 @@ public class Monster : MonoBehaviour
         if (hp <= 0)
         {
             anim.SetBool("isDead", true);
+
         }
         else
         {
