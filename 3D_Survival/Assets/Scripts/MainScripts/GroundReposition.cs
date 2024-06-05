@@ -13,7 +13,6 @@ public class GroundReposition : MonoBehaviour
         {
             return;
         }
-        print("aaa");
 
         float diffX = Mathf.Abs(transform.position.x - playerPosition.position.x);
         float diffZ = Mathf.Abs(transform.position.z - playerPosition.position.z);
@@ -36,6 +35,5 @@ public class GroundReposition : MonoBehaviour
         {
             transform.Translate(Vector3.forward * playerZDir * groundMoveDis);
         }
-        
     }
 }
