@@ -227,7 +227,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 84329671}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MonsterSpawner05
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -258,7 +258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 102022188}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MonsterSpawner07
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -488,7 +488,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 201933283}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MonsterSpawner08
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -519,7 +519,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 301718807}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MonsterSpawner02
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -1057,7 +1057,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 514772465}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MonsterSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1096,7 +1096,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 532895830}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1129,7 +1129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 577248028}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MonsterSpawner01
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -1165,7 +1165,7 @@ GameObject:
   - component: {fileID: 678853108}
   - component: {fileID: 678853113}
   - component: {fileID: 678853112}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1959,7 +1959,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1137083350}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MonsterSpawner04
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -2113,7 +2113,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1274650452}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FirePoint02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2257,7 +2257,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1620089443}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MonsterSpawner03
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -2319,7 +2319,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1792244008}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MonsterSpawner06
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -2421,7 +2421,7 @@ GameObject:
   - component: {fileID: 1861405092}
   - component: {fileID: 1861405094}
   - component: {fileID: 1861405093}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2571,7 +2571,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2114035123}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FirePoint01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

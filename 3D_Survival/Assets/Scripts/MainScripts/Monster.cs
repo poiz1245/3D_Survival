@@ -10,33 +10,49 @@ public class Monster : MonoBehaviour
     public GameObject experiencePrefab;
     public GameObject moneyPrefab;
 
-
     Rigidbody rigid;
     Animator anim;
+    CapsuleCollider collider;
 
     [SerializeField] float moveSpeed;
-    [SerializeField] float rotationSpeed;
-    [SerializeField] float maxHp = 100;
+    [SerializeField] float maxHp = 100f;
+    [SerializeField] float attackRange;
+    [SerializeField] LayerMask playerLayer;
 
+    float rotationSpeed = 100f;
+    bool findPlayer = false;
     bool isDead = false;
 
-    public float hp { get; private set; }
+    public float hp;
 
-
-    void Start()
+    private void Awake()
     {
+        collider = GetComponent<CapsuleCollider>();
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+
+        hp = maxHp;
+        isDead = false;
+        collider.enabled = true;
+        rigid.isKinematic = false;
+    }
+    private void OnEnable()
+    {
+        hp = maxHp;
+        isDead = false;
+        collider.enabled = true;
+        rigid.isKinematic = false;
     }
 
     void FixedUpdate()
     {
         Vector3 moveDir = GameManager.Instance.player.transform.position - transform.position;
-
         Vector3 targetVelocity = new Vector3(moveDir.x * moveSpeed, rigid.velocity.y, moveDir.z * moveSpeed);
         Vector3 velocityChange = (targetVelocity - rigid.velocity);
 
-        if (!isDead)
+        ScanPlayer();
+
+        if (!isDead && !findPlayer)
         {
             Move(velocityChange);
             Rotate(moveDir * rotationSpeed);
@@ -47,11 +63,6 @@ public class Monster : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        hp = maxHp;
-        isDead = false;
-    }
     private void Update()
     {
         AnimationSetting();
@@ -62,29 +73,37 @@ public class Monster : MonoBehaviour
             Invoke("Die", 1.5f);
         }
     }
-
-
-
     private void Die()
     {
 
         moneyDrop = 10;
         experiencePoints = 10;
         gameObject.SetActive(false); //오브젝트 풀링 사용중 이므로, 파괴가 필요한 오브젝트는 SetActive(false)로 비활성화
+        collider.enabled = false;
+        rigid.isKinematic = true;
         //DestroyObject(gameObject);
     }
-
     private void AnimationSetting()
     {
         if (hp <= 0)
         {
             anim.SetBool("isDead", true);
-
+            anim.SetBool("isAttack", false);
+        }
+        else if (findPlayer)
+        {
+            anim.SetBool("isAttack", true);
         }
         else
         {
             anim.SetBool("isDead", false);
+            anim.SetBool("isAttack", false);
         }
+    }
+
+    public void ResetDieAnimation()
+    {
+        anim.SetBool("isDead", false);
     }
     public void Rotate(Vector3 moveDir)
     {
@@ -98,5 +117,18 @@ public class Monster : MonoBehaviour
     public void GetDamage(float damage)
     {
         hp -= damage;
+    }
+    public void ScanPlayer()
+    {
+        Collider[] target = Physics.OverlapSphere(transform.position, attackRange, playerLayer);
+
+        if (target.Length > 0)
+        {
+            findPlayer = true;
+        }
+        else
+        {
+            findPlayer = false;
+        }
     }
 }
