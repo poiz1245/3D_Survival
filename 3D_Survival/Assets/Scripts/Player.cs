@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-        AnimSet();
+        //AnimSet();
 
         if(hp <= 0)
         {
