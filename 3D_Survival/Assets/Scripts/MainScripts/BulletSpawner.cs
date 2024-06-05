@@ -11,6 +11,7 @@ public class BulletSpawner : MonoBehaviour
     float spawnTime;
     int count = 0;
     bool findTarget;
+
     private void FixedUpdate()
     {
         spawnTime -= Time.fixedDeltaTime;
