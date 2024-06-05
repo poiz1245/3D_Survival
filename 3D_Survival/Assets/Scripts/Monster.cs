@@ -35,7 +35,7 @@ public class Monster : MonoBehaviour
     }
     private void Update()
     {
-        //AnimationSetting();
+        AnimationSetting();
 
         if (hp <= 0)
         {

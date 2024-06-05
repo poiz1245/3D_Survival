@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterPrefabs:
-  - {fileID: 7174872809379373149, guid: 26efbc61d4dde89468aa608b11248dc9, type: 3}
+  - {fileID: 8430003551212272072, guid: 3f8c85127f8ebd2488337433046ed599, type: 3}
 --- !u!4 &110080152
 Transform:
   m_ObjectHideFlags: 0
@@ -1783,7 +1783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
-  spawnDelay: 1000
+  spawnDelay: 1
   spawnPoints:
   - {fileID: 577248028}
   - {fileID: 301718807}
