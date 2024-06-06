@@ -8,12 +8,11 @@ public class GameManager : MonoBehaviour
 
     public MonsterPool monsterPool;
     public BulletPool bulletPool;
-    public MonsterSpawner monsterSpawner;
-    public BulletSpawner bulletSpawner;
-    public FieldAttack fieldAttack;
     public Player player;
-    
 
+    [SerializeField] int maxStage;
+    public float gameTime { get; private set; }
+    public int stage { get; private set; }
     private void Awake()
     {
         if (Instance == null)
@@ -26,8 +25,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Update()
     {
-        
+        gameTime += Time.deltaTime;
+
+        float stageTime = 0;
+        stageTime += Time.deltaTime;
+
+        if (stageTime >= 30 && stage != maxStage)
+        {
+            stage++;
+            stageTime = 0;
+        }
     }
 }

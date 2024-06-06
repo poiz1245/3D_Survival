@@ -13,7 +13,7 @@ public class MonsterSpawner : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(MonsterSpawn(0, spawnDelay));
+        StartCoroutine(MonsterSpawn(GameManager.Instance.stage, spawnDelay));
     }
 
     IEnumerator MonsterSpawn(int index, float spawnDelay)
