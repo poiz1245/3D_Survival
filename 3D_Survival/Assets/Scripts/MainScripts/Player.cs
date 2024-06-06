@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
+    public float scanRadius;
     [SerializeField] float moveSpeed;
     [SerializeField] LayerMask targetLayer;
 
@@ -18,20 +19,16 @@ public class Player : MonoBehaviour
 
     public float hp;
 
-    public float damage { get; private set; }
     public bool findTarget { get; private set; }
     public Monster nearestTargetObject { get; private set; }
     public Transform nearestTargetPos { get; private set; }
-    public float scanRadius { get; private set; }
 
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
 
-        scanRadius = 3f;
         findTarget = false;
-        damage = 50f;
     }
     void Update()
     {
