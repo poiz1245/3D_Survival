@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class MoveToPlayer : MonoBehaviour
 {
-    [SerializeField] Transform playerPos;
-    
     void Update()
     {
-        transform.position = playerPos.position;
+        transform.position = GameManager.Instance.player.transform.position;
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class BulletSpawner : MonoBehaviour
 {
-    [SerializeField] Transform[] spawnPoints;
     [SerializeField] float spawnDelay;
 
     float spawnTime;
@@ -26,13 +25,7 @@ public class BulletSpawner : MonoBehaviour
 
     public void BulletSpawn(int index)
     {
-        if (count == 2)
-        {
-            count = 0;
-        }
-
         GameObject bullet = GameManager.Instance.bulletPool.GetBullet(index);
-        bullet.transform.position = spawnPoints[count].position;
-        count++;
+        bullet.transform.position = transform.position;
     }
 }
