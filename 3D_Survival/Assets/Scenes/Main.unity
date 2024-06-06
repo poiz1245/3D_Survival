@@ -745,7 +745,7 @@ MonoBehaviour:
   spawnPoints:
   - {fileID: 2114035123}
   - {fileID: 1274650452}
-  spawnDelay: 0.5
+  spawnDelay: 0.3
 --- !u!4 &393525215
 Transform:
   m_ObjectHideFlags: 0
@@ -1275,6 +1275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186d47775fd03834ca2e67809a00a158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scanRadius: 20
   moveSpeed: 10
   targetLayer:
     serializedVersion: 2

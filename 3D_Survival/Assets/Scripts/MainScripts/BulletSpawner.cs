@@ -26,7 +26,6 @@ public class BulletSpawner : MonoBehaviour
 
     public void BulletSpawn(int index)
     {
-        print(count);
         if (count == 2)
         {
             count = 0;
