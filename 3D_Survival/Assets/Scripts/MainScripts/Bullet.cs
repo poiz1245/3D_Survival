@@ -24,6 +24,11 @@ public class Bullet : MonoBehaviour
 
         targetPos = GameManager.Instance.player.nearestTargetPos;
 
+        if (targetPos == null)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
         float distance = Vector3.Distance(transform.position, targetPos.position);
         float offsetY = Mathf.Lerp(1f, 2f, distance / maxDistance);
 
@@ -33,7 +38,7 @@ public class Bullet : MonoBehaviour
         Vector3 p1 = Vector3.Lerp(transform.position, thirdPoint, time);
         Vector3 p2 = Vector3.Lerp(thirdPoint, targetPos.position, time);
 
-        transform.position = Vector3.Lerp(p1, p2, time);
+        transform.position = Vector3.Lerp(p1, p2, time / 2);
         time += Time.deltaTime;
     }
 
@@ -45,7 +50,7 @@ public class Bullet : MonoBehaviour
             monster.GetDamage(GameManager.Instance.player.damage / 2);
             gameObject.SetActive(false);
 
-            if (monster.hp <=0)
+            if (monster.hp <= 0)
             {
                 gameObject.SetActive(false);
             }

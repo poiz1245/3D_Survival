@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AreaMove : MonoBehaviour
+public class MoveToPlayer : MonoBehaviour
 {
     [SerializeField] Transform playerPos;
     

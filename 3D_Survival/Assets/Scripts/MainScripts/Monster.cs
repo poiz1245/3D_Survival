@@ -69,6 +69,7 @@ public class Monster : MonoBehaviour
 
         if (hp <= 0)
         {
+            hp = 0;
             isDead = true;
             Invoke("Die", 1.5f);
         }

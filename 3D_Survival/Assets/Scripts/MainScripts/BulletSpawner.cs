@@ -26,7 +26,11 @@ public class BulletSpawner : MonoBehaviour
 
     public void BulletSpawn(int index)
     {
-        if (count == 2) { count = 0; }
+        print(count);
+        if (count == 2)
+        {
+            count = 0;
+        }
 
         GameObject bullet = GameManager.Instance.bulletPool.GetBullet(index);
         bullet.transform.position = spawnPoints[count].position;

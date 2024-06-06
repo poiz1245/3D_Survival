@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 
     public float damage { get; private set; }
     public bool findTarget { get; private set; }
-    public GameObject nearestTargetObject { get; private set; }
+    public Monster nearestTargetObject { get; private set; }
     public Transform nearestTargetPos { get; private set; }
     public float scanRadius { get; private set; }
 
@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
         //AnimSet();
 
-        if(hp <= 0)
+        if (hp <= 0)
         {
             gameObject.SetActive(false);
         }
@@ -53,12 +53,15 @@ public class Player : MonoBehaviour
 
         Movement(velocityChange);
         Rotation(moveDir);
+        ScanTargets();
 
-        if (nearestTargetObject == null || !nearestTargetObject.activeSelf)
+        if (nearestTargetObject != null)
         {
-            ScanTargets();
+            if (nearestTargetObject.hp <= 0)
+            {
+                nearestTargetObject = null;
+            }
         }
-
     }
     private void AnimSet()
     {
@@ -91,16 +94,18 @@ public class Player : MonoBehaviour
         {
             float closestDistance = Mathf.Infinity;
             Transform closestTarget = null;
-            GameObject closestTargetObject = null;
+            Monster closestTargetObject = null;
 
             foreach (Collider target in targets)
             {
-                float distance = Vector3.Distance(transform.position, target.transform.position);
-                if (distance < closestDistance)
+                Monster monster = target.GetComponent<Monster>();
+                float distance = Vector3.Distance(transform.position, monster.transform.position);
+
+                if (distance < closestDistance && monster.hp > 0)
                 {
                     closestDistance = distance;
-                    closestTarget = target.transform;
-                    closestTargetObject = target.gameObject;
+                    closestTarget = monster.transform;
+                    closestTargetObject = monster;
                 }
             }
 
