@@ -19,9 +19,25 @@ public class Player : MonoBehaviour
 
     public float hp;
 
+    public delegate void NearestTargetChanged(Monster nearestTarget);
+    public event NearestTargetChanged OnNearestTargetChanged;
+
+    public Monster changeTarget
+    {
+        get { return nearestTargetObject; }
+        set
+        {
+            if (nearestTargetObject != value)
+            {
+                nearestTargetObject = value;
+                OnNearestTargetChanged?.Invoke(nearestTargetObject);
+            }
+        }
+    }
     public bool findTarget { get; private set; }
     public Monster nearestTargetObject { get; private set; }
     public Transform nearestTargetPos { get; private set; }
+
 
     private void Start()
     {
@@ -52,11 +68,11 @@ public class Player : MonoBehaviour
         Rotation(moveDir);
         ScanTargets();
 
-        if (nearestTargetObject != null)
+        if (changeTarget != null)
         {
-            if (nearestTargetObject.hp <= 0)
+            if (changeTarget.hp <= 0)
             {
-                nearestTargetObject = null;
+                changeTarget = null;
             }
         }
     }
@@ -107,7 +123,7 @@ public class Player : MonoBehaviour
             }
 
             nearestTargetPos = closestTarget;
-            nearestTargetObject = closestTargetObject;
+            changeTarget = closestTargetObject;
             findTarget = true;
         }
         else

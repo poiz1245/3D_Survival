@@ -19,6 +19,21 @@ public class Bullet : MonoBehaviour
     {
         maxDistance = GameManager.Instance.player.scanRadius;
     }
+    void TargetChange(Monster target)
+    {
+        print("aaa");
+        gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        GameManager.Instance.player.OnNearestTargetChanged += TargetChange;
+    }
+    private void OnDisable()
+    {
+        GameManager.Instance.player.OnNearestTargetChanged -= TargetChange;
+
+    }
     void Update()
     {
         if (time > 1)
@@ -48,6 +63,7 @@ public class Bullet : MonoBehaviour
         transform.position = Vector3.Lerp(p1, p2, time / 2);*/
         time += Time.deltaTime;
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Monster"))
