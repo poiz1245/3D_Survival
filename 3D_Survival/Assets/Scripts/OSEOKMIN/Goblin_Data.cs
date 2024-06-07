@@ -19,7 +19,7 @@ public class Goblin_Data : MonoBehaviour
     void DropExperience()
     {
         GameObject experience = Instantiate(experiencePrefab, transform.position, Quaternion.identity);
-        GoblinExperience expScript = experience.GetComponent<GoblinExperience>();
+        ExpObject expScript = experience.GetComponent<ExpObject>();
         if (expScript != null)
         {
             expScript.SetAmount(experienceAmount);
@@ -30,15 +30,4 @@ public class Goblin_Data : MonoBehaviour
     {
         Instantiate(MoneyPrefab, transform.position, Quaternion.identity);
     }
-    //// Start is called before the first frame update
-    //void Start()
-    //{
-        
-    //}
-
-    //// Update is called once per frame
-    //void Update()
-    //{
-        
-    //}
 }
