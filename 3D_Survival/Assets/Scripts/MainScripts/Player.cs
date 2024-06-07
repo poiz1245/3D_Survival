@@ -18,7 +18,6 @@ public class Player : MonoBehaviour
 
     [SerializeField] float moveSpeed;
     [SerializeField] int currentExperience = 0;
-    [SerializeField] AoE aoe;
 
     LayerMask targetLayer;
     LayerMask dropObjectLayer;
