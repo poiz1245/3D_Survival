@@ -10,8 +10,11 @@ public class Player : MonoBehaviour
     public float monsterScanRadius;
     public float objectScanRadius;
     public float hp;
+    public float maxHp;
     public int level = 1;
     public int maxExperience = 100;
+    public float playerAttackPower;
+    public float playerShield;
 
     [SerializeField] float moveSpeed;
     [SerializeField] int currentExperience = 0;
@@ -51,6 +54,7 @@ public class Player : MonoBehaviour
         targetLayer = LayerMask.GetMask("Monster");
         dropObjectLayer = LayerMask.GetMask("Exp");
         findTarget = false;
+
     }
     void Update()
     {
