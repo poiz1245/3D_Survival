@@ -119,13 +119,15 @@ public class Player : MonoBehaviour
             foreach (Collider target in targets)
             {
                 Monster monster = target.GetComponent<Monster>();
-                float distance = Vector3.Distance(transform.position, monster.transform.position);
-
-                if (distance < closestDistance && monster.hp > 0)
+                if (monster != null)
                 {
-                    closestDistance = distance;
-                    closestTarget = monster.transform;
-                    closestTargetObject = monster;
+                    float distance = Vector3.Distance(transform.position, monster.transform.position);
+                    if (distance < closestDistance && monster.hp > 0)
+                    {
+                        closestDistance = distance;
+                        closestTarget = monster.transform;
+                        closestTargetObject = monster;
+                    }
                 }
             }
 
@@ -154,6 +156,7 @@ public class Player : MonoBehaviour
     }
     public void GetDamage(float damage)
     {
+        print("플레이어 데미지");
         hp -= damage;
     }
     public void AddExperience(int amount)

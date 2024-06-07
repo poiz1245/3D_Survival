@@ -1365,6 +1365,7 @@ MonoBehaviour:
     m_Bits: 8
   experienceAmount: 10
   moneyAmount: 0
+  damage: 20
   hp: 100
 --- !u!54 &-3013515478513667835
 Rigidbody:

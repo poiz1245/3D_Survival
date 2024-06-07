@@ -11,11 +11,10 @@ public class MonsterSpawner : MonoBehaviour
     [Header("Monster Pool")]
     [SerializeField] Transform[] spawnPoints;
 
-    void Start()
+    public void SpawnMonster()
     {
         StartCoroutine(MonsterSpawn(GameManager.Instance.stage, spawnDelay));
     }
-
     IEnumerator MonsterSpawn(int index, float spawnDelay)
     {
         while (true)
