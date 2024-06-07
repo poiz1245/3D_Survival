@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] float moveSpeed;
     [SerializeField] int currentExperience = 0;
+    [SerializeField] AoE aoe;
 
     LayerMask targetLayer;
     LayerMask dropObjectLayer;
@@ -46,7 +47,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         targetLayer = LayerMask.GetMask("Monster");
         dropObjectLayer = LayerMask.GetMask("Exp");
         findTarget = false;
@@ -55,7 +56,7 @@ public class Player : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-        //AnimSet();
+        AnimSet();
 
         if (hp <= 0)
         {
