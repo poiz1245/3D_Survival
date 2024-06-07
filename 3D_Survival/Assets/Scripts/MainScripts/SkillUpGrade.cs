@@ -7,22 +7,32 @@ public class SkillUpGrade : MonoBehaviour
 
     public void SowrdUp()
     {
-        //스폰 갯수 하나씩 증가시키기
+        WeaponManager.instance.UpgradeWeapon(0);
+        //level1 : 스폰
+        //level2 : 스폰
+        //level3 : 회전스피드 증가
+        //level4 : 크기 증가
     }
     public void AoEUp()
     {
-        //범위증가
-        //딜타임감소
-        //데미지증가
-        //몬스터 슬로우
+        //level1 : 소환
+        //level2 : 범위 증가
+        //level4 : 데미지 증가
+        //level3 : 데미지 쿨타임 감소
     }
     public void MissileUp()
     {
-
+        //level1 : 공속 증가
+        //level2 : 발사 방향 추가
+        //level3 : 데미지 증가
+        //level4 : 발사 방향 추가
     }
     public void HomingLaucherUp()
     {
-
+        //level1 : 소환
+        //level2 : 발사체 증가
+        //level3 : 발사 속도 증가
+        //level4 : 데미지 증가
     }
     public void PlayerMaxHpUp()
     {
