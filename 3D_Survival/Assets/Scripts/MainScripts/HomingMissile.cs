@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
 
-public class Bullet : MonoBehaviour
+public class HomingMissile : MonoBehaviour
 {
     public float speed;
 

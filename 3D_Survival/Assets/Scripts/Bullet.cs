@@ -5,7 +5,7 @@ using System.ComponentModel;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
 
-public class Missile : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
     [SerializeField] float speed;
     [SerializeField] float damage;

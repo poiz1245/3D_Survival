@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BulletSpawner : MonoBehaviour
+public class HomingLauncher : MonoBehaviour
 {
     [SerializeField] float spawnDelay;
 
     float spawnTime;
-    int count = 0;
     bool findTarget;
 
     private void FixedUpdate()
@@ -18,12 +17,12 @@ public class BulletSpawner : MonoBehaviour
 
         if (spawnTime <= 0 && findTarget) // ¸ó½ºÅÍ ³¢¸® °ãÃÄ¼­ Å¸°ÙÀÌ ¾È¸Â¾Æ¼­ ½ºÄµÀÌ ¾ÈµÊ
         {
-            BulletSpawn(0);
+            HomingMissileSpawn(0);
             spawnTime = spawnDelay;
         }
     }
 
-    public void BulletSpawn(int index)
+    public void HomingMissileSpawn(int index)
     {
         GameObject bullet = GameManager.Instance.bulletPool.GetBullet(index);
         bullet.transform.position = transform.position;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MissileSpawner : MonoBehaviour
+public class Gun : MonoBehaviour
 {
     [SerializeField] float spawnDelay;
     float spawnTime;
@@ -13,12 +13,12 @@ public class MissileSpawner : MonoBehaviour
 
         if (spawnTime <= 0) 
         {
-            MissileSpawn(1);
+            BulletSpawn(1);
             spawnTime = spawnDelay;
         }
     }
 
-    public void MissileSpawn(int index)
+    public void BulletSpawn(int index)
     {
         GameObject missile = GameManager.Instance.bulletPool.GetBullet(index);
         missile.transform.position = transform.position;
