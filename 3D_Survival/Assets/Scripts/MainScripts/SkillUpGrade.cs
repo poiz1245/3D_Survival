@@ -15,6 +15,7 @@ public class SkillUpGrade : MonoBehaviour
     }
     public void AoEUp()
     {
+        WeaponManager.instance.UpgradeWeapon(1);
         //level1 : 소환
         //level2 : 범위 증가
         //level4 : 데미지 증가
