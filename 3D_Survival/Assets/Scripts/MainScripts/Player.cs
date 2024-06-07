@@ -8,16 +8,19 @@ using UnityEngine.UIElements;
 public class Player : MonoBehaviour
 {
     public float scanRadius;
+    public float hp;
+    public int level = 1;
+    public int maxExperience = 100;
+
     [SerializeField] float moveSpeed;
     [SerializeField] LayerMask targetLayer;
+    [SerializeField] int currentExperience = 0;
 
     Rigidbody rigid;
     Animator anim;
 
     float horizontalInput;
     float verticalInput;
-
-    public float hp;
 
     public delegate void NearestTargetChanged(Monster nearestTarget);
     public event NearestTargetChanged OnNearestTargetChanged;
@@ -37,7 +40,6 @@ public class Player : MonoBehaviour
     public bool findTarget { get; private set; }
     public Monster nearestTargetObject { get; private set; }
     public Transform nearestTargetPos { get; private set; }
-
 
     private void Start()
     {
@@ -135,5 +137,19 @@ public class Player : MonoBehaviour
     public void GetDamage(float damage)
     {
         hp -= damage;
+    }
+    public void AddExperience(int amount)
+    {
+        currentExperience += amount;
+        if (currentExperience >= maxExperience)
+        {
+            LevelUp();
+        }
+    }
+    void LevelUp()
+    {
+        level++;
+        currentExperience = 0;
+        maxExperience += 50;
     }
 }
