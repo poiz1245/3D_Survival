@@ -2,29 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AoE : MonoBehaviour
+public class AoE : Weapon
 {
-    [SerializeField] LayerMask targetLayer;
+    public float coolTime;
+
     [SerializeField] GameObject particle;
 
-    public float aoeRadius = 0f;
-    public float damage = 0f;
-    public float coolTime = 0f;
+    LayerMask targetLayer;
 
+    public AoE(int level, float speed, float damage, float range, float coolTime) : base(level, speed, damage, range)
+    {
+        this.level = level;
+        this.range = range;
+        this.damage = damage;
+        this.coolTime = coolTime;
+    }
+    public override void WeaponUpGrade()
+    {
+        base.WeaponUpGrade();
+
+        float increasedAmount = range;
+        Vector3 particleScale = particle.transform.localScale;
+        particle.transform.localScale += particleScale * increasedAmount; // 1.5πË ¡ı∞°
+    }
     private void Start()
     {
         InvokeRepeating("Attack", 0f, coolTime);
+        targetLayer = LayerMask.GetMask("Monster");
     }
-    public void UpgradeSkill(float upgradePercent)
-    {
-        float increasedAmount = upgradePercent / 100;
-        Vector3 particleScale = particle.transform.localScale;
-        aoeRadius += aoeRadius * increasedAmount;
-        particle.transform.localScale += particleScale * increasedAmount;
-    }
+
     void Attack()
     {
-        Collider[] targets = Physics.OverlapSphere(transform.position, aoeRadius, targetLayer);
+        Collider[] targets = Physics.OverlapSphere(transform.position, range, targetLayer);
 
         foreach (Collider target in targets)
         {
@@ -32,9 +41,4 @@ public class AoE : MonoBehaviour
             monsterScript.GetDamage(damage);
         }
     }
-    /*    private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, aoeRadius);
-        }*/
 }
