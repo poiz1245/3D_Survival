@@ -427,9 +427,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4c5d6869c01e74787357dff2407ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoints:
-  - {fileID: 917220837}
-  - {fileID: 1299921787}
   spawnDelay: 1
 --- !u!4 &265945399
 Transform:
@@ -1194,6 +1191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186d47775fd03834ca2e67809a00a158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scanRadius: 0
   moveSpeed: 10
   targetLayer:
     serializedVersion: 2
@@ -1582,9 +1580,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPool: {fileID: 1581442584}
   bulletPool: {fileID: 918741053}
-  monsterSpawner: {fileID: 0}
-  bulletSpawner: {fileID: 265945398}
+  missilePool: {fileID: 0}
   player: {fileID: 1239015508}
+  maxStage: 0
 --- !u!4 &1487179363
 Transform:
   m_ObjectHideFlags: 0
@@ -2111,7 +2109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0affefa3bded35419fcdda7a422df8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPos: {fileID: 1239015507}
 --- !u!54 &1850528019
 Rigidbody:
   m_ObjectHideFlags: 0
