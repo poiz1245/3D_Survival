@@ -18,6 +18,7 @@ public class MonsterRanged : MonoBehaviour
     [SerializeField] LayerMask playerLayer;
     [SerializeField] int experienceAmount; // 기본 경험치 양
     [SerializeField] int moneyAmount;
+    [SerializeField] float damage;
 
     float rotationSpeed = 100f;
     bool findPlayer = false;
@@ -152,6 +153,13 @@ public class MonsterRanged : MonoBehaviour
         else
         {
             findPlayer = false;
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            GameManager.Instance.player.GetDamage(damage);
         }
     }
 }

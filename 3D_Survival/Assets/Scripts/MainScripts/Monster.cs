@@ -167,4 +167,11 @@ public class Monster : MonoBehaviour
         }
         gameObject.SetActive(false);
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            GameManager.Instance.player.GetDamage(damage);
+        }
+    }
 }
