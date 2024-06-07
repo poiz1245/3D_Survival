@@ -14,10 +14,10 @@ public class PlayerData : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 5f);
         foreach (var hitCollider in hitColliders)
         {
-            GoblinExperience goblinExp = hitCollider.GetComponent<GoblinExperience>();
+            ExpObject goblinExp = hitCollider.GetComponent<ExpObject>();
             if (goblinExp != null)
             {
-                goblinExp.AttractToPlayer(transform);
+                //goblinExp.AttractToPlayer(transform);
             }
         }
     }

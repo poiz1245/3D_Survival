@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     public MonsterPool monsterPool;
     public BulletPool bulletPool;
+    public DropObjectPool dropObjectPool;
     public Player player;
 
     [SerializeField] int maxStage;

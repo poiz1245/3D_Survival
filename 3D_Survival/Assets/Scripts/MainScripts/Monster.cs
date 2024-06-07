@@ -7,17 +7,18 @@ public class Monster : MonoBehaviour
 {
     public int experiencePoints = 10;
     public int moneyDrop = 10;
-    public GameObject experiencePrefab;
-    public GameObject moneyPrefab;
+
 
     Rigidbody rigid;
     Animator anim;
-    CapsuleCollider collider;
+    new CapsuleCollider collider;
 
     [SerializeField] float moveSpeed;
     [SerializeField] float maxHp = 100f;
     [SerializeField] float attackRange;
     [SerializeField] LayerMask playerLayer;
+    [SerializeField] int experienceAmount; // 기본 경험치 양
+    [SerializeField] int moneyAmount;
 
     float rotationSpeed = 100f;
     bool findPlayer = false;
@@ -25,6 +26,20 @@ public class Monster : MonoBehaviour
 
     public float hp;
 
+    public delegate void MonsterStateChange(bool isDead);
+    public event MonsterStateChange OnMonsterStateChanged;
+    public bool monsterState
+    {
+        get { return isDead; }
+        set
+        {
+            if (isDead != value)
+            {
+                isDead = value;
+                OnMonsterStateChanged?.Invoke(isDead);
+            }
+        }
+    }
     private void Awake()
     {
         collider = GetComponent<CapsuleCollider>();
@@ -32,18 +47,23 @@ public class Monster : MonoBehaviour
         anim = GetComponent<Animator>();
 
         hp = maxHp;
-        isDead = false;
+        monsterState = false;
         collider.enabled = true;
         rigid.isKinematic = false;
     }
     private void OnEnable()
     {
         hp = maxHp;
-        isDead = false;
+        monsterState = false;
         collider.enabled = true;
         rigid.isKinematic = false;
-    }
 
+        OnMonsterStateChanged += DropExp;
+    }
+    private void OnDisable()
+    {
+        OnMonsterStateChanged -= DropExp;
+    }
     void FixedUpdate()
     {
         Vector3 moveDir = GameManager.Instance.player.transform.position - transform.position;
@@ -62,7 +82,6 @@ public class Monster : MonoBehaviour
             rigid.velocity = Vector3.zero;
         }
     }
-
     private void Update()
     {
         AnimationSetting();
@@ -70,7 +89,7 @@ public class Monster : MonoBehaviour
         if (hp <= 0)
         {
             hp = 0;
-            isDead = true;
+            monsterState = true;
             Invoke("Die", 1.5f);
         }
     }
@@ -81,7 +100,18 @@ public class Monster : MonoBehaviour
         gameObject.SetActive(false); //오브젝트 풀링 사용중 이므로, 파괴가 필요한 오브젝트는 SetActive(false)로 비활성화
         collider.enabled = false;
         rigid.isKinematic = true;
-        //DestroyObject(gameObject);
+    }
+    void DropExp(bool monsterState)
+    {
+        GameObject exp = GameManager.Instance.dropObjectPool.GetDropObject(1);
+        ExpObject expScript = exp.GetComponent<ExpObject>();
+
+        if (expScript != null)
+        {
+            expScript.SetAmount(experienceAmount);
+        }
+
+        exp.transform.position = transform.position;
     }
     private void AnimationSetting()
     {
@@ -99,11 +129,6 @@ public class Monster : MonoBehaviour
             anim.SetBool("isDead", false);
             anim.SetBool("isAttack", false);
         }
-    }
-
-    public void ResetDieAnimation()
-    {
-        anim.SetBool("isDead", false);
     }
     public void Rotate(Vector3 moveDir)
     {
