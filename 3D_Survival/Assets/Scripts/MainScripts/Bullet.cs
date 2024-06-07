@@ -17,7 +17,7 @@ public class Bullet : MonoBehaviour
     float maxDistance;
     private void Start()
     {
-        maxDistance = GameManager.Instance.player.scanRadius;
+        maxDistance = GameManager.Instance.player.monsterScanRadius;
     }
     void TargetChange(Monster target)
     {

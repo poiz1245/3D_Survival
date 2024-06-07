@@ -1324,7 +1324,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186d47775fd03834ca2e67809a00a158, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scanRadius: 20
+  monsterScanRadius: 10
+  objectScanRadius: 5
   hp: 100
   level: 1
   maxExperience: 100
@@ -1332,6 +1333,9 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
+  dropObjectLayer:
+    serializedVersion: 2
+    m_Bits: 256
   currentExperience: 0
 --- !u!54 &678853113
 Rigidbody:
