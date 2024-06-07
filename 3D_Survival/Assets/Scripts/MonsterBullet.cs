@@ -20,19 +20,6 @@ public class MonsterBullet : MonoBehaviour
             aliveTime = 0;
         }
     }
-   /* private void OnCollisionEnter(Collision other)
-    {
-        print("콜라이더 접촉");
-        if (other.gameObject.CompareTag("Player"))
-        {
-            Player player = other.gameObject.GetComponent<Player>();
-            if (player != null)
-            {
-                player.GetDamage(damage);
-            }
-            gameObject.SetActive(false);
-        }
-    }*/
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
