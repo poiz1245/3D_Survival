@@ -19,7 +19,7 @@ public class ExpObject : MonoBehaviour
     }
     void Update()
     {
-        ScanPlayer();
+        //ScanPlayer();
     }
 
     public void SetAmount(int expAmount) //몬스터 죽을 때 몬스터가 가진 경험치 값을 오브젝트에 할당받는 함수
@@ -36,7 +36,11 @@ public class ExpObject : MonoBehaviour
         }
     }
 
-    void ScanPlayer()
+    public void MoveToPlayer()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, attractSpeed * Time.deltaTime);
+    }
+    /*void ScanPlayer()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, scanRadious, playerLayer);
 
@@ -48,7 +52,7 @@ public class ExpObject : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, attractSpeed * Time.deltaTime);
             }
         }
-    }
+    }*/
     /*    public void AttractToPlayer(Transform player)
         {
             playerTransform = player;
