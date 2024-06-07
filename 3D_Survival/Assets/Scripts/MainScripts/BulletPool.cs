@@ -33,6 +33,7 @@ public class BulletPool : MonoBehaviour
             {
                 select = obj;
                 select.SetActive(true);
+                print(select.activeSelf);
                 break;
             }
         }

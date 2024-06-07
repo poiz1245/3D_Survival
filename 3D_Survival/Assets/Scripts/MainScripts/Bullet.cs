@@ -21,7 +21,6 @@ public class Bullet : MonoBehaviour
     }
     void TargetChange(Monster target)
     {
-        print("aaa");
         gameObject.SetActive(false);
     }
 
