@@ -7,13 +7,15 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
-    public float scanRadius;
+    public float monsterScanRadius;
+    public float objectScanRadius;
     public float hp;
     public int level = 1;
     public int maxExperience = 100;
 
     [SerializeField] float moveSpeed;
     [SerializeField] LayerMask targetLayer;
+    [SerializeField] LayerMask dropObjectLayer;
     [SerializeField] int currentExperience = 0;
 
     Rigidbody rigid;
@@ -69,6 +71,7 @@ public class Player : MonoBehaviour
         Movement(velocityChange);
         Rotation(moveDir);
         ScanTargets();
+        ScanDropObject();
 
         if (changeTarget != null)
         {
@@ -103,7 +106,7 @@ public class Player : MonoBehaviour
     }
     void ScanTargets()
     {
-        Collider[] targets = Physics.OverlapSphere(transform.position, scanRadius, targetLayer);
+        Collider[] targets = Physics.OverlapSphere(transform.position, monsterScanRadius, targetLayer);
 
         if (targets.Length > 0)
         {
@@ -132,6 +135,19 @@ public class Player : MonoBehaviour
         {
             nearestTargetPos = null;
             findTarget = false;
+        }
+    }
+    void ScanDropObject()
+    {
+        Collider[] targetObject = Physics.OverlapSphere(transform.position, objectScanRadius, dropObjectLayer);
+
+        if(targetObject.Length > 0)
+        {
+            foreach (Collider target in targetObject)
+            {
+                ExpObject expObject = target.GetComponent<ExpObject>();
+                expObject.MoveToPlayer();
+            }
         }
     }
     public void GetDamage(float damage)
