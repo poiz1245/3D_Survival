@@ -31,6 +31,11 @@ public class Missile : MonoBehaviour
             {
                 monster.GetDamage(damage);
             }
+            MonsterRanged monsterRanged = other.gameObject.GetComponent<MonsterRanged>();
+            if (monsterRanged != null)
+            {
+                monsterRanged.GetDamage(damage);
+            }
             gameObject.SetActive(false);
         }
     }

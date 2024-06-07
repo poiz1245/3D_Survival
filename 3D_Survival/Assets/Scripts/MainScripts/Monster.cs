@@ -19,6 +19,7 @@ public class Monster : MonoBehaviour
     [SerializeField] LayerMask playerLayer;
     [SerializeField] int experienceAmount; // 기본 경험치 양
     [SerializeField] int moneyAmount;
+    [SerializeField] int damage;
 
     float rotationSpeed = 100f;
     bool findPlayer = false;
@@ -155,5 +156,15 @@ public class Monster : MonoBehaviour
         {
             findPlayer = false;
         }
+    }
+    private void Attack()
+    {
+        Collider playerCollider = GameObject.FindWithTag("Player").GetComponent<Collider>();
+        Player player = playerCollider.gameObject.GetComponent<Player>();
+        if (player != null)
+        {
+            player.GetDamage(damage);
+        }
+        gameObject.SetActive(false);
     }
 }
