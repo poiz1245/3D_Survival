@@ -11,11 +11,9 @@ public class ExpObject : MonoBehaviour
 
     int amount;
     Transform playerTransform;
-    LayerMask playerLayer;
     private void Awake()
     {
         playerTransform = GameManager.Instance.player.transform;
-        playerLayer = LayerMask.GetMask("Player");
     }
     void Update()
     {

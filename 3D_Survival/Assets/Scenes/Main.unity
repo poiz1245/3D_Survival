@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterPrefabs:
-  - {fileID: 8430003551212272072, guid: 3f8c85127f8ebd2488337433046ed599, type: 3}
+  - {fileID: 7614642148526892867, guid: fdc0fbc51767faa48975925d7164fb27, type: 3}
 --- !u!4 &110080152
 Transform:
   m_ObjectHideFlags: 0
@@ -1330,12 +1330,6 @@ MonoBehaviour:
   level: 1
   maxExperience: 100
   moveSpeed: 10
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  dropObjectLayer:
-    serializedVersion: 2
-    m_Bits: 256
   currentExperience: 0
 --- !u!54 &678853113
 Rigidbody:

@@ -14,10 +14,10 @@ public class Player : MonoBehaviour
     public int maxExperience = 100;
 
     [SerializeField] float moveSpeed;
-    [SerializeField] LayerMask targetLayer;
-    [SerializeField] LayerMask dropObjectLayer;
     [SerializeField] int currentExperience = 0;
 
+    LayerMask targetLayer;
+    LayerMask dropObjectLayer;
     Rigidbody rigid;
     Animator anim;
 
@@ -47,7 +47,8 @@ public class Player : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
-
+        targetLayer = LayerMask.GetMask("Monster");
+        dropObjectLayer = LayerMask.GetMask("Exp");
         findTarget = false;
     }
     void Update()
@@ -141,7 +142,7 @@ public class Player : MonoBehaviour
     {
         Collider[] targetObject = Physics.OverlapSphere(transform.position, objectScanRadius, dropObjectLayer);
 
-        if(targetObject.Length > 0)
+        if (targetObject.Length > 0)
         {
             foreach (Collider target in targetObject)
             {

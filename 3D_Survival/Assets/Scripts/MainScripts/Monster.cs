@@ -93,7 +93,7 @@ public class Monster : MonoBehaviour
             Invoke("Die", 1.5f);
         }
     }
-    private void Die()
+    void Die()
     {
         moneyDrop = 10;
         experiencePoints = 10;
@@ -113,7 +113,7 @@ public class Monster : MonoBehaviour
 
         exp.transform.position = transform.position;
     }
-    private void AnimationSetting()
+    void AnimationSetting()
     {
         if (hp <= 0)
         {
@@ -130,12 +130,12 @@ public class Monster : MonoBehaviour
             anim.SetBool("isAttack", false);
         }
     }
-    public void Rotate(Vector3 moveDir)
+    void Rotate(Vector3 moveDir)
     {
         Quaternion deltaRotation = Quaternion.LookRotation(new Vector3(moveDir.x, rigid.velocity.y, moveDir.z));
         rigid.MoveRotation(deltaRotation);
     }
-    public void Move(Vector3 velocityChange)
+    void Move(Vector3 velocityChange)
     {
         rigid.AddForce(velocityChange, ForceMode.VelocityChange);
     }
@@ -143,7 +143,7 @@ public class Monster : MonoBehaviour
     {
         hp -= damage;
     }
-    public void ScanPlayer()
+    void ScanPlayer()
     {
         Collider[] target = Physics.OverlapSphere(transform.position, attackRange, playerLayer);
 

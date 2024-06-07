@@ -26,4 +26,5 @@ public class MonsterSpawner : MonoBehaviour
             monster.transform.position = spawnPoints[rnd].position;
         }
     }
+
 }
