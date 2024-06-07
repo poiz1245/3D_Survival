@@ -22,5 +22,6 @@ public class MissileSpawner : MonoBehaviour
     {
         GameObject missile = GameManager.Instance.bulletPool.GetBullet(index);
         missile.transform.position = transform.position;
+        missile.transform.rotation = transform.rotation;
     }
 }
