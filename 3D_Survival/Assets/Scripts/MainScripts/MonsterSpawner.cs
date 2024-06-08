@@ -13,17 +13,111 @@ public class MonsterSpawner : MonoBehaviour
 
     public void SpawnMonster()
     {
-        StartCoroutine(MonsterSpawn(GameManager.Instance.stage, spawnDelay));
+        StartCoroutine(StageMonsterSpawn(GameManager.Instance.stage, spawnDelay));
     }
-    IEnumerator MonsterSpawn(int index, float spawnDelay)
+    IEnumerator StageMonsterSpawn(int index, float spawnDelay)
     {
-        while (true)
+        int rnd = Random.Range(0, spawnPoints.Length);
+        GameObject monster = GameManager.Instance.monsterPool.GetMonster(0);
+        float stageDelay = spawnDelay - (index * 0.5f);
+        switch (index)
         {
-            yield return new WaitForSeconds(spawnDelay);
-            int rnd = Random.Range(0, spawnPoints.Length);
-            GameObject monster = GameManager.Instance.monsterPool.GetMonster(index);
-            monster.transform.position = spawnPoints[rnd].position;
+            case 0:
+                while (true)
+                {
+                    print("스테이지"+ index + "몬스터스폰");
+                    yield return new WaitForSeconds(stageDelay);
+                    monster = GameManager.Instance.monsterPool.GetMonster(0);
+                    monster.transform.position = spawnPoints[rnd].position;
+                }
+            case 1:
+                while (true)
+                {
+                    print("스테이지" + index + "몬스터스폰");
+                    yield return new WaitForSeconds(stageDelay);
+                    monster = GameManager.Instance.monsterPool.GetMonster(0);
+                    monster = GameManager.Instance.monsterPool.GetMonster(1);
+                    monster.transform.position = spawnPoints[rnd].position;
+                }
+            case 2:
+                while (true)
+                {
+                    print("스테이지" + index + "몬스터스폰");
+                    yield return new WaitForSeconds(stageDelay);
+                    monster = GameManager.Instance.monsterPool.GetMonster(0);
+                    monster = GameManager.Instance.monsterPool.GetMonster(1);
+                    monster.transform.position = spawnPoints[rnd].position;
+                }
+            case 3:
+                while (true)
+                {
+                    print("스테이지" + index + "몬스터스폰");
+                    yield return new WaitForSeconds(stageDelay);
+                    monster = GameManager.Instance.monsterPool.GetMonster(0);
+                    monster = GameManager.Instance.monsterPool.GetMonster(1);
+                    monster.transform.position = spawnPoints[rnd].position;
+                }
+            case 4:
+                while (true)
+                {
+                    print("스테이지" + index + "몬스터스폰");
+                    yield return new WaitForSeconds(stageDelay);
+                    monster = GameManager.Instance.monsterPool.GetMonster(0);
+                    monster = GameManager.Instance.monsterPool.GetMonster(1);
+                    monster.transform.position = spawnPoints[rnd].position;
+                }
+            case 5:
+                while (true)
+                {
+                    print("스테이지" + index + "몬스터스폰");
+                    yield return new WaitForSeconds(stageDelay);
+                    monster = GameManager.Instance.monsterPool.GetMonster(0);
+                    monster = GameManager.Instance.monsterPool.GetMonster(1);
+                    monster.transform.position = spawnPoints[rnd].position;
+                }
+            case 6:
+                while (true)
+                {
+                    print("스테이지" + index + "몬스터스폰");
+                    yield return new WaitForSeconds(stageDelay);
+                    monster = GameManager.Instance.monsterPool.GetMonster(0);
+                    monster = GameManager.Instance.monsterPool.GetMonster(1);
+                    monster.transform.position = spawnPoints[rnd].position;
+                }
+            case 7:
+                while (true)
+                {
+                    print("스테이지" + index + "몬스터스폰");
+                    yield return new WaitForSeconds(stageDelay);
+                    monster = GameManager.Instance.monsterPool.GetMonster(0);
+                    monster = GameManager.Instance.monsterPool.GetMonster(1);
+                    monster.transform.position = spawnPoints[rnd].position;
+                }
+            case 8:
+                while (true)
+                {
+                    print("스테이지" + index + "몬스터스폰");
+                    yield return new WaitForSeconds(stageDelay);
+                    monster = GameManager.Instance.monsterPool.GetMonster(0);
+                    monster = GameManager.Instance.monsterPool.GetMonster(1);
+                    monster.transform.position = spawnPoints[rnd].position;
+                }
+            case 9:
+                while (true)
+                {
+                    print("스테이지" + index + "몬스터스폰");
+                    yield return new WaitForSeconds(stageDelay);
+                    monster = GameManager.Instance.monsterPool.GetMonster(0);
+                    monster = GameManager.Instance.monsterPool.GetMonster(1);
+                    monster.transform.position = spawnPoints[rnd].position;
+                }
+            default:
+                yield return new WaitForSeconds(stageDelay);
+                monster = GameManager.Instance.monsterPool.GetMonster(0);
+                monster.transform.position = spawnPoints[rnd].position;
+                break;
         }
+        
     }
 
 }
