@@ -311,6 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefabs:
   - {fileID: 7614642148526892867, guid: fdc0fbc51767faa48975925d7164fb27, type: 3}
+  - {fileID: 3438864095953657720, guid: ba6f17ce4007f55468d97c9a7280a9d9, type: 3}
 --- !u!4 &110080152
 Transform:
   m_ObjectHideFlags: 0
@@ -993,6 +994,7 @@ MonoBehaviour:
   bulletPrefabs:
   - {fileID: 168984090651000656, guid: bda8d7edeaa13d74fbc7f274504ea54a, type: 3}
   - {fileID: 5028905411228316168, guid: 61f96e02f36193d458438075fb6f88a7, type: 3}
+  - {fileID: 6594314719797547058, guid: 324730d13eb79874d997f9d859319cdb, type: 3}
 --- !u!4 &463252343
 Transform:
   m_ObjectHideFlags: 0
@@ -1187,7 +1189,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &532895830
 Transform:
   m_ObjectHideFlags: 0
@@ -1332,9 +1334,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterScanRadius: 10
-  objectScanRadius: 5
+  objectScanRadius: 2
   hp: 100
-  maxHp: 100
+  maxHp: 10000
   level: 1
   maxExperience: 100
   playerAttackPower: 10
@@ -1720,7 +1722,7 @@ MonoBehaviour:
   bulletPool: {fileID: 463252342}
   dropObjectPool: {fileID: 2003685049}
   player: {fileID: 678853112}
-  maxStage: 0
+  maxStage: 10
 --- !u!4 &884382182
 Transform:
   m_ObjectHideFlags: 0
@@ -1838,8 +1840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f08008ddcac3e4d865a6402feb3738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 0
-  spawnDelay: 0.5
+  spawnDelay: 5
   spawnPoints:
   - {fileID: 577248028}
   - {fileID: 301718807}
