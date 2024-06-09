@@ -83,6 +83,7 @@ public class RangedMonster : MonoBehaviour
         else
         {
             rigid.velocity = Vector3.zero;
+            Rotate(moveDir * rotationSpeed);
         }
     }
     private void Update()
