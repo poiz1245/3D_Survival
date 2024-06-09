@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class Gun : Weapon
 {
     [SerializeField] float spawnDelay;
-    [SerializeField] float damage;
 
     float spawnTime;
 
+    public Gun(int level, float speed, float damage, float range) : base(level, speed, damage, range)
+    {
+        this.level = level;
+        this.speed = speed;
+        this.damage = damage;
+        this.range = range;
+    }
     private void FixedUpdate()
     {
         spawnTime -= Time.fixedDeltaTime;
@@ -23,7 +29,7 @@ public class Gun : MonoBehaviour
     public void BulletSpawn(int index)
     {
         Bullet bullet = GameManager.Instance.bulletPool.GetBullet(index).GetComponent<Bullet>();
-        bullet.SetDamage(damage);
+        bullet.SetStatus(damage, speed);
         bullet.transform.position = transform.position;
         bullet.transform.rotation = transform.rotation;
     }

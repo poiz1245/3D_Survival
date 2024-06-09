@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    public void SetDamage(float damage)
+    public void SetStatus(float damage, float speed)
     {
         this.damage = damage;
     }
