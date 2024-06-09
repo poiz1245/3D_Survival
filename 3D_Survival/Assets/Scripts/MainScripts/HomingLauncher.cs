@@ -11,12 +11,8 @@ public class HomingLauncher : Weapon
     bool findTarget;
     LayerMask targetLayer;
 
-    public Monster nearestTargetObject;
-    public Transform nearestTargetPos;
-
     public delegate void NearestTargetChanged(Monster nearestTarget);
     public event NearestTargetChanged OnNearestTargetChanged;
-
     public Monster changedTarget
     {
         get { return nearestTargetObject; }
@@ -29,7 +25,8 @@ public class HomingLauncher : Weapon
             }
         }
     }
-
+    public Monster nearestTargetObject { get; private set; }
+    public Transform nearestTargetPos { get; private set; }
     public HomingLauncher(int level, float speed, float damage, float range) : base(level, speed, damage, range)
     {
         this.level = level;
@@ -46,10 +43,10 @@ public class HomingLauncher : Weapon
     private void Update()
     {
         spawnTime -= Time.fixedDeltaTime;
-        //findTarget = GameManager.Instance.player.findTarget;
 
         ScanTargets();
 
+        print(findTarget);
         if (spawnTime <= 0 && findTarget)
         {
             HomingMissileSpawn(0);
@@ -64,6 +61,7 @@ public class HomingLauncher : Weapon
                 changedTarget = null;
             }
         }
+
     }
     void ScanTargets()
     {
@@ -72,7 +70,7 @@ public class HomingLauncher : Weapon
         if (targets.Length > 0)
         {
             float closestDistance = Mathf.Infinity;
-            Transform closestTarget = null;
+            Transform closestTargetPos = null;
             Monster closestTargetObject = null;
 
             foreach (Collider target in targets)
@@ -84,13 +82,13 @@ public class HomingLauncher : Weapon
                     if (distance < closestDistance && monster.hp > 0)
                     {
                         closestDistance = distance;
-                        closestTarget = monster.transform;
+                        closestTargetPos = monster.transform;
                         closestTargetObject = monster;
                     }
                 }
             }
 
-            nearestTargetPos = closestTarget;
+            nearestTargetPos = closestTargetPos;
             changedTarget = closestTargetObject;
             findTarget = true;
         }

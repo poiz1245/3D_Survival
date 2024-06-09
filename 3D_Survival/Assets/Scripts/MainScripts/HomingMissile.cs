@@ -14,32 +14,20 @@ public class HomingMissile : MonoBehaviour
 
     Transform targetPos;
     float maxDistance;
-    HomingLauncher homingLaucher;
     //float time = 0; //베지어 곡선 만들 때 사용할 변수임
-
-    private void Start()
-    {
-        //homingLaucher = WeaponManager.instance.weapons[2].GetComponent<HomingLauncher>();
-        //maxDistance = WeaponManager.instance.weapons[2].range;
-        //maxDistance = GameManager.Instance.player.monsterScanRadius;
-    }
 
     private void OnEnable()
     {
-        homingLaucher = WeaponManager.instance.weapons[2].GetComponent<HomingLauncher>();
-        maxDistance = WeaponManager.instance.weapons[2].range;
-        homingLaucher.OnNearestTargetChanged += TargetChange;
-        //GameManager.Instance.player.OnNearestTargetChanged += TargetChange;
+        maxDistance = WeaponManager.instance.homingLauncher.range;
+        WeaponManager.instance.homingLauncher.OnNearestTargetChanged += TargetChange;
     }
     private void OnDisable()
     {
-        homingLaucher.OnNearestTargetChanged -= TargetChange;
-        //GameManager.Instance.player.OnNearestTargetChanged -= TargetChange;
+        WeaponManager.instance.homingLauncher.OnNearestTargetChanged -= TargetChange;
     }
     void Update()
     {
-        targetPos = homingLaucher.nearestTargetPos;
-        //targetPos = GameManager.Instance.player.nearestTargetPos;
+        targetPos = WeaponManager.instance.homingLauncher.nearestTargetPos;
 
         if (targetPos == null)
         {
@@ -67,7 +55,6 @@ public class HomingMissile : MonoBehaviour
     }
     void TargetChange(Monster target)
     {
-        print("aa");
         gameObject.SetActive(false);
     }
     public void SetStatus(float damage, float speed)

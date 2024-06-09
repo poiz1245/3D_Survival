@@ -6,6 +6,7 @@ public class WeaponManager : MonoBehaviour
 {
     public static WeaponManager instance;
 
+    public HomingLauncher homingLauncher;
     public Weapon[] weapons;
 
     private void Awake()
