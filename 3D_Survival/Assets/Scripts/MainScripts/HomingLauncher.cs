@@ -9,10 +9,12 @@ public class HomingLauncher : Weapon
 
     float spawnTime;
     bool findTarget;
+    bool isSpawn = false;
     LayerMask targetLayer;
 
     public delegate void NearestTargetChanged(Monster nearestTarget);
     public event NearestTargetChanged OnNearestTargetChanged;
+
     public Monster changedTarget
     {
         get { return nearestTargetObject; }
@@ -42,17 +44,18 @@ public class HomingLauncher : Weapon
     }
     private void Update()
     {
-        spawnTime -= Time.fixedDeltaTime;
+        spawnTime -= Time.deltaTime;
 
-        ScanTargets();
-
-        print(findTarget);
-        if (spawnTime <= 0 && findTarget)
+        if (isSpawn)
         {
-            HomingMissileSpawn(0);
-            spawnTime = spawnDelay;
-        }
+            ScanTargets();
 
+            if (spawnTime <= 0 && findTarget)
+            {
+                HomingMissileSpawn(0);
+                spawnTime = spawnDelay;
+            }
+        }
 
         if (changedTarget != null)
         {
@@ -61,7 +64,6 @@ public class HomingLauncher : Weapon
                 changedTarget = null;
             }
         }
-
     }
     void ScanTargets()
     {
@@ -104,9 +106,32 @@ public class HomingLauncher : Weapon
         homingMissile.SetStatus(damage, speed);
         homingMissile.transform.position = transform.position;
     }
+
     public override void WeaponUpGrade()
     {
         base.WeaponUpGrade();
-        //레벨 별 업그레이드 구현
+
+        if (level == 1)
+        {
+            //소환
+            isSpawn = true;
+        }
+        else if (level == 2)
+        {
+            //level2 : 스캔범위 증가
+            range *= 1.5f;
+
+        }
+        else if (level == 3)
+        {
+            //level3 : 발사 속도 증가
+            speed *= 2.0f;
+
+        }
+        else if (level == 4)
+        {
+            //level4 : 데미지 증가
+            damage *= 1.5f;
+        }
     }
 }
