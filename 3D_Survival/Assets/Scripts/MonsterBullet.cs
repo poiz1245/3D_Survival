@@ -6,7 +6,7 @@ using UnityEngine;
 public class MonsterBullet : MonoBehaviour
 {
     [SerializeField] float speed;
-    [SerializeField] float damage;
+    float damage;
 
     float aliveTime;
     private void Update()
@@ -19,6 +19,11 @@ public class MonsterBullet : MonoBehaviour
             gameObject.SetActive(false);
             aliveTime = 0;
         }
+    }
+
+    public void SetDamage(float damage)
+    {
+        this.damage += damage;
     }
     private void OnTriggerEnter(Collider other)
     {
