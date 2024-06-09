@@ -2,29 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterRanged : MonoBehaviour
+public class RangedMonster : MonoBehaviour
 {
     public int experiencePoints = 0;       
     public int moneyDrop = 0;            
-
-
-    Rigidbody rigid;
-    Animator anim;
-    new Collider collider;
+    public float hp;
 
     [SerializeField] float moveSpeed;
     [SerializeField] float maxHp = 100f;
     [SerializeField] float attackRange;
-    [SerializeField] LayerMask playerLayer;
     [SerializeField] int experienceAmount; // 기본 경험치 양
     [SerializeField] int moneyAmount;
     [SerializeField] float damage;
 
+    Rigidbody rigid;
+    Animator anim;
+    new CapsuleCollider collider;
+
+    LayerMask playerLayer;
     float rotationSpeed = 100f;
     bool findPlayer = false;
     bool isDead = false;
 
-    public float hp;
 
     public delegate void MonsterStateChange(bool isDead);
     public event MonsterStateChange OnMonsterStateChanged;
@@ -42,7 +41,7 @@ public class MonsterRanged : MonoBehaviour
     }
     private void Awake()
     {
-        collider = GetComponent<BoxCollider>();
+        collider = GetComponent<CapsuleCollider>();
         rigid = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
 
@@ -50,6 +49,10 @@ public class MonsterRanged : MonoBehaviour
         monsterState = false;
         collider.enabled = true;
         rigid.isKinematic = false;
+    }
+    private void Start()
+    {
+        playerLayer = LayerMask.GetMask("Player");
     }
     private void OnEnable()
     {
@@ -66,7 +69,7 @@ public class MonsterRanged : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Vector3 moveDir = GameManager.Instance.player.transform.position - transform.position;
+        Vector3 moveDir = (GameManager.Instance.player.transform.position - transform.position).normalized;
         Vector3 targetVelocity = new Vector3(moveDir.x * moveSpeed, rigid.velocity.y, moveDir.z * moveSpeed);
         Vector3 velocityChange = (targetVelocity - rigid.velocity);
 
@@ -115,20 +118,20 @@ public class MonsterRanged : MonoBehaviour
     }
     private void AnimationSetting()
     {
-        //if (hp <= 0)
-        //{
-        //    anim.SetBool("isDead", true);
-        //    anim.SetBool("isAttack", false);
-        //}
-        //else if (findPlayer)
-        //{
-        //    anim.SetBool("isAttack", true);
-        //}
-        //else
-        //{
-        //    anim.SetBool("isDead", false);
-        //    anim.SetBool("isAttack", false);
-        //}
+        if (hp <= 0)
+        {
+            anim.SetBool("isDead", true);
+            anim.SetBool("isAttack", false);
+        }
+        else if (findPlayer)
+        {
+            anim.SetBool("isAttack", true);
+        }
+        else
+        {
+            anim.SetBool("isDead", false);
+            anim.SetBool("isAttack", false);
+        }
     }
     public void Rotate(Vector3 moveDir)
     {
@@ -154,6 +157,13 @@ public class MonsterRanged : MonoBehaviour
         {
             findPlayer = false;
         }
+    }
+    public void MonsterBulletSpawn(int index)
+    {
+        MonsterBullet monsterBullet = GameManager.Instance.bulletPool.GetBullet(index).GetComponent<MonsterBullet>();
+        monsterBullet.SetDamage(damage);
+        monsterBullet.transform.position = transform.position;
+        monsterBullet.transform.rotation = transform.rotation;
     }
     private void OnTriggerEnter(Collider other)
     {

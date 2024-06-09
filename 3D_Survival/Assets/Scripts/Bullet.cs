@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour
             {
                 monster.GetDamage(damage);
             }
-            MonsterRanged monsterRanged = other.gameObject.GetComponent<MonsterRanged>();
+            RangedMonster monsterRanged = other.gameObject.GetComponent<RangedMonster>();
             if (monsterRanged != null)
             {
                 monsterRanged.GetDamage(damage);

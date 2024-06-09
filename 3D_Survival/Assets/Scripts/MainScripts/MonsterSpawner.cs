@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    [SerializeField] int index;
+    int index;
     [SerializeField] float spawnDelay;
 
     [Header("Monster Pool")]
@@ -25,7 +25,6 @@ public class MonsterSpawner : MonoBehaviour
             case 0:
                 while (true)
                 {
-                    print("스테이지"+ index + "몬스터스폰");
                     yield return new WaitForSeconds(stageDelay);
                     monster = GameManager.Instance.monsterPool.GetMonster(0);
                     monster.transform.position = spawnPoints[rnd].position;
@@ -33,7 +32,6 @@ public class MonsterSpawner : MonoBehaviour
             case 1:
                 while (true)
                 {
-                    print("스테이지" + index + "몬스터스폰");
                     yield return new WaitForSeconds(stageDelay);
                     monster = GameManager.Instance.monsterPool.GetMonster(0);
                     monster = GameManager.Instance.monsterPool.GetMonster(1);
@@ -42,7 +40,6 @@ public class MonsterSpawner : MonoBehaviour
             case 2:
                 while (true)
                 {
-                    print("스테이지" + index + "몬스터스폰");
                     yield return new WaitForSeconds(stageDelay);
                     monster = GameManager.Instance.monsterPool.GetMonster(0);
                     monster = GameManager.Instance.monsterPool.GetMonster(1);
@@ -51,7 +48,6 @@ public class MonsterSpawner : MonoBehaviour
             case 3:
                 while (true)
                 {
-                    print("스테이지" + index + "몬스터스폰");
                     yield return new WaitForSeconds(stageDelay);
                     monster = GameManager.Instance.monsterPool.GetMonster(0);
                     monster = GameManager.Instance.monsterPool.GetMonster(1);
@@ -60,7 +56,6 @@ public class MonsterSpawner : MonoBehaviour
             case 4:
                 while (true)
                 {
-                    print("스테이지" + index + "몬스터스폰");
                     yield return new WaitForSeconds(stageDelay);
                     monster = GameManager.Instance.monsterPool.GetMonster(0);
                     monster = GameManager.Instance.monsterPool.GetMonster(1);
@@ -69,7 +64,6 @@ public class MonsterSpawner : MonoBehaviour
             case 5:
                 while (true)
                 {
-                    print("스테이지" + index + "몬스터스폰");
                     yield return new WaitForSeconds(stageDelay);
                     monster = GameManager.Instance.monsterPool.GetMonster(0);
                     monster = GameManager.Instance.monsterPool.GetMonster(1);
@@ -78,7 +72,6 @@ public class MonsterSpawner : MonoBehaviour
             case 6:
                 while (true)
                 {
-                    print("스테이지" + index + "몬스터스폰");
                     yield return new WaitForSeconds(stageDelay);
                     monster = GameManager.Instance.monsterPool.GetMonster(0);
                     monster = GameManager.Instance.monsterPool.GetMonster(1);
@@ -87,7 +80,6 @@ public class MonsterSpawner : MonoBehaviour
             case 7:
                 while (true)
                 {
-                    print("스테이지" + index + "몬스터스폰");
                     yield return new WaitForSeconds(stageDelay);
                     monster = GameManager.Instance.monsterPool.GetMonster(0);
                     monster = GameManager.Instance.monsterPool.GetMonster(1);
@@ -96,7 +88,6 @@ public class MonsterSpawner : MonoBehaviour
             case 8:
                 while (true)
                 {
-                    print("스테이지" + index + "몬스터스폰");
                     yield return new WaitForSeconds(stageDelay);
                     monster = GameManager.Instance.monsterPool.GetMonster(0);
                     monster = GameManager.Instance.monsterPool.GetMonster(1);
@@ -105,7 +96,6 @@ public class MonsterSpawner : MonoBehaviour
             case 9:
                 while (true)
                 {
-                    print("스테이지" + index + "몬스터스폰");
                     yield return new WaitForSeconds(stageDelay);
                     monster = GameManager.Instance.monsterPool.GetMonster(0);
                     monster = GameManager.Instance.monsterPool.GetMonster(1);
