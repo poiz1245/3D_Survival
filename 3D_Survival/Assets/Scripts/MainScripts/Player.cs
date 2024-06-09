@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     float horizontalInput;
     float verticalInput;
 
-    public delegate void NearestTargetChanged(Monster nearestTarget);
+   /* public delegate void NearestTargetChanged(Monster nearestTarget);
     public event NearestTargetChanged OnNearestTargetChanged;
 
     public Monster changeTarget
@@ -41,10 +41,10 @@ public class Player : MonoBehaviour
                 OnNearestTargetChanged?.Invoke(nearestTargetObject);
             }
         }
-    }
-    public bool findTarget { get; private set; }
+    }*/
+    /*public bool findTarget { get; private set; }
     public Monster nearestTargetObject { get; private set; }
-    public Transform nearestTargetPos { get; private set; }
+    public Transform nearestTargetPos { get; private set; }*/
 
     private void Start()
     {
@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         targetLayer = LayerMask.GetMask("Monster");
         dropObjectLayer = LayerMask.GetMask("Exp");
-        findTarget = false;
+        //findTarget = false;
 
     }
     void Update()
@@ -75,16 +75,16 @@ public class Player : MonoBehaviour
 
         Movement(velocityChange);
         Rotation(moveDir);
-        ScanTargets();
+        //ScanTargets();
         ScanDropObject();
 
-        if (changeTarget != null)
+        /*if (changeTarget != null)
         {
             if (changeTarget.hp <= 0)
             {
                 changeTarget = null;
             }
-        }
+        }*/
     }
     private void AnimSet()
     {
@@ -109,7 +109,7 @@ public class Player : MonoBehaviour
     {
         rigid.AddForce(velocityChange, ForceMode.VelocityChange);
     }
-    void ScanTargets()
+    /*void ScanTargets()
     {
         Collider[] targets = Physics.OverlapSphere(transform.position, monsterScanRadius, targetLayer);
 
@@ -143,7 +143,7 @@ public class Player : MonoBehaviour
             nearestTargetPos = null;
             findTarget = false;
         }
-    }
+    }*/
     void ScanDropObject()
     {
         Collider[] targetObject = Physics.OverlapSphere(transform.position, objectScanRadius, dropObjectLayer);

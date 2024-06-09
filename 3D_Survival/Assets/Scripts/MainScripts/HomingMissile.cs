@@ -8,35 +8,38 @@ using static UnityEditor.PlayerSettings;
 
 public class HomingMissile : MonoBehaviour
 {
-    public float speed;
 
-
+    float speed;
     float damage;
+
     Transform targetPos;
-    float time = 0;
     float maxDistance;
+    HomingLauncher homingLaucher;
+    //float time = 0; //베지어 곡선 만들 때 사용할 변수임
 
     private void Start()
     {
-        maxDistance = GameManager.Instance.player.monsterScanRadius;
+        //homingLaucher = WeaponManager.instance.weapons[2].GetComponent<HomingLauncher>();
+        //maxDistance = WeaponManager.instance.weapons[2].range;
+        //maxDistance = GameManager.Instance.player.monsterScanRadius;
     }
-   
+
     private void OnEnable()
     {
-        GameManager.Instance.player.OnNearestTargetChanged += TargetChange;
+        homingLaucher = WeaponManager.instance.weapons[2].GetComponent<HomingLauncher>();
+        maxDistance = WeaponManager.instance.weapons[2].range;
+        homingLaucher.OnNearestTargetChanged += TargetChange;
+        //GameManager.Instance.player.OnNearestTargetChanged += TargetChange;
     }
     private void OnDisable()
     {
-        GameManager.Instance.player.OnNearestTargetChanged -= TargetChange;
+        homingLaucher.OnNearestTargetChanged -= TargetChange;
+        //GameManager.Instance.player.OnNearestTargetChanged -= TargetChange;
     }
     void Update()
     {
-        if (time > 1)
-        {
-            time = 0;
-        }
-
-        targetPos = GameManager.Instance.player.nearestTargetPos;
+        targetPos = homingLaucher.nearestTargetPos;
+        //targetPos = GameManager.Instance.player.nearestTargetPos;
 
         if (targetPos == null)
         {
@@ -46,7 +49,11 @@ public class HomingMissile : MonoBehaviour
 
         Vector3 moveDir = targetPos.position - transform.position;
         transform.Translate(moveDir * speed * Time.deltaTime);
-        /*float distance = Vector3.Distance(transform.position, targetPos.position);
+        /*if (time > 1)
+        {
+            time = 0;
+        }
+        float distance = Vector3.Distance(transform.position, targetPos.position);
         float offsetY = Mathf.Lerp(1f, 2f, distance / maxDistance);
 
         Vector3 middlePoint = (transform.position + targetPos.position) / 2;
@@ -55,16 +62,18 @@ public class HomingMissile : MonoBehaviour
         Vector3 p1 = Vector3.Lerp(transform.position, thirdPoint, time);
         Vector3 p2 = Vector3.Lerp(thirdPoint, targetPos.position, time);
 
-        transform.position = Vector3.Lerp(p1, p2, time / 2);*/
-        time += Time.deltaTime;
+        transform.position = Vector3.Lerp(p1, p2, time / 2);
+        time += Time.deltaTime;*///베지어 곡선
     }
     void TargetChange(Monster target)
     {
+        print("aa");
         gameObject.SetActive(false);
     }
-    public void SetDamage(float damage)
+    public void SetStatus(float damage, float speed)
     {
         this.damage = damage;
+        this.speed = speed;
     }
 
     private void OnTriggerEnter(Collider other)
