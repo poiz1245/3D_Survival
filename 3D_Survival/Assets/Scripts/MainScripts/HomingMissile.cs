@@ -10,20 +10,17 @@ public class HomingMissile : MonoBehaviour
 {
     public float speed;
 
-    [SerializeField] float damage;
 
+    float damage;
     Transform targetPos;
     float time = 0;
     float maxDistance;
+
     private void Start()
     {
         maxDistance = GameManager.Instance.player.monsterScanRadius;
     }
-    void TargetChange(Monster target)
-    {
-        gameObject.SetActive(false);
-    }
-
+   
     private void OnEnable()
     {
         GameManager.Instance.player.OnNearestTargetChanged += TargetChange;
@@ -31,7 +28,6 @@ public class HomingMissile : MonoBehaviour
     private void OnDisable()
     {
         GameManager.Instance.player.OnNearestTargetChanged -= TargetChange;
-
     }
     void Update()
     {
@@ -61,6 +57,14 @@ public class HomingMissile : MonoBehaviour
 
         transform.position = Vector3.Lerp(p1, p2, time / 2);*/
         time += Time.deltaTime;
+    }
+    void TargetChange(Monster target)
+    {
+        gameObject.SetActive(false);
+    }
+    public void SetDamage(float damage)
+    {
+        this.damage = damage;
     }
 
     private void OnTriggerEnter(Collider other)

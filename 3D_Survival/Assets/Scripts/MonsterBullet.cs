@@ -23,7 +23,7 @@ public class MonsterBullet : MonoBehaviour
 
     public void SetDamage(float damage)
     {
-        this.damage += damage;
+        this.damage = damage;
     }
     private void OnTriggerEnter(Collider other)
     {

@@ -6,7 +6,7 @@ using UnityEngine;
 public class HomingLauncher : MonoBehaviour
 {
     [SerializeField] float spawnDelay;
-
+    [SerializeField] float damage;
     float spawnTime;
     bool findTarget;
 
@@ -24,7 +24,8 @@ public class HomingLauncher : MonoBehaviour
 
     public void HomingMissileSpawn(int index)
     {
-        GameObject bullet = GameManager.Instance.bulletPool.GetBullet(index);
-        bullet.transform.position = transform.position;
+        HomingMissile homingMissile = GameManager.Instance.bulletPool.GetBullet(index).GetComponent<HomingMissile>();
+        homingMissile.SetDamage(damage);
+        homingMissile.transform.position = transform.position;
     }
 }

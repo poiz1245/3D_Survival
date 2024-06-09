@@ -5,6 +5,8 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     [SerializeField] float spawnDelay;
+    [SerializeField] float damage;
+
     float spawnTime;
 
     private void FixedUpdate()
@@ -20,8 +22,9 @@ public class Gun : MonoBehaviour
 
     public void BulletSpawn(int index)
     {
-        GameObject missile = GameManager.Instance.bulletPool.GetBullet(index);
-        missile.transform.position = transform.position;
-        missile.transform.rotation = transform.rotation;
+        Bullet bullet = GameManager.Instance.bulletPool.GetBullet(index).GetComponent<Bullet>();
+        bullet.SetDamage(damage);
+        bullet.transform.position = transform.position;
+        bullet.transform.rotation = transform.rotation;
     }
 }
