@@ -7,8 +7,8 @@ using static UnityEditor.PlayerSettings;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] float speed;
-
+    
+    float speed;
     float damage;
     float aliveTime;
 
@@ -27,6 +27,7 @@ public class Bullet : MonoBehaviour
     public void SetStatus(float damage, float speed)
     {
         this.damage = damage;
+        this.speed = speed;
     }
     private void OnCollisionEnter(Collision other)
     {
