@@ -5,12 +5,13 @@ using System.ComponentModel;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
 
-public class Missile : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
-    [SerializeField] float speed;
-    [SerializeField] float damage;
-
+    
+    float speed;
+    float damage;
     float aliveTime;
+
     private void Update()
     {
         aliveTime += Time.deltaTime;
@@ -22,6 +23,12 @@ public class Missile : MonoBehaviour
             aliveTime = 0;
         }
     }
+
+    public void SetStatus(float damage, float speed)
+    {
+        this.damage = damage;
+        this.speed = speed;
+    }
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Monster"))
@@ -31,7 +38,7 @@ public class Missile : MonoBehaviour
             {
                 monster.GetDamage(damage);
             }
-            MonsterRanged monsterRanged = other.gameObject.GetComponent<MonsterRanged>();
+            RangedMonster monsterRanged = other.gameObject.GetComponent<RangedMonster>();
             if (monsterRanged != null)
             {
                 monsterRanged.GetDamage(damage);

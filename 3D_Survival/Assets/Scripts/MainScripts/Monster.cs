@@ -7,25 +7,24 @@ public class Monster : MonoBehaviour
 {
     public int experiencePoints = 10;
     public int moneyDrop = 10;
+    public float hp;
 
+    [SerializeField] float moveSpeed;
+    [SerializeField] float maxHp = 100f;
+    [SerializeField] float attackRange;
+    [SerializeField] int experienceAmount; // 기본 경험치 양
+    [SerializeField] int moneyAmount;
+    [SerializeField] int damage;
 
     Rigidbody rigid;
     Animator anim;
     new CapsuleCollider collider;
 
-    [SerializeField] float moveSpeed;
-    [SerializeField] float maxHp = 100f;
-    [SerializeField] float attackRange;
-    [SerializeField] LayerMask playerLayer;
-    [SerializeField] int experienceAmount; // 기본 경험치 양
-    [SerializeField] int moneyAmount;
-    [SerializeField] int damage;
-
+    LayerMask playerLayer;
     float rotationSpeed = 100f;
     bool findPlayer = false;
     bool isDead = false;
 
-    public float hp;
 
     public delegate void MonsterStateChange(bool isDead);
     public event MonsterStateChange OnMonsterStateChanged;
@@ -52,6 +51,10 @@ public class Monster : MonoBehaviour
         collider.enabled = true;
         rigid.isKinematic = false;
     }
+    private void Start()
+    {
+        playerLayer = LayerMask.GetMask("Player");
+    }
     private void OnEnable()
     {
         hp = maxHp;
@@ -67,7 +70,7 @@ public class Monster : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Vector3 moveDir = GameManager.Instance.player.transform.position - transform.position;
+        Vector3 moveDir = (GameManager.Instance.player.transform.position - transform.position).normalized;
         Vector3 targetVelocity = new Vector3(moveDir.x * moveSpeed, rigid.velocity.y, moveDir.z * moveSpeed);
         Vector3 velocityChange = (targetVelocity - rigid.velocity);
 
@@ -98,7 +101,7 @@ public class Monster : MonoBehaviour
     {
         moneyDrop = 10;
         experiencePoints = 10;
-        gameObject.SetActive(false); //오브젝트 풀링 사용중 이므로, 파괴가 필요한 오브젝트는 SetActive(false)로 비활성화
+        gameObject.SetActive(false);
         collider.enabled = false;
         rigid.isKinematic = true;
     }

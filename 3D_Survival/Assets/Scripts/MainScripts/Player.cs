@@ -18,7 +18,6 @@ public class Player : MonoBehaviour
 
     [SerializeField] float moveSpeed;
     [SerializeField] int currentExperience = 0;
-    [SerializeField] AoE aoe;
 
     LayerMask targetLayer;
     LayerMask dropObjectLayer;
@@ -28,33 +27,12 @@ public class Player : MonoBehaviour
     float horizontalInput;
     float verticalInput;
 
-    public delegate void NearestTargetChanged(Monster nearestTarget);
-    public event NearestTargetChanged OnNearestTargetChanged;
-
-    public Monster changeTarget
-    {
-        get { return nearestTargetObject; }
-        set
-        {
-            if (nearestTargetObject != value)
-            {
-                nearestTargetObject = value;
-                OnNearestTargetChanged?.Invoke(nearestTargetObject);
-            }
-        }
-    }
-    public bool findTarget { get; private set; }
-    public Monster nearestTargetObject { get; private set; }
-    public Transform nearestTargetPos { get; private set; }
-
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
         targetLayer = LayerMask.GetMask("Monster");
         dropObjectLayer = LayerMask.GetMask("Exp");
-        findTarget = false;
-
     }
     void Update()
     {
@@ -76,16 +54,8 @@ public class Player : MonoBehaviour
 
         Movement(velocityChange);
         Rotation(moveDir);
-        ScanTargets();
         ScanDropObject();
 
-        if (changeTarget != null)
-        {
-            if (changeTarget.hp <= 0)
-            {
-                changeTarget = null;
-            }
-        }
     }
     private void AnimSet()
     {
@@ -110,41 +80,7 @@ public class Player : MonoBehaviour
     {
         rigid.AddForce(velocityChange, ForceMode.VelocityChange);
     }
-    void ScanTargets()
-    {
-        Collider[] targets = Physics.OverlapSphere(transform.position, monsterScanRadius, targetLayer);
 
-        if (targets.Length > 0)
-        {
-            float closestDistance = Mathf.Infinity;
-            Transform closestTarget = null;
-            Monster closestTargetObject = null;
-
-            foreach (Collider target in targets)
-            {
-                Monster monster = target.GetComponent<Monster>();
-                if (monster != null)
-                {
-                    float distance = Vector3.Distance(transform.position, monster.transform.position);
-                    if (distance < closestDistance && monster.hp > 0)
-                    {
-                        closestDistance = distance;
-                        closestTarget = monster.transform;
-                        closestTargetObject = monster;
-                    }
-                }
-            }
-
-            nearestTargetPos = closestTarget;
-            changeTarget = closestTargetObject;
-            findTarget = true;
-        }
-        else
-        {
-            nearestTargetPos = null;
-            findTarget = false;
-        }
-    }
     void ScanDropObject()
     {
         Collider[] targetObject = Physics.OverlapSphere(transform.position, objectScanRadius, dropObjectLayer);
@@ -160,7 +96,6 @@ public class Player : MonoBehaviour
     }
     public void GetDamage(float damage)
     {
-        print("플레이어 데미지");
         hp -= damage;
     }
     public void AddExperience(int amount)

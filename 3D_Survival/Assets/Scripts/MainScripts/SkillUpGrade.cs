@@ -7,38 +7,35 @@ public class SkillUpGrade : MonoBehaviour
 
     public void SowrdUp()
     {
-        //스폰 갯수 하나씩 증가시키기
+        WeaponManager.instance.UpgradeWeapon(0);
     }
     public void AoEUp()
     {
-
-        //범위증가
-        //딜타임감소
-        //데미지증가
-        //몬스터 슬로우
-    }
-    public void MissileUp()
-    {
-
+        WeaponManager.instance.UpgradeWeapon(1);
     }
     public void HomingLaucherUp()
     {
-
+        WeaponManager.instance.UpgradeWeapon(2);
     }
+    public void MissileUp()
+    {
+        WeaponManager.instance.UpgradeWeapon(3);
+    }
+   
     public void PlayerMaxHpUp()
     {
-        GameManager.Instance.player.maxHp += 50;
+        GameManager.Instance.player.maxHp *= 1.3f;
     }
     public void PlayerPowerUp()
     {
-        GameManager.Instance.player.playerAttackPower += 10;
+        GameManager.Instance.player.playerAttackPower *= 1.1f;
     }
     public void PlayerShieldUp()
     {
-        GameManager.Instance.player.playerShield += 10;
+        GameManager.Instance.player.playerShield *= 1.1f;
     }
     public void PlayerScanRangeUp()
     {
-        GameManager.Instance.player.objectScanRadius += 2;
+        GameManager.Instance.player.objectScanRadius *= 1.3f;
     }
 }

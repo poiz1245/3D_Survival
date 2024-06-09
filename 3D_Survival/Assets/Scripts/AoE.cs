@@ -1,30 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static HomingLauncher;
 
-public class AoE : MonoBehaviour
+public class AoE : Weapon
 {
-    [SerializeField] LayerMask targetLayer;
-    [SerializeField] GameObject particle;
+    [SerializeField] float coolTime;
+    [SerializeField] ParticleSystem effact;
 
-    public float aoeRadius = 0f;
-    public float damage = 0f;
-    public float coolTime = 0f;
+    LayerMask targetLayer;
 
+    public delegate void ObjectVisibilityChangedHandler(bool isSpawn);
+    public event ObjectVisibilityChangedHandler OnObjectVisibilityChanged;
+
+    public AoE(int level, float speed, float damage, float range, float coolTime) : base(level, speed, damage, range)
+    {
+        this.level = level;
+        this.range = range;
+        this.damage = damage;
+        this.coolTime = coolTime;
+    }
+   
     private void Start()
     {
+        targetLayer = LayerMask.GetMask("Monster");
+        OnObjectVisibilityChanged += HandleVisibilityChanged;
+    }
+    void OnVisibilityChanged(bool isVisible)
+    {
+        OnObjectVisibilityChanged?.Invoke(isVisible);
+    }
+
+    private void HandleVisibilityChanged(bool isSpawn)
+    {
+        effact.gameObject.SetActive(true);
         InvokeRepeating("Attack", 0f, coolTime);
     }
-    public void UpgradeSkill(float upgradePercent)
-    {
-        float increasedAmount = upgradePercent / 100;
-        Vector3 particleScale = particle.transform.localScale;
-        aoeRadius += aoeRadius * increasedAmount;
-        particle.transform.localScale += particleScale * increasedAmount;
-    }
+
     void Attack()
     {
-        Collider[] targets = Physics.OverlapSphere(transform.position, aoeRadius, targetLayer);
+        Collider[] targets = Physics.OverlapSphere(transform.position, range, targetLayer);
 
         foreach (Collider target in targets)
         {
@@ -32,9 +47,33 @@ public class AoE : MonoBehaviour
             monsterScript.GetDamage(damage);
         }
     }
-    /*    private void OnDrawGizmos()
+
+    public override void WeaponUpGrade()
+    {
+        base.WeaponUpGrade();
+        if (level == 1)
         {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, aoeRadius);
-        }*/
+            //소환
+            OnVisibilityChanged(true);
+        }
+        else if (level == 2)
+        {
+            //범위증가
+            range *= 1.5f;
+            effact.transform.localScale *= range;
+        }
+        else if (level == 3)
+        {
+            //데미지증가
+            damage *= 2f;
+        }
+        else if (level == 4)
+        {
+            //쿨타임감소
+            var mainModule = effact.main;
+            coolTime *= 0.5f;
+            mainModule.duration *= coolTime;
+
+        }
+    }
 }

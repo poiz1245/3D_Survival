@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8501286709661201803}
   - component: {fileID: 5566353103731761606}
-  - component: {fileID: 2736490831602272849}
+  - component: {fileID: 1754693413424708680}
   m_Layer: 0
-  m_Name: MissilHead
+  m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +57,7 @@ CapsuleCollider:
   m_Height: 1.21
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: -0.64}
---- !u!114 &2736490831602272849
+--- !u!114 &1754693413424708680
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -66,11 +66,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5028905411228316168}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec6a04d1d5ad7e94b83ce7e98aeae674, type: 3}
+  m_Script: {fileID: 11500000, guid: 4044383958df935448394debd0b8cc00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  damage: 100
+  damage: 10
 --- !u!1 &7553095546851090049
 GameObject:
   m_ObjectHideFlags: 0
