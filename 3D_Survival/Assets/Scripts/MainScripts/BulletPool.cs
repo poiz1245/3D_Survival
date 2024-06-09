@@ -41,6 +41,7 @@ public class BulletPool : MonoBehaviour
         {
             select = Instantiate(bulletPrefabs[index], transform);
             bulletPool[index].Add(select);
+            print("¼ß");
         }
 
         return select;
