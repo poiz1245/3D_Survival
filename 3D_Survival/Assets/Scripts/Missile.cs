@@ -7,12 +7,20 @@ using static UnityEditor.PlayerSettings;
 
 public class Missile : MonoBehaviour
 {
-    public float speed;
+    [SerializeField] float speed;
     [SerializeField] float damage;
 
+    float aliveTime;
     private void Update()
     {
-        transform.Translate(Vector3.forward * speed);
+        aliveTime += Time.deltaTime;
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+
+        if(aliveTime >5)
+        {
+            gameObject.SetActive(false);
+            aliveTime = 0;
+        }
     }
     private void OnCollisionEnter(Collision other)
     {

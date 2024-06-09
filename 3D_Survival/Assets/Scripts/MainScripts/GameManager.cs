@@ -8,8 +8,12 @@ public class GameManager : MonoBehaviour
 
     public MonsterPool monsterPool;
     public BulletPool bulletPool;
-    public MissilePool missilePool;
+    public DropObjectPool dropObjectPool;
     public Player player;
+    public Transform buttonContainer; // buttonContainer 추가
+
+    public ExperienceManager experienceManager; // 수정된 부분
+    public GameObject upgradeButtonPrefab; // 수정된 부분
 
     [SerializeField] int maxStage;
     public float gameTime { get; private set; }
@@ -24,9 +28,26 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
     }
+    /////////////////////////////////
+    private void Start()
+    {
+        if (experienceManager == null)
+        {
+            Debug.LogError("ExperienceManager is not assigned.");
+        }
+
+        if (upgradeButtonPrefab == null)
+        {
+            Debug.LogError("UpgradeButtonPrefab is not assigned.");
+        }
+    }
+    /////////////////////////
 
     private void Update()
+
+
     {
         gameTime += Time.deltaTime;
 
@@ -38,5 +59,36 @@ public class GameManager : MonoBehaviour
             stage++;
             stageTime = 0;
         }
+
+        // 여기부터 수정된 부분. 화면 정지.
+        //if (experienceManager != null && experienceManager.IsLevelUp())
+        //{
+        //    Time.timeScale = 0f; // 화면 정지
+        //    GenerateUpgradeButtons();
+        //}
+        
+        else if (experienceManager == null)
+        {
+            Debug.LogError("ExperienceManager is not assigned.");
+        }
     }
+
+    void GenerateUpgradeButtons()
+    {
+        string[] upgradeOptions = { "Max HP 증가", "공격력 증가", "방어력 증가", "공격 범위 증가" };
+
+        for (int i = 0; i < 3; i++)
+        {
+            string upgradeType = upgradeOptions[Random.Range(0, upgradeOptions.Length)];
+
+            GameObject buttonObj = Instantiate(upgradeButtonPrefab, Vector3.zero, Quaternion.identity);
+            buttonObj.GetComponent<UpgradeButton>().SetUpgradeType(upgradeType);
+        }
+
+
+    }
+
 }
+
+
+
