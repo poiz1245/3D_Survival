@@ -65,7 +65,7 @@ public class HomingMissile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Monster"))
+        if (other != null && other.gameObject.CompareTag("Monster"))
         {
             Monster monster = other.gameObject.GetComponent<Monster>();
             monster.GetDamage(damage);
