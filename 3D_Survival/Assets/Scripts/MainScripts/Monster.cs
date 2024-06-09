@@ -101,7 +101,7 @@ public class Monster : MonoBehaviour
     {
         moneyDrop = 10;
         experiencePoints = 10;
-        gameObject.SetActive(false); //오브젝트 풀링 사용중 이므로, 파괴가 필요한 오브젝트는 SetActive(false)로 비활성화
+        gameObject.SetActive(false);
         collider.enabled = false;
         rigid.isKinematic = true;
     }

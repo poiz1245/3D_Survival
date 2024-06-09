@@ -22,12 +22,6 @@ public class WeaponManager : MonoBehaviour
     }
     public void UpgradeWeapon(int weaponIndex)
     {
-        if (weaponIndex < 0 || weaponIndex >= weapons.Length)
-        {
-            Debug.LogError("Invalid weapon index.");
-            return;
-        }
-
         weapons[weaponIndex].WeaponUpGrade();
     }
 }

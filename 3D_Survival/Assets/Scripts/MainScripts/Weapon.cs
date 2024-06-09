@@ -19,8 +19,5 @@ public class Weapon : MonoBehaviour
     public virtual void WeaponUpGrade()
     {
         level++;
-        /*damage += 10;
-        speed *= 2;
-        range *= 1.5f; */
     }
 }
