@@ -1275,8 +1275,11 @@ MonoBehaviour:
   monsterScanRadius: 10
   objectScanRadius: 5
   hp: 100
+  maxHp: 0
   level: 1
   maxExperience: 100
+  playerAttackPower: 0
+  playerShield: 0
   moveSpeed: 10
   currentExperience: 0
   aoe: {fileID: 1102272298}
@@ -1655,6 +1658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterPool: {fileID: 110080151}
+  monsterSpawner: {fileID: 0}
   bulletPool: {fileID: 463252342}
   dropObjectPool: {fileID: 2003685049}
   player: {fileID: 678853112}

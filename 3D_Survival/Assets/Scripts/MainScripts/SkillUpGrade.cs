@@ -11,6 +11,7 @@ public class SkillUpGrade : MonoBehaviour
     }
     public void AoEUp()
     {
+
         //범위증가
         //딜타임감소
         //데미지증가
