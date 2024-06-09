@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class AoE : Weapon
 {
-    public float coolTime;
-
-    [SerializeField] GameObject particle;
+    [SerializeField] float coolTime;
+    [SerializeField] ParticleSystem effact;
 
     LayerMask targetLayer;
 
@@ -20,10 +19,30 @@ public class AoE : Weapon
     public override void WeaponUpGrade()
     {
         base.WeaponUpGrade();
+        if (level == 1)
+        {
+            //소환
+            gameObject.SetActive(true);
+        }
+        else if (level == 2)
+        {
+            //범위증가
+            range *= 1.5f;
+            effact.transform.localScale *= range;
+        }
+        else if (level == 3)
+        {
+            //데미지증가
+            damage *= 2f;
+        }
+        else if (level == 4)
+        {
+            //쿨타임감소
+            var mainModule = effact.main;
+            coolTime *= 0.5f;
+            mainModule.duration *= coolTime;
 
-        float increasedAmount = range;
-        Vector3 particleScale = particle.transform.localScale;
-        particle.transform.localScale += particleScale * increasedAmount; // 1.5배 증가
+        }
     }
     private void Start()
     {
