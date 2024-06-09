@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class Sword : Weapon
 {
-    public Sword() : base(0, 1f, 30f, 1f)
+    [SerializeField] GameObject swordLevel1;
+    [SerializeField] GameObject swordLevel2;
+    public Sword(int level, float speed, float damage, float range) : base(level, speed, damage, range)
     {
+        this.level = level;
+        this.speed = speed;
+        this.damage = damage;
+        this.range = range;
     }
     void Update()
     {
@@ -15,6 +21,27 @@ public class Sword : Weapon
     public override void WeaponUpGrade()
     {
         base.WeaponUpGrade();
+        if (level == 1)
+        {
+            //sword 소환
+            swordLevel1.SetActive(true);
+        }
+        else if (level == 2)
+        {
+            //sword추가 소환
+            swordLevel2.SetActive(true);
+        }
+        else if (level == 3)
+        {
+            //회전스피드 2배증가
+            speed *= 2;
+        }
+        else if (level == 4)
+        {
+            //크기증가
+            range *= 2;
+            gameObject.transform.localScale *= range;
+        }
     }
 
     public void OnTriggerEnter(Collider other)
