@@ -994,6 +994,7 @@ MonoBehaviour:
   bulletPrefabs:
   - {fileID: 168984090651000656, guid: bda8d7edeaa13d74fbc7f274504ea54a, type: 3}
   - {fileID: 5028905411228316168, guid: 61f96e02f36193d458438075fb6f88a7, type: 3}
+  - {fileID: 6594314719797547058, guid: 324730d13eb79874d997f9d859319cdb, type: 3}
 --- !u!4 &463252343
 Transform:
   m_ObjectHideFlags: 0
@@ -2093,6 +2094,11 @@ PrefabInstance:
       propertyPath: range
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1886757522946777714, guid: e4a5f1afd60291a409707a34563f1fe3,
+        type: 3}
+      propertyPath: damage
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5644808888496469258, guid: e4a5f1afd60291a409707a34563f1fe3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2151,7 +2157,7 @@ PrefabInstance:
     - target: {fileID: 7662713971316861176, guid: e4a5f1afd60291a409707a34563f1fe3,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
