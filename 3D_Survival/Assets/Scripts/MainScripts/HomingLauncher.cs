@@ -104,4 +104,9 @@ public class HomingLauncher : Weapon
         homingMissile.SetStatus(damage, speed);
         homingMissile.transform.position = transform.position;
     }
+    public override void WeaponUpGrade()
+    {
+        base.WeaponUpGrade();
+        //레벨 별 업그레이드 구현
+    }
 }

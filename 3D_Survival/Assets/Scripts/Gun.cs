@@ -33,4 +33,10 @@ public class Gun : Weapon
         bullet.transform.position = transform.position;
         bullet.transform.rotation = transform.rotation;
     }
+
+    public override void WeaponUpGrade()
+    {
+        base.WeaponUpGrade();
+        //레벨 별 업그레이드 구현
+    }
 }
