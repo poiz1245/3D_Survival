@@ -1149,15 +1149,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 230fc374bddbcf54b85be30cfcbfa8b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  experiencePoints: 10
-  moneyDrop: 10
-  hp: 80
+  hp: 100
+  maxHp: 100
+  damage: 10
   moveSpeed: 5
-  maxHp: 10
   attackRange: 5
   experienceAmount: 15
-  moneyAmount: 0
-  damage: 10
 --- !u!136 &1260233924614357775
 CapsuleCollider:
   m_ObjectHideFlags: 0

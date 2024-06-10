@@ -33,16 +33,18 @@ public class Bullet : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Monster"))
         {
-            Monster monster = other.gameObject.GetComponent<Monster>();
-            if (monster != null)
-            {
-                monster.GetDamage(damage);
-            }
+            MeleeMonster meleeMonster = other.gameObject.GetComponent<MeleeMonster>();
             RangedMonster monsterRanged = other.gameObject.GetComponent<RangedMonster>();
+
+            if (meleeMonster != null)
+            {
+                meleeMonster.GetDamage(damage);
+            }
             if (monsterRanged != null)
             {
                 monsterRanged.GetDamage(damage);
             }
+
             gameObject.SetActive(false);
         }
     }

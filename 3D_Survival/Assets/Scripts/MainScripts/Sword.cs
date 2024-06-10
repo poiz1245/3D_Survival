@@ -10,7 +10,7 @@ public class Sword : Weapon
     {
         this.level = level;
         this.speed = speed;
-        this.damage = damage;
+        this.damage = GameManager.Instance.player.playerAttackPower * 0.5f + damage;
         this.range = range;
     }
     void Update()
@@ -48,8 +48,16 @@ public class Sword : Weapon
     {
         if (other.gameObject.CompareTag("Monster"))
         {
-            Monster monster = other.GetComponent<Monster>();
-            monster.GetDamage(damage);
+            MeleeMonster meleeMonster = other.gameObject.GetComponent<MeleeMonster>();
+            if (meleeMonster != null)
+            {
+                meleeMonster.GetDamage(damage);
+            }
+            RangedMonster monsterRanged = other.gameObject.GetComponent<RangedMonster>();
+            if (monsterRanged != null)
+            {
+                monsterRanged.GetDamage(damage);
+            }
         }
     }
 }

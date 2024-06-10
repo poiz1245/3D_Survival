@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class RangedMonster : MonoBehaviour
 {
-    public int experiencePoints = 0;       
-    public int moneyDrop = 0;            
     public float hp;
-
-    [SerializeField] float moveSpeed;
-    [SerializeField] float maxHp = 100f;
-    [SerializeField] float attackRange;
-    [SerializeField] int experienceAmount; // 기본 경험치 양
-    [SerializeField] int moneyAmount;
-    [SerializeField] float damage;
+    public float maxHp = 100f;
+    public int damage;
+    public float moveSpeed;
+    public float attackRange;
+    public int experienceAmount;
 
     Rigidbody rigid;
     Animator anim;
@@ -39,6 +35,16 @@ public class RangedMonster : MonoBehaviour
             }
         }
     }
+
+    /*public RangedMonster(float hp, float maxHp, int damage, float moveSpeed, float attackRange, int experienceAmount) : base(hp, maxHp, damage, moveSpeed, attackRange, experienceAmount)
+    {
+        this.hp = hp;
+        this.maxHp = maxHp;
+        this.moveSpeed = moveSpeed;
+        this.damage = damage;
+        this.attackRange = attackRange;
+        this.experienceAmount = experienceAmount;
+    }*/
     private void Awake()
     {
         collider = GetComponent<CapsuleCollider>();
@@ -99,9 +105,7 @@ public class RangedMonster : MonoBehaviour
     }
     private void Die()
     {
-        moneyDrop = 10;
-        experiencePoints = 10;
-        gameObject.SetActive(false); //오브젝트 풀링 사용중 이므로, 파괴가 필요한 오브젝트는 SetActive(false)로 비활성화
+        gameObject.SetActive(false); 
         collider.enabled = false;
         rigid.isKinematic = true;
     }
@@ -146,6 +150,7 @@ public class RangedMonster : MonoBehaviour
     public void GetDamage(float damage)
     {
         hp -= damage;
+        //base.GetDamage(damage);
     }
     public void ScanPlayer()
     {
@@ -159,7 +164,7 @@ public class RangedMonster : MonoBehaviour
             findPlayer = false;
         }
     }
-    public void MonsterBulletSpawn(int index)
+    public void Attack(int index)
     {
         MonsterBullet monsterBullet = GameManager.Instance.bulletPool.GetBullet(index).GetComponent<MonsterBullet>();
         monsterBullet.SetDamage(damage);
