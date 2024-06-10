@@ -48,8 +48,16 @@ public class Sword : Weapon
     {
         if (other.gameObject.CompareTag("Monster"))
         {
-            Monster monster = other.GetComponent<Monster>();
-            monster.GetDamage(damage);
+            MeleeMonster meleeMonster = other.gameObject.GetComponent<MeleeMonster>();
+            if (meleeMonster != null)
+            {
+                meleeMonster.GetDamage(damage);
+            }
+            RangedMonster monsterRanged = other.gameObject.GetComponent<RangedMonster>();
+            if (monsterRanged != null)
+            {
+                monsterRanged.GetDamage(damage);
+            }
         }
     }
 }

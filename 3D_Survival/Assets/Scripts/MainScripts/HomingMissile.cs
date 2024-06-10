@@ -16,10 +16,6 @@ public class HomingMissile : MonoBehaviour
     float maxDistance;
     //float time = 0; //베지어 곡선 만들 때 사용할 변수임
 
-    void TestMethod()
-    {
-
-    }
     private void OnEnable()
     {
         maxDistance = WeaponManager.instance.homingLauncher.range;
@@ -57,7 +53,7 @@ public class HomingMissile : MonoBehaviour
         transform.position = Vector3.Lerp(p1, p2, time / 2);
         time += Time.deltaTime;*///베지어 곡선
     }
-    void TargetChange(Monster target)
+    void TargetChange(GameObject target)
     {
         gameObject.SetActive(false);
     }
@@ -69,10 +65,18 @@ public class HomingMissile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other != null && other.gameObject.CompareTag("Monster"))
+        if (other.gameObject.CompareTag("Monster"))
         {
-            Monster monster = other.gameObject.GetComponent<Monster>();
-            monster.GetDamage(damage);
+            MeleeMonster meleeMonster = other.gameObject.GetComponent<MeleeMonster>();
+            if (meleeMonster != null)
+            {
+                meleeMonster.GetDamage(damage);
+            }
+            RangedMonster monsterRanged = other.gameObject.GetComponent<RangedMonster>();
+            if (monsterRanged != null)
+            {
+                monsterRanged.GetDamage(damage);
+            }
             gameObject.SetActive(false);
         }
     }

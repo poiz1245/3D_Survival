@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using static HomingLauncher;
 
@@ -20,7 +22,7 @@ public class AoE : Weapon
         this.damage = damage;
         this.coolTime = coolTime;
     }
-   
+
     private void Start()
     {
         targetLayer = LayerMask.GetMask("Monster");
@@ -43,8 +45,16 @@ public class AoE : Weapon
 
         foreach (Collider target in targets)
         {
-            Monster monsterScript = target.GetComponent<Monster>();
-            monsterScript.GetDamage(damage);
+            MeleeMonster meleeMonster = target.GetComponent<MeleeMonster>();
+            RangedMonster rangedMonster = target.GetComponent<RangedMonster>();
+            if (meleeMonster != null)
+            {
+                meleeMonster.GetDamage(damage);
+            }
+            if(rangedMonster != null)
+            {
+                rangedMonster.GetDamage(damage);
+            }
         }
     }
 
