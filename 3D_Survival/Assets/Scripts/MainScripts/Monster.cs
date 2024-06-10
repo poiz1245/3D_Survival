@@ -7,24 +7,24 @@ public class Monster : MonoBehaviour
 {
     public int experiencePoints = 10;
     public int moneyDrop = 10;
+    public float hp;
 
+    [SerializeField] float moveSpeed;
+    [SerializeField] float maxHp = 100f;
+    [SerializeField] float attackRange;
+    [SerializeField] int experienceAmount; // 기본 경험치 양
+    [SerializeField] int moneyAmount;
+    [SerializeField] int damage;
 
     Rigidbody rigid;
     Animator anim;
     new CapsuleCollider collider;
 
-    [SerializeField] float moveSpeed;
-    [SerializeField] float maxHp = 100f;
-    [SerializeField] float attackRange;
-    [SerializeField] LayerMask playerLayer;
-    [SerializeField] int experienceAmount; // 기본 경험치 양
-    [SerializeField] int moneyAmount;
-
+    LayerMask playerLayer;
     float rotationSpeed = 100f;
     bool findPlayer = false;
     bool isDead = false;
 
-    public float hp;
 
     public delegate void MonsterStateChange(bool isDead);
     public event MonsterStateChange OnMonsterStateChanged;
@@ -51,6 +51,10 @@ public class Monster : MonoBehaviour
         collider.enabled = true;
         rigid.isKinematic = false;
     }
+    private void Start()
+    {
+        playerLayer = LayerMask.GetMask("Player");
+    }
     private void OnEnable()
     {
         hp = maxHp;
@@ -66,7 +70,7 @@ public class Monster : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Vector3 moveDir = GameManager.Instance.player.transform.position - transform.position;
+        Vector3 moveDir = (GameManager.Instance.player.transform.position - transform.position).normalized;
         Vector3 targetVelocity = new Vector3(moveDir.x * moveSpeed, rigid.velocity.y, moveDir.z * moveSpeed);
         Vector3 velocityChange = (targetVelocity - rigid.velocity);
 
@@ -93,11 +97,11 @@ public class Monster : MonoBehaviour
             Invoke("Die", 1.5f);
         }
     }
-    private void Die()
+    void Die()
     {
         moneyDrop = 10;
         experiencePoints = 10;
-        gameObject.SetActive(false); //오브젝트 풀링 사용중 이므로, 파괴가 필요한 오브젝트는 SetActive(false)로 비활성화
+        gameObject.SetActive(false);
         collider.enabled = false;
         rigid.isKinematic = true;
     }
@@ -113,7 +117,7 @@ public class Monster : MonoBehaviour
 
         exp.transform.position = transform.position;
     }
-    private void AnimationSetting()
+    void AnimationSetting()
     {
         if (hp <= 0)
         {
@@ -130,12 +134,12 @@ public class Monster : MonoBehaviour
             anim.SetBool("isAttack", false);
         }
     }
-    public void Rotate(Vector3 moveDir)
+    void Rotate(Vector3 moveDir)
     {
         Quaternion deltaRotation = Quaternion.LookRotation(new Vector3(moveDir.x, rigid.velocity.y, moveDir.z));
         rigid.MoveRotation(deltaRotation);
     }
-    public void Move(Vector3 velocityChange)
+    void Move(Vector3 velocityChange)
     {
         rigid.AddForce(velocityChange, ForceMode.VelocityChange);
     }
@@ -143,7 +147,7 @@ public class Monster : MonoBehaviour
     {
         hp -= damage;
     }
-    public void ScanPlayer()
+    void ScanPlayer()
     {
         Collider[] target = Physics.OverlapSphere(transform.position, attackRange, playerLayer);
 
@@ -154,6 +158,23 @@ public class Monster : MonoBehaviour
         else
         {
             findPlayer = false;
+        }
+    }
+    private void Attack()
+    {
+        Collider playerCollider = GameObject.FindWithTag("Player").GetComponent<Collider>();
+        Player player = playerCollider.gameObject.GetComponent<Player>();
+        if (player != null)
+        {
+            player.GetDamage(damage);
+        }
+        gameObject.SetActive(false);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            GameManager.Instance.player.GetDamage(damage);
         }
     }
 }

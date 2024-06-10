@@ -118,5 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6861a4b68ee37984e8d86fd208e438e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attractSpeed: 10
+  attractSpeed: 20
   scanRadious: 2

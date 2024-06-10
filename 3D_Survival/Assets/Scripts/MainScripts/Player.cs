@@ -10,54 +10,35 @@ public class Player : MonoBehaviour
     public float monsterScanRadius;
     public float objectScanRadius;
     public float hp;
+    public float maxHp;
     public int level = 1;
     public int maxExperience = 100;
+    public float playerAttackPower;
+    public float playerShield;
 
     [SerializeField] float moveSpeed;
-    [SerializeField] LayerMask targetLayer;
-    [SerializeField] LayerMask dropObjectLayer;
     [SerializeField] int currentExperience = 0;
 
+    LayerMask targetLayer;
+    LayerMask dropObjectLayer;
     Rigidbody rigid;
     Animator anim;
 
     float horizontalInput;
     float verticalInput;
 
-    public delegate void NearestTargetChanged(Monster nearestTarget);
-    public event NearestTargetChanged OnNearestTargetChanged;
-
-
-
-
-    public Monster changeTarget
-    {
-        get { return nearestTargetObject; }
-        set
-        {
-            if (nearestTargetObject != value)
-            {
-                nearestTargetObject = value;
-                OnNearestTargetChanged?.Invoke(nearestTargetObject);
-            }
-        }
-    }
-    public bool findTarget { get; private set; }
-    public Monster nearestTargetObject { get; private set; }
-    public Transform nearestTargetPos { get; private set; }
-
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
-        anim = GetComponent<Animator>();
-
-        findTarget = false;
+        anim = GetComponentInChildren<Animator>();
+        targetLayer = LayerMask.GetMask("Monster");
+        dropObjectLayer = LayerMask.GetMask("Exp");
     }
     void Update()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-        //AnimSet();
+        AnimSet();
 
         if (hp <= 0)
         {
@@ -73,16 +54,8 @@ public class Player : MonoBehaviour
 
         Movement(velocityChange);
         Rotation(moveDir);
-        ScanTargets();
         ScanDropObject();
 
-        if (changeTarget != null)
-        {
-            if (changeTarget.hp <= 0)
-            {
-                changeTarget = null;
-            }
-        }
     }
     private void AnimSet()
     {
@@ -107,44 +80,12 @@ public class Player : MonoBehaviour
     {
         rigid.AddForce(velocityChange, ForceMode.VelocityChange);
     }
-    void ScanTargets()
-    {
-        Collider[] targets = Physics.OverlapSphere(transform.position, monsterScanRadius, targetLayer);
 
-        if (targets.Length > 0)
-        {
-            float closestDistance = Mathf.Infinity;
-            Transform closestTarget = null;
-            Monster closestTargetObject = null;
-
-            foreach (Collider target in targets)
-            {
-                Monster monster = target.GetComponent<Monster>();
-                float distance = Vector3.Distance(transform.position, monster.transform.position);
-
-                if (distance < closestDistance && monster.hp > 0)
-                {
-                    closestDistance = distance;
-                    closestTarget = monster.transform;
-                    closestTargetObject = monster;
-                }
-            }
-
-            nearestTargetPos = closestTarget;
-            changeTarget = closestTargetObject;
-            findTarget = true;
-        }
-        else
-        {
-            nearestTargetPos = null;
-            findTarget = false;
-        }
-    }
     void ScanDropObject()
     {
         Collider[] targetObject = Physics.OverlapSphere(transform.position, objectScanRadius, dropObjectLayer);
 
-        if(targetObject.Length > 0)
+        if (targetObject.Length > 0)
         {
             foreach (Collider target in targetObject)
             {
@@ -171,6 +112,4 @@ public class Player : MonoBehaviour
         currentExperience = 0;
         maxExperience += 50;
     }
-
-    
 }

@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public MonsterPool monsterPool;
+    public MonsterSpawner monsterSpawner;
     public BulletPool bulletPool;
     public DropObjectPool dropObjectPool;
     public Player player;
@@ -16,6 +17,11 @@ public class GameManager : MonoBehaviour
     public GameObject upgradeButtonPrefab; // 수정된 부분
 
     [SerializeField] int maxStage;
+
+
+    float stageTime;
+
+
     public float gameTime { get; private set; }
     public int stage { get; private set; }
     private void Awake()
@@ -45,18 +51,21 @@ public class GameManager : MonoBehaviour
     }
     /////////////////////////
 
+    private void Start()
+    {
+        monsterSpawner.SpawnMonster();
+    }
     private void Update()
 
 
     {
         gameTime += Time.deltaTime;
-
-        float stageTime = 0;
-        stageTime += Time.deltaTime;
-
-        if (stageTime >= 30 && stage != maxStage)
+        
+        stageTime+= Time.deltaTime;
+        if (stageTime >= 5 && stage != maxStage)
         {
             stage++;
+            monsterSpawner.SpawnMonster();
             stageTime = 0;
         }
 
