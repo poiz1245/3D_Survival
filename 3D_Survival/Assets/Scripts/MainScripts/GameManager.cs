@@ -39,6 +39,9 @@ public class GameManager : MonoBehaviour
     /////////////////////////////////
     private void Start()
     {
+        monsterSpawner.SpawnMonster();
+
+
         if (experienceManager == null)
         {
             Debug.LogError("ExperienceManager is not assigned.");
@@ -50,11 +53,6 @@ public class GameManager : MonoBehaviour
         }
     }
     /////////////////////////
-
-    private void Start()
-    {
-        monsterSpawner.SpawnMonster();
-    }
     private void Update()
 
 
