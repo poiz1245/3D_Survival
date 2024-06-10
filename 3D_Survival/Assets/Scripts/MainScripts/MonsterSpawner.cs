@@ -26,16 +26,18 @@ public class MonsterSpawner : MonoBehaviour
                 while (true)
                 {
                     yield return new WaitForSeconds(stageDelay);
-                    monster = GameManager.Instance.monsterPool.GetMonster(1);
+                    monster = GameManager.Instance.monsterPool.GetMonster(0);
                     monster.transform.position = spawnPoints[rnd].position;
                 }
             case 1:
                 while (true)
                 {
                     yield return new WaitForSeconds(stageDelay);
-                    monster = GameManager.Instance.monsterPool.GetMonster(0);
-                    monster = GameManager.Instance.monsterPool.GetMonster(1);
+                    monster = GameManager.Instance.monsterPool.GetMonster(2);
+                    //monster = GameManager.Instance.monsterPool.GetMonster(1);
                     monster.transform.position = spawnPoints[rnd].position;
+
+                    this.transform.gameObject.SetActive(false);
                 }
             case 2:
                 while (true)
@@ -104,7 +106,6 @@ public class MonsterSpawner : MonoBehaviour
             case 10:
                 while (true)
                 {
-                    int i = 1;
                     yield return new WaitForSeconds(stageDelay);
                     monster = GameManager.Instance.monsterPool.GetMonster(2);
                     monster.transform.position = spawnPoints[rnd].position;

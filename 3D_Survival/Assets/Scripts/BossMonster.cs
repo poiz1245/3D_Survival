@@ -6,16 +6,12 @@ using UnityEngine.Assertions.Must;
 
 public class BossMonster : MonoBehaviour
 {
-    public int experiencePoints = 0;
-    public int moneyDrop = 0;
     public float hp;
-
-    [SerializeField] float moveSpeed;
-    [SerializeField] float maxHp = 100f;
-    [SerializeField] float attackRange;
-    [SerializeField] int experienceAmount; // 기본 경험치 양
-    [SerializeField] int moneyAmount;
-    [SerializeField] float damage;
+    public float maxHp = 100f;
+    public int damage;
+    public float moveSpeed;
+    public float attackRange;
+    public int experienceAmount;
 
     Rigidbody rigid;
     Animator anim;
@@ -102,9 +98,7 @@ public class BossMonster : MonoBehaviour
     }
     private void Die()
     {
-        moneyDrop = 10;
-        experiencePoints = 10;
-        gameObject.SetActive(false); //오브젝트 풀링 사용중 이므로, 파괴가 필요한 오브젝트는 SetActive(false)로 비활성화
+        gameObject.SetActive(false);
         collider.enabled = false;
         rigid.isKinematic = true;
     }
@@ -168,45 +162,45 @@ public class BossMonster : MonoBehaviour
     //    //monsterBullet.SetDamage(damage);
     //    bossMonsterBullet.transform.position = transform.position;
     //    bossMonsterBullet.transform.rotation = transform.rotation;
-        
+
     //}
 
     IEnumerator CreatBullet()
     {
         int count = 15;
-        float intervalAngle = 360 / count;
+        float radius = 3f; // 원의 반지름 설정
+        float intervalAngle = 360f / count;
         float weightAngle = 0;
 
         while (true)
         {
             for (int i = 0; i < count; ++i)
             {
-
                 yield return new WaitForSeconds(0.1f);
-                GameObject clone = Instantiate(GameManager.Instance.bulletPool.GetBullet(3), transform.position, Quaternion.identity);
+                // 각도에 따라 원 위에 위치 계산
                 float angle = weightAngle + intervalAngle * i;
-                float x = Mathf.Cos(angle * Mathf.Deg2Rad);
-                float y = Mathf.Sin(angle * Mathf.Deg2Rad);
-                clone.GetComponent<BossMonsterBullet>().Move(new Vector2(x, -y - 3));
+                float x = Mathf.Cos(angle * Mathf.Deg2Rad) * radius;
+                float y = Mathf.Sin(angle * Mathf.Deg2Rad) * radius;
+
+                // 총알 생성 및 위치 설정
+                Vector3 spawnPosition = transform.position + new Vector3(x, 0f, y);
+               // GameObject clone = Instantiate(GameManager.Instance.bulletPool.GetBullet(3), spawnPosition, Quaternion.identity);
+                GameObject clone = GameManager.Instance.bulletPool.GetBullet(3);
+                clone.transform.position = spawnPosition;
+
+                clone.transform.RotateAround(Vector3.up, i*intervalAngle);
+
             }
 
             yield return new WaitForSeconds(1f);
-
-            for (int i = 0; i < count; ++i)
-            {
-                yield return new WaitForSeconds(0.1f);
-                GameObject clone2 = Instantiate(GameManager.Instance.bulletPool.GetBullet(3), transform.position, Quaternion.identity);
-                float angle = weightAngle + intervalAngle * i;
-                float x = Mathf.Cos(angle * Mathf.Deg2Rad);
-                float y = Mathf.Sin(angle * Mathf.Deg2Rad);
-                clone2.GetComponent<BossMonsterBullet>().Move(new Vector2(x, -y - 3));
-            }
 
             weightAngle += 1;
 
             yield return new WaitForSeconds(3);
         }
     }
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))

@@ -8,6 +8,7 @@ public class BossMonsterBullet : MonoBehaviour
     float damage;
 
     float aliveTime;
+
     private void Update()
     {
         aliveTime += Time.deltaTime;
@@ -20,6 +21,13 @@ public class BossMonsterBullet : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        //Vector3 moveDir = transform.position - GameManager.Instance.monsterPool.monsterPrefabs[2].transform.position;
+        //Quaternion deltaRotation = Quaternion.LookRotation(new Vector3(0, 0, 0));
+        //// 현재 객체를 목표 회전으로 회전
+        //transform.rotation = deltaRotation;
+    }
     public void SetDamage(float damage)
     {
         this.damage = damage;
@@ -37,8 +45,4 @@ public class BossMonsterBullet : MonoBehaviour
         }
     }
 
-    public void Move(Vector2 vec)
-    {
-        rigidbody2D.velocity = direction.normalized * moveSpeed;
-    }
 }
