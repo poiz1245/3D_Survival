@@ -27,21 +27,7 @@ public class HomingMissile : MonoBehaviour
     }
     private void OnDisable()
     {
-        maxDistance = GameManager.Instance.player.monsterScanRadius;
-    }
-    void TargetChange(Monster target)
-    {
-        gameObject.SetActive(false);
-    }
-
-    private void OnEnable()
-    {
-        GameManager.Instance.player.OnNearestTargetChanged += TargetChange;
-    }
-    private void OnDisable()
-    {
-        GameManager.Instance.player.OnNearestTargetChanged -= TargetChange;
-
+        //WeaponManager.instance.homingLauncher.OnNearestTargetChanged -= TargetChange;
     }
     void Update()
     {
