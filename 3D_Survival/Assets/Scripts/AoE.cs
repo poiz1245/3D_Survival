@@ -1,20 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
-using static HomingLauncher;
 
 public class AoE : Weapon
 {
     [SerializeField] float coolTime;
-    [SerializeField] ParticleSystem effact;
+    [SerializeField] ParticleSystem particleSystem;
 
     LayerMask targetLayer;
 
     public delegate void ObjectVisibilityChangedHandler(bool isSpawn);
     public event ObjectVisibilityChangedHandler OnObjectVisibilityChanged;
-
     public AoE(int level, float speed, float damage, float range, float coolTime) : base(level, speed, damage, range)
     {
         this.level = level;
@@ -27,6 +26,7 @@ public class AoE : Weapon
     {
         targetLayer = LayerMask.GetMask("Monster");
         OnObjectVisibilityChanged += HandleVisibilityChanged;
+
     }
     void OnVisibilityChanged(bool isVisible)
     {
@@ -35,8 +35,8 @@ public class AoE : Weapon
 
     private void HandleVisibilityChanged(bool isSpawn)
     {
-        effact.gameObject.SetActive(true);
-        InvokeRepeating("Attack", 0f, coolTime);
+        particleSystem.gameObject.SetActive(true);
+        InvokeRepeating("Attack", 3, coolTime);
     }
 
     void Attack()
@@ -70,7 +70,7 @@ public class AoE : Weapon
         {
             //범위증가
             range *= 1.5f;
-            effact.transform.localScale *= range;
+            particleSystem.transform.localScale *= range;
         }
         else if (level == 3)
         {
@@ -80,7 +80,7 @@ public class AoE : Weapon
         else if (level == 4)
         {
             //쿨타임감소
-            var mainModule = effact.main;
+            var mainModule = particleSystem.main;
             coolTime *= 0.5f;
             mainModule.duration *= coolTime;
 
