@@ -67,13 +67,13 @@ public class GameManager : MonoBehaviour
             stageTime = 0;
         }
 
-        // 여기부터 수정된 부분. 화면 정지.
-        //if (experienceManager != null && experienceManager.IsLevelUp())
-        //{
-        //    Time.timeScale = 0f; // 화면 정지
-        //    GenerateUpgradeButtons();
-        //}
-        
+        //여기부터 수정된 부분.화면 정지.
+        if (experienceManager != null && experienceManager.IsLevelUp())
+        {
+            Time.timeScale = 0f; // 화면 정지
+            GenerateUpgradeButtons();
+        }
+
         else if (experienceManager == null)
         {
             Debug.LogError("ExperienceManager is not assigned.");
