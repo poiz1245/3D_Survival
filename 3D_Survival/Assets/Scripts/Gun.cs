@@ -13,7 +13,7 @@ public class Gun : Weapon
     {
         this.level = level;
         this.speed = speed;
-        this.damage = GameManager.Instance.player.playerAttackPower * 0.1f + damage;
+        this.damage = damage;
         this.range = range;
         this.spawnDelay = 0.5f;
     }

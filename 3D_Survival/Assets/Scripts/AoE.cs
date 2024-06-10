@@ -19,7 +19,7 @@ public class AoE : Weapon
     {
         this.level = level;
         this.range = range;
-        this.damage = GameManager.Instance.player.playerAttackPower * 0.3f + damage;
+        this.damage = damage;
         this.coolTime = coolTime;
     }
 
@@ -36,7 +36,7 @@ public class AoE : Weapon
     private void HandleVisibilityChanged(bool isSpawn)
     {
         effact.gameObject.SetActive(true);
-        InvokeRepeating("Attack", coolTime, coolTime);
+        InvokeRepeating("Attack", 0f, coolTime);
     }
 
     void Attack()
@@ -51,7 +51,7 @@ public class AoE : Weapon
             {
                 meleeMonster.GetDamage(damage);
             }
-            if (rangedMonster != null)
+            if(rangedMonster != null)
             {
                 rangedMonster.GetDamage(damage);
             }
@@ -69,7 +69,7 @@ public class AoE : Weapon
         else if (level == 2)
         {
             //범위증가
-            range *= 1.25f;
+            range *= 1.5f;
             effact.transform.localScale *= range;
         }
         else if (level == 3)
@@ -83,6 +83,7 @@ public class AoE : Weapon
             var mainModule = effact.main;
             coolTime *= 0.5f;
             mainModule.duration *= coolTime;
+
         }
     }
 }

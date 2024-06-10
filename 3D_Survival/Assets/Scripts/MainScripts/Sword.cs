@@ -10,7 +10,7 @@ public class Sword : Weapon
     {
         this.level = level;
         this.speed = speed;
-        this.damage = GameManager.Instance.player.playerAttackPower * 0.5f + damage;
+        this.damage = damage;
         this.range = range;
     }
     void Update()
