@@ -1,10 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
-<<<<<<<< HEAD:3D_Survival/Assets/Prefabs/MissilHead.prefab
---- !u!1 &5028905411228316168
-========
---- !u!1 &6594314719797547058
->>>>>>>> c6606a3d3a649f5b57f34791edbd6f50d9d6d9ea:3D_Survival/Assets/Prefabs/MonsterBullet.prefab
+--- !u!1 &4459958788177297525
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12,89 +8,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<<< HEAD:3D_Survival/Assets/Prefabs/MissilHead.prefab
-  - component: {fileID: 8501286709661201803}
-  - component: {fileID: 5566353103731761606}
-  - component: {fileID: 2736490831602272849}
-  m_Layer: 0
-  m_Name: MissilHead
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8501286709661201803
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5028905411228316168}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.238, y: 1.563, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6946598802035392996}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &5566353103731761606
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5028905411228316168}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.32
-  m_Height: 1.21
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: -0.64}
---- !u!114 &2736490831602272849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5028905411228316168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec6a04d1d5ad7e94b83ce7e98aeae674, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
-  damage: 10
---- !u!1 &7553095546851090049
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6946598802035392996}
-  - component: {fileID: 3435277288820317660}
-  - component: {fileID: 1410034632537503472}
-========
-  - component: {fileID: 617925031781679346}
-  - component: {fileID: 2872376604981630852}
-  - component: {fileID: 6048192683354659180}
-  - component: {fileID: 3079408804379970969}
-  - component: {fileID: 6339277883791827919}
-  - component: {fileID: -5657160724774992302}
->>>>>>>> c6606a3d3a649f5b57f34791edbd6f50d9d6d9ea:3D_Survival/Assets/Prefabs/MonsterBullet.prefab
+  - component: {fileID: 7785713610253913376}
+  - component: {fileID: 3765686505547725369}
+  - component: {fileID: 7885364773316772667}
+  - component: {fileID: 4230756286751930800}
+  - component: {fileID: 9070875278199019677}
   m_Layer: 0
   m_Name: MonsterBullet
   m_TagString: Untagged
@@ -102,63 +20,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<<< HEAD:3D_Survival/Assets/Prefabs/MissilHead.prefab
---- !u!4 &6946598802035392996
-========
---- !u!4 &617925031781679346
->>>>>>>> c6606a3d3a649f5b57f34791edbd6f50d9d6d9ea:3D_Survival/Assets/Prefabs/MonsterBullet.prefab
+--- !u!4 &7785713610253913376
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:3D_Survival/Assets/Prefabs/MissilHead.prefab
-  m_GameObject: {fileID: 7553095546851090049}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.012000084, z: -0.5680001}
-  m_LocalScale: {x: 0.6, y: 0.5999999, z: 0.5999999}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 8501286709661201803}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3435277288820317660
-========
-  m_GameObject: {fileID: 6594314719797547058}
+  m_GameObject: {fileID: 4459958788177297525}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.191, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2872376604981630852
->>>>>>>> c6606a3d3a649f5b57f34791edbd6f50d9d6d9ea:3D_Survival/Assets/Prefabs/MonsterBullet.prefab
+--- !u!33 &3765686505547725369
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:3D_Survival/Assets/Prefabs/MissilHead.prefab
-  m_GameObject: {fileID: 7553095546851090049}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &1410034632537503472
-========
-  m_GameObject: {fileID: 6594314719797547058}
+  m_GameObject: {fileID: 4459958788177297525}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6048192683354659180
->>>>>>>> c6606a3d3a649f5b57f34791edbd6f50d9d6d9ea:3D_Survival/Assets/Prefabs/MonsterBullet.prefab
+--- !u!23 &7885364773316772667
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:3D_Survival/Assets/Prefabs/MissilHead.prefab
-  m_GameObject: {fileID: 7553095546851090049}
-========
-  m_GameObject: {fileID: 6594314719797547058}
->>>>>>>> c6606a3d3a649f5b57f34791edbd6f50d9d6d9ea:3D_Survival/Assets/Prefabs/MonsterBullet.prefab
+  m_GameObject: {fileID: 4459958788177297525}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -172,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1fc8fead6f1e7a144a9e510b7ea37a5e, type: 2}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -194,15 +85,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
-<<<<<<<< HEAD:3D_Survival/Assets/Prefabs/MissilHead.prefab
-========
---- !u!135 &3079408804379970969
+--- !u!135 &4230756286751930800
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6594314719797547058}
+  m_GameObject: {fileID: 4459958788177297525}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -217,45 +106,16 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6339277883791827919
+--- !u!114 &9070875278199019677
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6594314719797547058}
+  m_GameObject: {fileID: 4459958788177297525}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f122f011d7b7d924b90c39b852ebc6a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  damage: 10
---- !u!54 &-5657160724774992302
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6594314719797547058}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 4
-  m_CollisionDetection: 0
->>>>>>>> c6606a3d3a649f5b57f34791edbd6f50d9d6d9ea:3D_Survival/Assets/Prefabs/MonsterBullet.prefab
+  speed: 10

@@ -88231,8 +88231,8 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.8333333
-    functionName: MonsterBulletSpawn
+  - time: 0.6
+    functionName: Attack
     data: 
     objectReferenceParameter: {fileID: 3438864095953657720, guid: ba6f17ce4007f55468d97c9a7280a9d9,
       type: 3}

@@ -11,10 +11,7 @@ public class GameManager : MonoBehaviour
     public BulletPool bulletPool;
     public DropObjectPool dropObjectPool;
     public Player player;
-    public Transform buttonContainer; // buttonContainer 추가
 
-    public ExperienceManager experienceManager; // 수정된 부분
-    public GameObject upgradeButtonPrefab; // 수정된 부분
 
     [SerializeField] int maxStage;
 
@@ -35,31 +32,22 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        //player.OnPlayerLevelChanged += PlayerLevelUp;
+
     }
-    /////////////////////////////////
+    /*private void PlayerLevelUp(int level)
+    {
+        Time.timeScale = 0;
+    }*/
     private void Start()
     {
         monsterSpawner.SpawnMonster();
-
-
-        if (experienceManager == null)
-        {
-            Debug.LogError("ExperienceManager is not assigned.");
-        }
-
-        if (upgradeButtonPrefab == null)
-        {
-            Debug.LogError("UpgradeButtonPrefab is not assigned.");
-        }
     }
-    /////////////////////////
     private void Update()
-
-
     {
         gameTime += Time.deltaTime;
-        
-        stageTime+= Time.deltaTime;
+
+        stageTime += Time.deltaTime;
         if (stageTime >= 5 && stage != maxStage)
         {
             stage++;
@@ -73,28 +61,7 @@ public class GameManager : MonoBehaviour
         //    Time.timeScale = 0f; // 화면 정지
         //    GenerateUpgradeButtons();
         //}
-        
-        else if (experienceManager == null)
-        {
-            Debug.LogError("ExperienceManager is not assigned.");
-        }
     }
-
-    void GenerateUpgradeButtons()
-    {
-        string[] upgradeOptions = { "Max HP 증가", "공격력 증가", "방어력 증가", "공격 범위 증가" };
-
-        for (int i = 0; i < 3; i++)
-        {
-            string upgradeType = upgradeOptions[Random.Range(0, upgradeOptions.Length)];
-
-            GameObject buttonObj = Instantiate(upgradeButtonPrefab, Vector3.zero, Quaternion.identity);
-            buttonObj.GetComponent<UpgradeButton>().SetUpgradeType(upgradeType);
-        }
-
-
-    }
-
 }
 
 
