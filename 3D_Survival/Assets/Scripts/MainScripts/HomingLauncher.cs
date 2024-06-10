@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class HomingLauncher : Weapon
 {
-    [SerializeField] float spawnDelay;
+    public float fireDelay;
 
     float spawnTime;
     bool findTarget;
     bool isSpawn = false;
     LayerMask targetLayer;
 
-    public delegate void NearestTargetChanged(Monster nearestTarget);
+    public delegate void NearestTargetChanged(GameObject nearestTarget);
     public event NearestTargetChanged OnNearestTargetChanged;
 
-    public Monster changedTarget
+    public GameObject changedTarget
     {
         get { return nearestTargetObject; }
         set
@@ -27,15 +27,15 @@ public class HomingLauncher : Weapon
             }
         }
     }
-    public Monster nearestTargetObject { get; private set; }
+    public GameObject nearestTargetObject { get; private set; }
     public Transform nearestTargetPos { get; private set; }
-    public HomingLauncher(int level, float speed, float damage, float range) : base(level, speed, damage, range)
+    public HomingLauncher(int level, float speed, float damage, float range, float fireDelay) : base(level, speed, damage, range)
     {
         this.level = level;
         this.speed = speed;
         this.damage = damage;
         this.range = range;
-
+        this.fireDelay = fireDelay;
     }
     private void Start()
     {
@@ -49,17 +49,23 @@ public class HomingLauncher : Weapon
         if (isSpawn)
         {
             ScanTargets();
-
             if (spawnTime <= 0 && findTarget)
             {
                 HomingMissileSpawn(0);
-                spawnTime = spawnDelay;
+                spawnTime = fireDelay;
             }
         }
 
         if (changedTarget != null)
         {
-            if (changedTarget.hp <= 0)
+            MeleeMonster meleeMonster = changedTarget.GetComponent<MeleeMonster>();
+            RangedMonster rangedMonster = changedTarget.GetComponent<RangedMonster>();
+
+            if (meleeMonster != null && meleeMonster.hp <= 0)
+            {
+                changedTarget = null;
+            }
+            if (rangedMonster != null && rangedMonster.hp <= 0)
             {
                 changedTarget = null;
             }
@@ -73,19 +79,31 @@ public class HomingLauncher : Weapon
         {
             float closestDistance = Mathf.Infinity;
             Transform closestTargetPos = null;
-            Monster closestTargetObject = null;
+            GameObject closestTargetObject = null;
 
             foreach (Collider target in targets)
             {
-                Monster monster = target.GetComponent<Monster>();
-                if (monster != null)
+                MeleeMonster meleeMonster = target.GetComponent<MeleeMonster>();
+                if (meleeMonster != null)
                 {
-                    float distance = Vector3.Distance(transform.position, monster.transform.position);
-                    if (distance < closestDistance && monster.hp > 0)
+                    float distance = Vector3.Distance(transform.position, meleeMonster.transform.position);
+                    if (distance < closestDistance && meleeMonster.hp > 0)
                     {
                         closestDistance = distance;
-                        closestTargetPos = monster.transform;
-                        closestTargetObject = monster;
+                        closestTargetPos = meleeMonster.transform;
+                        closestTargetObject = meleeMonster.gameObject;
+                    }
+                }
+
+                RangedMonster rangedMonster = target.GetComponent<RangedMonster>();
+                if (rangedMonster != null)
+                {
+                    float distance = Vector3.Distance(transform.position, rangedMonster.transform.position);
+                    if (distance < closestDistance && rangedMonster.hp > 0)
+                    {
+                        closestDistance = distance;
+                        closestTargetPos = rangedMonster.transform;
+                        closestTargetObject = rangedMonster.gameObject;
                     }
                 }
             }
@@ -100,6 +118,53 @@ public class HomingLauncher : Weapon
             findTarget = false;
         }
     }
+    /*void ScanTargets()
+    {
+        Collider[] targets = Physics.OverlapSphere(transform.position, range, targetLayer);
+
+        if (targets.Length > 0)
+        {
+            float closestDistance = Mathf.Infinity;
+            Transform closestTargetPos = null;
+            GameObject closestTargetObject = null;
+
+            foreach (Collider target in targets)
+            {
+                MeleeMonster meleeMonster = target.GetComponent<MeleeMonster>();
+                RangedMonster rangedMonster = target.GetComponent<RangedMonster>();
+
+                if (meleeMonster != null)
+                {
+                    float distance = Vector3.Distance(transform.position, meleeMonster.transform.position);
+                    if (distance < closestDistance && meleeMonster.hp > 0)
+                    {
+                        closestDistance = distance;
+                        closestTargetPos = meleeMonster.transform;
+                        closestTargetObject = meleeMonster.gameObject;
+                    }
+                }
+                if (rangedMonster != null)
+                {
+                    float distance = Vector3.Distance(transform.position, meleeMonster.transform.position);
+                    if (distance < closestDistance && meleeMonster.hp > 0)
+                    {
+                        closestDistance = distance;
+                        closestTargetPos = rangedMonster.transform;
+                        closestTargetObject = rangedMonster.gameObject;
+                    }
+                }
+            }
+
+            nearestTargetPos = closestTargetPos;
+            changedTarget = closestTargetObject;
+            findTarget = true;
+        }
+        else
+        {
+            nearestTargetPos = null;
+            findTarget = false;
+        }
+    }*/
     public void HomingMissileSpawn(int index)
     {
         HomingMissile homingMissile = GameManager.Instance.bulletPool.GetBullet(index).GetComponent<HomingMissile>();
@@ -125,7 +190,7 @@ public class HomingLauncher : Weapon
         else if (level == 3)
         {
             //level3 : 발사 속도 증가
-            speed *= 2.0f;
+            fireDelay *= 0.5f;
 
         }
         else if (level == 4)
