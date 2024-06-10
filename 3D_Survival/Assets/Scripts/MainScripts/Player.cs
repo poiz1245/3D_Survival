@@ -27,6 +27,21 @@ public class Player : MonoBehaviour
     float horizontalInput;
     float verticalInput;
 
+    public delegate void PlayerLevelChanged(int level);
+    public event PlayerLevelChanged OnPlayerLevelChanged;
+
+    public int plyaerLevel
+    {
+        get { return level; }
+        set
+        {
+            if (level != value)
+            {
+                level = value;
+                OnPlayerLevelChanged?.Invoke(level);
+            }
+        }
+    }
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
@@ -108,7 +123,7 @@ public class Player : MonoBehaviour
     }
     void LevelUp()
     {
-        level++;
+        plyaerLevel++;
         currentExperience = 0;
         maxExperience += 50;
     }
