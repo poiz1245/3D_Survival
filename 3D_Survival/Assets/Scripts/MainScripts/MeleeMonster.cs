@@ -149,6 +149,7 @@ public class MeleeMonster : MonoBehaviour
     public void GetDamage(float damage)
     {
         //base.GetDamage(damage);
+        hp -= damage;
     }
     void ScanPlayer()
     {

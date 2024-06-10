@@ -149,6 +149,7 @@ public class RangedMonster : MonoBehaviour
     }
     public void GetDamage(float damage)
     {
+        hp -= damage;
         //base.GetDamage(damage);
     }
     public void ScanPlayer()
@@ -163,7 +164,7 @@ public class RangedMonster : MonoBehaviour
             findPlayer = false;
         }
     }
-    public void MonsterBulletSpawn(int index)
+    public void Attack(int index)
     {
         MonsterBullet monsterBullet = GameManager.Instance.bulletPool.GetBullet(index).GetComponent<MonsterBullet>();
         monsterBullet.SetDamage(damage);
