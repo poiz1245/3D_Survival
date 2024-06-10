@@ -2,8 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedMonster : Monster
+public class RangedMonster : MonoBehaviour
 {
+    public float hp;
+    public float maxHp = 100f;
+    public int damage;
+    public float moveSpeed;
+    public float attackRange;
+    public int experienceAmount;
+
     Rigidbody rigid;
     Animator anim;
     new CapsuleCollider collider;
@@ -29,7 +36,7 @@ public class RangedMonster : Monster
         }
     }
 
-    public RangedMonster(float hp, float maxHp, int damage, float moveSpeed, float attackRange, int experienceAmount) : base(hp, maxHp, damage, moveSpeed, attackRange, experienceAmount)
+    /*public RangedMonster(float hp, float maxHp, int damage, float moveSpeed, float attackRange, int experienceAmount) : base(hp, maxHp, damage, moveSpeed, attackRange, experienceAmount)
     {
         this.hp = hp;
         this.maxHp = maxHp;
@@ -37,7 +44,7 @@ public class RangedMonster : Monster
         this.damage = damage;
         this.attackRange = attackRange;
         this.experienceAmount = experienceAmount;
-    }
+    }*/
     private void Awake()
     {
         collider = GetComponent<CapsuleCollider>();
@@ -140,9 +147,9 @@ public class RangedMonster : Monster
     {
         rigid.AddForce(velocityChange, ForceMode.VelocityChange);
     }
-    public override void GetDamage(float damage)
+    public void GetDamage(float damage)
     {
-        base.GetDamage(damage);
+        //base.GetDamage(damage);
     }
     public void ScanPlayer()
     {
