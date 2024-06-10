@@ -16,6 +16,10 @@ public class HomingMissile : MonoBehaviour
     float maxDistance;
     //float time = 0; //베지어 곡선 만들 때 사용할 변수임
 
+    void TestMethod()
+    {
+
+    }
     private void OnEnable()
     {
         maxDistance = WeaponManager.instance.homingLauncher.range;
