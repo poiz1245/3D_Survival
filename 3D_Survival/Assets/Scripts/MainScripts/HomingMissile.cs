@@ -27,7 +27,7 @@ public class HomingMissile : MonoBehaviour
     }
     private void OnDisable()
     {
-        WeaponManager.instance.homingLauncher.OnNearestTargetChanged -= TargetChange;
+        //WeaponManager.instance.homingLauncher.OnNearestTargetChanged -= TargetChange;
     }
     void Update()
     {
