@@ -26,7 +26,6 @@ public class MonsterPool : MonoBehaviour
     public GameObject GetMonster(int index)
     {
         GameObject select = null;
-
         foreach (GameObject obj in monsterPool[index])
         {
             if (!obj.activeSelf)
