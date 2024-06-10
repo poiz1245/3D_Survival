@@ -20,9 +20,4 @@ public class Monster : MonoBehaviour
         this.attackRange = attackRange;
         this.experienceAmount = experienceAmount;
     }
-
-    public virtual void GetDamage(float damage)
-    {
-        hp -= damage;
-    }
 }

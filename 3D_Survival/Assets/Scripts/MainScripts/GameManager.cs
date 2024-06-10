@@ -11,10 +11,7 @@ public class GameManager : MonoBehaviour
     public BulletPool bulletPool;
     public DropObjectPool dropObjectPool;
     public Player player;
-    public Transform buttonContainer; // buttonContainer 추가
 
-    public ExperienceManager experienceManager; // 수정된 부분
-    public GameObject upgradeButtonPrefab; // 수정된 부분
 
     [SerializeField] int maxStage;
 
@@ -35,31 +32,22 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        //player.OnPlayerLevelChanged += PlayerLevelUp;
+
     }
-    /////////////////////////////////
+    /*private void PlayerLevelUp(int level)
+    {
+        Time.timeScale = 0;
+    }*/
     private void Start()
     {
         monsterSpawner.SpawnMonster();
-
-
-        if (experienceManager == null)
-        {
-            Debug.LogError("ExperienceManager is not assigned.");
-        }
-
-        if (upgradeButtonPrefab == null)
-        {
-            Debug.LogError("UpgradeButtonPrefab is not assigned.");
-        }
     }
-    /////////////////////////
     private void Update()
-
-
     {
         gameTime += Time.deltaTime;
-        
-        stageTime+= Time.deltaTime;
+
+        stageTime += Time.deltaTime;
         if (stageTime >= 5 && stage != maxStage)
         {
             stage++;
@@ -67,13 +55,13 @@ public class GameManager : MonoBehaviour
             stageTime = 0;
         }
 
-        //여기부터 수정된 부분.화면 정지.
-        if (experienceManager != null && experienceManager.IsLevelUp())
-        {
-            Time.timeScale = 0f; // 화면 정지
-            GenerateUpgradeButtons();
-        }
-
+        // 여기부터 수정된 부분. 화면 정지.
+        //if (experienceManager != null && experienceManager.IsLevelUp())
+        //{
+        //    Time.timeScale = 0f; // 화면 정지
+        //    GenerateUpgradeButtons();
+        //}
+        
         else if (experienceManager == null)
         {
             Debug.LogError("ExperienceManager is not assigned.");
@@ -94,7 +82,6 @@ public class GameManager : MonoBehaviour
 
 
     }
-
 }
 
 

@@ -7,17 +7,17 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
-    public float monsterScanRadius;
-    public float objectScanRadius;
+    public int level = 1;
     public float hp;
     public float maxHp;
-    public int level = 1;
-    public int maxExperience = 100;
+    public float monsterScanRadius;
+    public float objectScanRadius;
     public float playerAttackPower;
     public float playerShield;
+    public int maxExperience = 100;
 
-    [SerializeField] float moveSpeed;
     [SerializeField] int currentExperience = 0;
+    [SerializeField] float moveSpeed;
 
     LayerMask targetLayer;
     LayerMask dropObjectLayer;
@@ -27,6 +27,21 @@ public class Player : MonoBehaviour
     float horizontalInput;
     float verticalInput;
 
+    public delegate void PlayerLevelChanged(int level);
+    public event PlayerLevelChanged OnPlayerLevelChanged;
+
+    public int plyaerLevel
+    {
+        get { return level; }
+        set
+        {
+            if (level != value)
+            {
+                level = value;
+                OnPlayerLevelChanged?.Invoke(level);
+            }
+        }
+    }
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
@@ -96,7 +111,7 @@ public class Player : MonoBehaviour
     }
     public void GetDamage(float damage)
     {
-        hp -= damage;
+        hp -= damage - (damage * playerShield / 100);
     }
     public void AddExperience(int amount)
     {
@@ -108,7 +123,8 @@ public class Player : MonoBehaviour
     }
     void LevelUp()
     {
-        level++;
+        plyaerLevel++;
+        hp = maxHp;
         currentExperience = 0;
         maxExperience += 50;
     }

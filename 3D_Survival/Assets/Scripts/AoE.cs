@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using static HomingLauncher;
 
@@ -17,10 +19,10 @@ public class AoE : Weapon
     {
         this.level = level;
         this.range = range;
-        this.damage = damage;
+        this.damage = GameManager.Instance.player.playerAttackPower * 0.3f + damage;
         this.coolTime = coolTime;
     }
-   
+
     private void Start()
     {
         targetLayer = LayerMask.GetMask("Monster");
@@ -34,7 +36,7 @@ public class AoE : Weapon
     private void HandleVisibilityChanged(bool isSpawn)
     {
         effact.gameObject.SetActive(true);
-        InvokeRepeating("Attack", 0f, coolTime);
+        InvokeRepeating("Attack", coolTime, coolTime);
     }
 
     void Attack()
@@ -43,8 +45,16 @@ public class AoE : Weapon
 
         foreach (Collider target in targets)
         {
-            Monster monsterScript = target.GetComponent<Monster>();
-            monsterScript.GetDamage(damage);
+            MeleeMonster meleeMonster = target.GetComponent<MeleeMonster>();
+            RangedMonster rangedMonster = target.GetComponent<RangedMonster>();
+            if (meleeMonster != null)
+            {
+                meleeMonster.GetDamage(damage);
+            }
+            if (rangedMonster != null)
+            {
+                rangedMonster.GetDamage(damage);
+            }
         }
     }
 
@@ -59,7 +69,7 @@ public class AoE : Weapon
         else if (level == 2)
         {
             //범위증가
-            range *= 1.5f;
+            range *= 1.25f;
             effact.transform.localScale *= range;
         }
         else if (level == 3)
@@ -73,7 +83,6 @@ public class AoE : Weapon
             var mainModule = effact.main;
             coolTime *= 0.5f;
             mainModule.duration *= coolTime;
-
         }
     }
 }
