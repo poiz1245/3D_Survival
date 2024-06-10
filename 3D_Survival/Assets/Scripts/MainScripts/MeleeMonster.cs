@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class RangedMonster : Monster
+public class MeleeMonster : Monster
 {
     Rigidbody rigid;
     Animator anim;
@@ -28,8 +29,7 @@ public class RangedMonster : Monster
             }
         }
     }
-
-    public RangedMonster(float hp, float maxHp, int damage, float moveSpeed, float attackRange, int experienceAmount) : base(hp, maxHp, damage, moveSpeed, attackRange, experienceAmount)
+    public MeleeMonster(float hp, float maxHp, int damage, float moveSpeed, float attackRange, int experienceAmount) : base(hp, maxHp, damage, moveSpeed, attackRange, experienceAmount)
     {
         this.hp = hp;
         this.maxHp = maxHp;
@@ -82,7 +82,6 @@ public class RangedMonster : Monster
         else
         {
             rigid.velocity = Vector3.zero;
-            Rotate(moveDir * rotationSpeed);
         }
     }
     private void Update()
@@ -96,9 +95,9 @@ public class RangedMonster : Monster
             Invoke("Die", 1.5f);
         }
     }
-    private void Die()
+    void Die()
     {
-        gameObject.SetActive(false); 
+        gameObject.SetActive(false);
         collider.enabled = false;
         rigid.isKinematic = true;
     }
@@ -114,7 +113,7 @@ public class RangedMonster : Monster
 
         exp.transform.position = transform.position;
     }
-    private void AnimationSetting()
+    void AnimationSetting()
     {
         if (hp <= 0)
         {
@@ -131,12 +130,12 @@ public class RangedMonster : Monster
             anim.SetBool("isAttack", false);
         }
     }
-    public void Rotate(Vector3 moveDir)
+    void Rotate(Vector3 moveDir)
     {
         Quaternion deltaRotation = Quaternion.LookRotation(new Vector3(moveDir.x, rigid.velocity.y, moveDir.z));
         rigid.MoveRotation(deltaRotation);
     }
-    public void Move(Vector3 velocityChange)
+    void Move(Vector3 velocityChange)
     {
         rigid.AddForce(velocityChange, ForceMode.VelocityChange);
     }
@@ -144,9 +143,10 @@ public class RangedMonster : Monster
     {
         base.GetDamage(damage);
     }
-    public void ScanPlayer()
+    void ScanPlayer()
     {
         Collider[] target = Physics.OverlapSphere(transform.position, attackRange, playerLayer);
+
         if (target.Length > 0)
         {
             findPlayer = true;
@@ -156,12 +156,15 @@ public class RangedMonster : Monster
             findPlayer = false;
         }
     }
-    public void MonsterBulletSpawn(int index)
+    private void Attack()
     {
-        MonsterBullet monsterBullet = GameManager.Instance.bulletPool.GetBullet(index).GetComponent<MonsterBullet>();
-        monsterBullet.SetDamage(damage);
-        monsterBullet.transform.position = transform.position;
-        monsterBullet.transform.rotation = transform.rotation;
+        Collider playerCollider = GameObject.FindWithTag("Player").GetComponent<Collider>();
+        Player player = playerCollider.gameObject.GetComponent<Player>();
+        if (player != null)
+        {
+            player.GetDamage(damage);
+        }
+        gameObject.SetActive(false);
     }
     private void OnTriggerEnter(Collider other)
     {
