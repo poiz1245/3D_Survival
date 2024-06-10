@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -25,13 +26,21 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.player.OnPlayerLevelChanged += PlayerLevelUp;
-
     }
-    private void OnEnable()
+    private void PlayerLevelUp(int level)
     {
         randomNumbers = GetRandomNumber(0, button.Length, 3);
-    }
 
+        buttonPanel.SetActive(true);
+
+        for (int i = 0; i < 3; i++)
+        {
+            button[randomNumbers[i]].transform.position = spots[i].position;
+            button[randomNumbers[i]].SetActive(true);
+        }
+
+        Time.timeScale = 0;
+    }
     List<int> GetRandomNumber(int min, int max, int count)
     {
         List<int> numbers = new List<int>();
@@ -40,6 +49,7 @@ public class UIManager : MonoBehaviour
         for (int i = min; i < max; i++)
         {
             numbers.Add(i);
+            button[i].SetActive(false);
         }
 
         for (int i = 0; i < count; ++i)
@@ -50,17 +60,5 @@ public class UIManager : MonoBehaviour
         }
 
         return result;
-    }
-    private void PlayerLevelUp(int level)
-    {
-        buttonPanel.SetActive(true);
-
-        for (int i = 0; i < 3; i++)
-        {
-            button[randomNumbers[i]].transform.position = spots[i].position;
-            button[randomNumbers[i]].SetActive(true);
-        }
-
-        Time.timeScale = 0;
     }
 }
