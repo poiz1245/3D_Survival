@@ -69,7 +69,7 @@ public class AoE : Weapon
         else if (level == 2)
         {
             //범위증가
-            range *= 1.5f;
+            range *= 1.2f;
             particleSystem.transform.localScale *= range;
         }
         else if (level == 3)
