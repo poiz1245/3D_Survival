@@ -20,6 +20,7 @@ public class MonsterSpawner : MonoBehaviour
         int rnd = Random.Range(0, spawnPoints.Length);
         GameObject meleeMonster = GameManager.Instance.monsterPool.GetMonster(0);
         GameObject rangedMonster = GameManager.Instance.monsterPool.GetMonster(1);
+        GameObject bossMonster = GameManager.Instance.monsterPool.GetMonster(2);
         float stageDelay = spawnDelay - (index * 0.5f);
         switch (index)
         {
@@ -34,9 +35,9 @@ public class MonsterSpawner : MonoBehaviour
                 while (true)
                 {
                     yield return new WaitForSeconds(stageDelay);
-                    monster = GameManager.Instance.monsterPool.GetMonster(2);
+                    bossMonster = GameManager.Instance.monsterPool.GetMonster(2);
                     //monster = GameManager.Instance.monsterPool.GetMonster(1);
-                    monster.transform.position = spawnPoints[rnd].position;
+                    bossMonster.transform.position = spawnPoints[rnd].position;
 
                     this.transform.gameObject.SetActive(false);
                 }
@@ -107,16 +108,15 @@ public class MonsterSpawner : MonoBehaviour
                 while (true)
                 {
                     yield return new WaitForSeconds(stageDelay);
-                    monster = GameManager.Instance.monsterPool.GetMonster(0);
-                    monster = GameManager.Instance.monsterPool.GetMonster(1);
-                    monster.transform.position = spawnPoints[rnd].position;
+                    meleeMonster = GameManager.Instance.monsterPool.GetMonster(0);
+                    meleeMonster.transform.position = spawnPoints[rnd].position;
                 }
             case 10:
                 while (true)
                 {
                     yield return new WaitForSeconds(stageDelay);
-                    monster = GameManager.Instance.monsterPool.GetMonster(2);
-                    monster.transform.position = spawnPoints[rnd].position;
+                    bossMonster = GameManager.Instance.monsterPool.GetMonster(2);
+                    bossMonster.transform.position = spawnPoints[rnd].position;
                     this.transform.gameObject.SetActive(false);
                 }
             default:
