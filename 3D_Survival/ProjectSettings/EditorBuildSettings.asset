@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/OSEOKMIN.unity
     guid: a951615b06bba8441b64ba3ded1abc87
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: 0c81fda6cd7afed469f74940a1033345
   m_configObjects: {}
