@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3534077800373388332}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -128,7 +128,7 @@ MonoBehaviour:
   moveSpeed: 10
   attackRange: 10
   experienceAmount: 0
-  bulletIndex: 0
+  bulletSpawnComplate: 0
 --- !u!54 &5268145652308139716
 Rigidbody:
   m_ObjectHideFlags: 0

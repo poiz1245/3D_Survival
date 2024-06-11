@@ -13,11 +13,7 @@ public class BossMonsterBullet : MonoBehaviour
     private void Update()
     {
         aliveTime += Time.deltaTime;
-        //if (bossMonster.bulletSpawnComplate == true)
-        //{
-        // [S]ÃÑ¾Ë ÀÌµ¿
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
-        //}
 
         if (aliveTime > 5)
         {
