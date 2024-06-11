@@ -11,6 +11,8 @@ public class RangedMonster : MonoBehaviour
     public float attackRange;
     public int experienceAmount;
 
+    [SerializeField] Transform expSpawnPoint;
+
     Rigidbody rigid;
     Animator anim;
     new CapsuleCollider collider;
@@ -111,7 +113,7 @@ public class RangedMonster : MonoBehaviour
             expScript.SetAmount(experienceAmount);
         }
 
-        exp.transform.position = transform.position;
+        exp.transform.position = expSpawnPoint.position;
     }
     private void AnimationSetting()
     {

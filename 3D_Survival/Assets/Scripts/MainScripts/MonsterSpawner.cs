@@ -20,7 +20,6 @@ public class MonsterSpawner : MonoBehaviour
         int rnd = Random.Range(0, spawnPoints.Length);
         GameObject meleeMonster = GameManager.Instance.monsterPool.GetMonster(0);
         GameObject rangedMonster = GameManager.Instance.monsterPool.GetMonster(1);
-        GameObject bossMonster = GameManager.Instance.monsterPool.GetMonster(2);
         float stageDelay = spawnDelay - (index * 0.5f);
         switch (index)
         {
@@ -36,7 +35,9 @@ public class MonsterSpawner : MonoBehaviour
                 {
                     yield return new WaitForSeconds(stageDelay);
                     meleeMonster = GameManager.Instance.monsterPool.GetMonster(0);
+                    //rangedMonster = GameManager.Instance.monsterPool.GetMonster(1);
                     meleeMonster.transform.position = spawnPoints[rnd].position;
+                    //rangedMonster.transform.position = spawnPoints[rnd].position;
                 }
             case 2:
                 while (true)
@@ -106,15 +107,9 @@ public class MonsterSpawner : MonoBehaviour
                 {
                     yield return new WaitForSeconds(stageDelay);
                     meleeMonster = GameManager.Instance.monsterPool.GetMonster(0);
+                    //rangedMonster = GameManager.Instance.monsterPool.GetMonster(1);
                     meleeMonster.transform.position = spawnPoints[rnd].position;
-                }
-            case 10:
-                while (true)
-                {
-                    yield return new WaitForSeconds(stageDelay);
-                    bossMonster = GameManager.Instance.monsterPool.GetMonster(2);
-                    bossMonster.transform.position = spawnPoints[rnd].position;
-                    this.transform.gameObject.SetActive(false);
+                    //rangedMonster.transform.position = spawnPoints[rnd].position;
                 }
             default:
                 yield return new WaitForSeconds(stageDelay);
