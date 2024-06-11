@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO.IsolatedStorage;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -8,10 +9,9 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     public GameObject buttonPanel;
-    public GameObject[] button;
+    public List<GameObject> button;
     public Transform[] spots;
 
-    List<int> randomNumbers;
     private void Awake()
     {
         if (Instance == null)
@@ -29,10 +29,16 @@ public class UIManager : MonoBehaviour
     }
     private void PlayerLevelUp(int level)
     {
-        randomNumbers = GetRandomNumber(0, button.Length, 3);
+        List<int> getIndicesToRemove = GetIndicesToRemove();
+
+        for (int i = getIndicesToRemove.Count - 1; i >= 0; i--)
+        {
+            button.RemoveAt(getIndicesToRemove[i]);
+        }
 
         buttonPanel.SetActive(true);
 
+        List<int> randomNumbers = GetRandomNumber();
         for (int i = 0; i < 3; i++)
         {
             button[randomNumbers[i]].transform.position = spots[i].position;
@@ -41,18 +47,37 @@ public class UIManager : MonoBehaviour
 
         Time.timeScale = 0;
     }
-    List<int> GetRandomNumber(int min, int max, int count)
+    List<int> GetIndicesToRemove()
     {
-        List<int> numbers = new List<int>();
-        List<int> result = new List<int>();
+        List<int> indicesToRemove = new();
 
-        for (int i = min; i < max; i++)
+        for(int i = 0; i < button.Count; i++) //Count 8
         {
-            numbers.Add(i);
             button[i].SetActive(false);
+
+            if (i < WeaponManager.instance.weaponsList.Count) //Length 4
+            {
+                if (WeaponManager.instance.weaponsList[i].level == 4)
+                {
+                    indicesToRemove.Add(i);
+                    WeaponManager.instance.weaponsList.RemoveAt(i); //한번 조건에 걸려서 제거된 무기는 다시 걸리지 않도록 삭제
+                }
+            }
         }
 
-        for (int i = 0; i < count; ++i)
+        return indicesToRemove;
+    }
+    List<int> GetRandomNumber()
+    {
+        List<int> numbers = new();
+        List<int> result = new();
+
+        for (int i = 0; i < button.Count; i++)
+        {
+            numbers.Add(i);
+        }
+
+        for (int i = 0; i < 3; ++i)
         {
             int index = Random.Range(0, numbers.Count);
             result.Add(numbers[index]);
