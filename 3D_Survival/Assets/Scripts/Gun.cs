@@ -27,6 +27,8 @@ public class Gun : Weapon
             BulletSpawn(1, level);
             spawnTime = spawnDelay;
         }
+
+        transform.rotation = GameManager.Instance.player.transform.rotation;
     }
     public void SetBullet(int index, int spawnPointIndex) //ÃÑ¾Ë ½ºÆù
     {

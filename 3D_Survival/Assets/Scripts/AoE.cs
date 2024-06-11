@@ -70,7 +70,7 @@ public class AoE : Weapon
         else if (level == 2)
         {
             range *= 1.2f;
-            GetComponent<ParticleSystem>().transform.localScale *= range;
+            myParticleSystem.gameObject.transform.localScale *= 1.2f;
         }
         else if (level == 3)
         {
@@ -78,9 +78,11 @@ public class AoE : Weapon
         }
         else if (level == 4)
         {
+            myParticleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             var mainModule = myParticleSystem.GetComponent<ParticleSystem>().main;
             coolTime *= 0.5f;
             mainModule.duration *= coolTime;
+            myParticleSystem.Play();
 
         }
     }

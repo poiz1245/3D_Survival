@@ -21,7 +21,6 @@ public class MeleeMonster : MonoBehaviour
     bool findPlayer = false;
     bool isDead = false;
 
-
     public delegate void MonsterStateChange(bool isDead);
     public event MonsterStateChange OnMonsterStateChanged;
     public bool monsterState
@@ -77,9 +76,10 @@ public class MeleeMonster : MonoBehaviour
             Move(velocityChange);
             Rotate(moveDir * rotationSpeed);
         }
-        else
+        else if (!isDead && findPlayer)
         {
             rigid.velocity = Vector3.zero;
+            Rotate(moveDir * rotationSpeed);
         }
     }
     private void Update()
