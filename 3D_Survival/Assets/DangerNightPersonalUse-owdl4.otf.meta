@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: ab44915be12459b488991ee58854c18d
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Danger Night - Personal Use
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 3fae5ea73c19be544a6a73a97a795603, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 0
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
