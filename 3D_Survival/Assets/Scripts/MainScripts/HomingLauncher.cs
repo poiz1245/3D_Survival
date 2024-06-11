@@ -118,53 +118,6 @@ public class HomingLauncher : Weapon
             findTarget = false;
         }
     }
-    /*void ScanTargets()
-    {
-        Collider[] targets = Physics.OverlapSphere(transform.position, range, targetLayer);
-
-        if (targets.Length > 0)
-        {
-            float closestDistance = Mathf.Infinity;
-            Transform closestTargetPos = null;
-            GameObject closestTargetObject = null;
-
-            foreach (Collider target in targets)
-            {
-                MeleeMonster meleeMonster = target.GetComponent<MeleeMonster>();
-                RangedMonster rangedMonster = target.GetComponent<RangedMonster>();
-
-                if (meleeMonster != null)
-                {
-                    float distance = Vector3.Distance(transform.position, meleeMonster.transform.position);
-                    if (distance < closestDistance && meleeMonster.hp > 0)
-                    {
-                        closestDistance = distance;
-                        closestTargetPos = meleeMonster.transform;
-                        closestTargetObject = meleeMonster.gameObject;
-                    }
-                }
-                if (rangedMonster != null)
-                {
-                    float distance = Vector3.Distance(transform.position, meleeMonster.transform.position);
-                    if (distance < closestDistance && meleeMonster.hp > 0)
-                    {
-                        closestDistance = distance;
-                        closestTargetPos = rangedMonster.transform;
-                        closestTargetObject = rangedMonster.gameObject;
-                    }
-                }
-            }
-
-            nearestTargetPos = closestTargetPos;
-            changedTarget = closestTargetObject;
-            findTarget = true;
-        }
-        else
-        {
-            nearestTargetPos = null;
-            findTarget = false;
-        }
-    }*/
     public void HomingMissileSpawn(int index)
     {
         HomingMissile homingMissile = GameManager.Instance.bulletPool.GetBullet(index).GetComponent<HomingMissile>();
@@ -175,6 +128,7 @@ public class HomingLauncher : Weapon
     public override void WeaponUpGrade()
     {
         base.WeaponUpGrade();
+        print(gameObject.name + "무기 업그레이드 완료 Level : " + level);
 
         if (level == 1)
         {
