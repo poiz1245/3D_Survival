@@ -53,7 +53,6 @@ public class GameManager : MonoBehaviour
             stage++;
             monsterSpawner.SpawnMonster();
             stageTime = 0;
-            print(stage);
         }
     }
 }

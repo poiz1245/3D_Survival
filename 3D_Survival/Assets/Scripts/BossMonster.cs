@@ -22,6 +22,8 @@ public class BossMonster : MonoBehaviour
     bool findPlayer = false;
     bool isDead = false;
 
+    public bool bulletSpawnComplate = false;
+
 
     public delegate void MonsterStateChange(bool isDead);
     public event MonsterStateChange OnMonsterStateChanged;
@@ -171,6 +173,7 @@ public class BossMonster : MonoBehaviour
         float radius = 3f; // 원의 반지름 설정
         float intervalAngle = 360f / count;
         float weightAngle = 0;
+        
 
         while (true)
         {
@@ -187,10 +190,12 @@ public class BossMonster : MonoBehaviour
                // GameObject clone = Instantiate(GameManager.Instance.bulletPool.GetBullet(3), spawnPosition, Quaternion.identity);
                 GameObject clone = GameManager.Instance.bulletPool.GetBullet(3);
                 clone.transform.position = spawnPosition;
-
+                
+                // [S]총알 돌아감
                 clone.transform.RotateAround(Vector3.up, i*intervalAngle);
 
             }
+            bulletSpawnComplate = true;
 
             yield return new WaitForSeconds(1f);
 
