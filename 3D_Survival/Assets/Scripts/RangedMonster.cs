@@ -76,12 +76,12 @@ public class RangedMonster : MonoBehaviour
             Move(velocityChange);
             Rotate(moveDir * rotationSpeed);
         }
-
-        if(findPlayer)
+        else if (!isDead && findPlayer)
         {
             rigid.velocity = Vector3.zero;
             Rotate(moveDir * rotationSpeed);
         }
+
     }
     private void Update()
     {
