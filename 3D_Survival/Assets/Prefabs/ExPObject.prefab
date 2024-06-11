@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6446280436248685275}
   - component: {fileID: 5619494917548100083}
   - component: {fileID: 6799476488206884661}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 4352080356548970581}
   - component: {fileID: 4766605705416154920}
   - component: {fileID: 9100197432881579749}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Flares
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4968,7 +4968,7 @@ GameObject:
   - component: {fileID: 2458609172937977731}
   - component: {fileID: 2869634501827566554}
   - component: {fileID: 5443298159446021139}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Buff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9801,7 +9801,7 @@ GameObject:
   - component: {fileID: 470777642518637022}
   - component: {fileID: 1697468786681993873}
   - component: {fileID: 7888679382889395826}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Trails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14642,7 +14642,7 @@ GameObject:
   - component: {fileID: 738462067632350505}
   - component: {fileID: 1887230716462792423}
   - component: {fileID: 3419167968319074201}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: ExPObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14762,7 +14762,7 @@ GameObject:
   - component: {fileID: 8003904538274452716}
   - component: {fileID: 905488602915779711}
   - component: {fileID: 5743139113140866230}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
