@@ -163,7 +163,6 @@ public class BossMonster : MonoBehaviour
     void Attack()
     {
         float perHp = (hp / maxHp) * 100;
-        print(perHp);
 
         if (hp <= 0)
         {
