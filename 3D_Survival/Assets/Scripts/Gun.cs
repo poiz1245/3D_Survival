@@ -70,22 +70,24 @@ public class Gun : Weapon
 
         if (level == 1)
         {
-            //level1 : 공속 증가
-            speed *= 1.5f;
+            //레벨이 0에서 1로 올라갈 때 들어와서 공속 50%증가
+            spawnDelay *= 0.5f;
+            UIManager.Instance.SetText(0, "다른 방향의 적을 추가로 공격합니다."); //다음 레벨업 할 때 표시될 text 세팅
         }
         else if (level == 2)
         {
-            //level2 : 발사 방향 추가
+            //1에서 2로 올라갈 때 들어옴
+            UIManager.Instance.SetText(0, "적을 더 강하게 공격합니다.");
             return;
         }
         else if (level == 3)
         {
-            //level3 : 데미지 증가
+            //2에서 3으로 올라갈 때 데미지 증가
             damage *= 1.5f;
+            UIManager.Instance.SetText(0, "공격방향이 더 증가합니다.");
         }
         else if (level == 4)
         {
-            //level4 : 발사 방향 추가
             return;
         }
     }

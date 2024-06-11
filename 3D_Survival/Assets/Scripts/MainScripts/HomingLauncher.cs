@@ -132,24 +132,23 @@ public class HomingLauncher : Weapon
 
         if (level == 1)
         {
-            //소환
             isSpawn = true;
+            UIManager.Instance.SetText(1, "적을 추적하는 범위가 증가합니다.");
         }
         else if (level == 2)
         {
-            //level2 : 스캔범위 증가
             range *= 1.5f;
-
+            UIManager.Instance.SetText(1, "더 빠른 속도로 적을 공격합니다.");
         }
         else if (level == 3)
         {
-            //level3 : 발사 속도 증가
             fireDelay *= 0.5f;
+            UIManager.Instance.SetText(1, "더 강하게 적을 공격합니다.");
+
 
         }
         else if (level == 4)
         {
-            //level4 : 데미지 증가
             damage *= 1.5f;
         }
     }
