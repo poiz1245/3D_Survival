@@ -36,15 +36,6 @@ public class MeleeMonster : MonoBehaviour
             }
         }
     }
-    /*public MeleeMonster(float hp, float maxHp, int damage, float moveSpeed, float attackRange, int experienceAmount) : base(hp, maxHp, damage, moveSpeed, attackRange, experienceAmount)
-    {
-        this.hp = hp;
-        this.maxHp = maxHp;
-        this.moveSpeed = moveSpeed;
-        this.damage = damage;
-        this.attackRange = attackRange;
-        this.experienceAmount = experienceAmount;
-    }*/
     private void Awake()
     {
         collider = GetComponent<CapsuleCollider>();
@@ -99,14 +90,14 @@ public class MeleeMonster : MonoBehaviour
         {
             hp = 0;
             monsterState = true;
+            collider.enabled = false;
+            rigid.isKinematic = true;
             Invoke("Die", 1.5f);
         }
     }
     void Die()
     {
         gameObject.SetActive(false);
-        collider.enabled = false;
-        rigid.isKinematic = true;
     }
     void DropExp(bool monsterState)
     {
@@ -148,7 +139,6 @@ public class MeleeMonster : MonoBehaviour
     }
     public void GetDamage(float damage)
     {
-        //base.GetDamage(damage);
         hp -= damage;
     }
     void ScanPlayer()
