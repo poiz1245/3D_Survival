@@ -5,21 +5,22 @@ using UnityEngine;
 
 public class ExpObject : MonoBehaviour
 {
-    public float attractSpeed = 5f;
+    public float attractSpeed;
 
-    [SerializeField] float scanRadious;
+    [SerializeField] GameObject light;
 
+    float rotationSpeed = 100f;
     int amount;
     Transform playerTransform;
     private void Awake()
     {
         playerTransform = GameManager.Instance.player.transform;
     }
-    void Update()
+    private void Update()
     {
-        //ScanPlayer();
+        transform.Rotate(0f, rotationSpeed * Time.deltaTime, 0f, Space.World);
+        //light.transform.Rotate(0f, -rotationSpeed * Time.deltaTime,0f );
     }
-
     public void SetAmount(int expAmount) //몬스터 죽을 때 몬스터가 가진 경험치 값을 오브젝트에 할당받는 함수
     {
         amount = expAmount;
@@ -33,28 +34,9 @@ public class ExpObject : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
-
     public void MoveToPlayer()
     {
         transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, attractSpeed * Time.deltaTime);
     }
-    /*void ScanPlayer()
-    {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, scanRadious, playerLayer);
 
-        foreach (var hitCollider in hitColliders)
-        {
-            if (hitCollider != null)
-
-            {
-                transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, attractSpeed * Time.deltaTime);
-            }
-        }
-    }*/
-    /*    public void AttractToPlayer(Transform player)
-        {
-            playerTransform = player;
-            attracting = true;
-        }
-    */
 }

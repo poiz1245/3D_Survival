@@ -12,6 +12,8 @@ public class MeleeMonster : MonoBehaviour
     public float attackRange;
     public int experienceAmount;
 
+    [SerializeField] Transform expSpawnPoint;
+
     Rigidbody rigid;
     Animator anim;
     new CapsuleCollider collider;
@@ -109,7 +111,7 @@ public class MeleeMonster : MonoBehaviour
             expScript.SetAmount(experienceAmount);
         }
 
-        exp.transform.position = transform.position;
+        exp.transform.position = expSpawnPoint.position;
     }
     void AnimationSetting()
     {

@@ -7,17 +7,17 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
-    public float monsterScanRadius;
-    public float objectScanRadius;
+    //public float monsterScanRadius;
+    public int level = 1;
     public float hp;
     public float maxHp;
-    public int level = 1;
-    public int maxExperience = 100;
     public float playerAttackPower;
     public float playerShield;
+    public float objectScanRadius;
+    public float maxExperience = 100;
+    public float currentExperience = 0;
 
     [SerializeField] float moveSpeed;
-    [SerializeField] int currentExperience = 0;
 
     LayerMask dropObjectLayer;
     Rigidbody rigid;
