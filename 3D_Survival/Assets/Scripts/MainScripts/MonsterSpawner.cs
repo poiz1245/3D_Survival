@@ -35,11 +35,8 @@ public class MonsterSpawner : MonoBehaviour
                 while (true)
                 {
                     yield return new WaitForSeconds(stageDelay);
-                    bossMonster = GameManager.Instance.monsterPool.GetMonster(2);
-                    //monster = GameManager.Instance.monsterPool.GetMonster(1);
-                    bossMonster.transform.position = spawnPoints[rnd].position;
-
-                    this.transform.gameObject.SetActive(false);
+                    meleeMonster = GameManager.Instance.monsterPool.GetMonster(0);
+                    meleeMonster.transform.position = spawnPoints[rnd].position;
                 }
             case 2:
                 while (true)
