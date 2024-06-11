@@ -8,7 +8,7 @@ using UnityEngine;
 public class AoE : Weapon
 {
     [SerializeField] float coolTime;
-    [SerializeField] ParticleSystem particleSystem;
+    [SerializeField] ParticleSystem myParticleSystem;
 
     LayerMask targetLayer;
 
@@ -35,7 +35,7 @@ public class AoE : Weapon
 
     private void HandleVisibilityChanged(bool isSpawn)
     {
-        particleSystem.gameObject.SetActive(true);
+        myParticleSystem.gameObject.SetActive(true);
         InvokeRepeating("Attack", 3, coolTime);
     }
 
@@ -61,26 +61,24 @@ public class AoE : Weapon
     public override void WeaponUpGrade()
     {
         base.WeaponUpGrade();
+        print(gameObject.name + "Î¨¥Í∏∞ ÏóÖÍ∑∏Î†àÏù¥Îìú ÏôÑÎ£å Level : " + level);
+
         if (level == 1)
         {
-            //º“»Ø
             OnVisibilityChanged(true);
         }
         else if (level == 2)
         {
-            //π¸¿ß¡ı∞°
             range *= 1.2f;
-            particleSystem.transform.localScale *= range;
+            GetComponent<ParticleSystem>().transform.localScale *= range;
         }
         else if (level == 3)
         {
-            //µ•πÃ¡ˆ¡ı∞°
             damage *= 2f;
         }
         else if (level == 4)
         {
-            //ƒ≈∏¿”∞®º“
-            var mainModule = particleSystem.main;
+            var mainModule = myParticleSystem.GetComponent<ParticleSystem>().main;
             coolTime *= 0.5f;
             mainModule.duration *= coolTime;
 
