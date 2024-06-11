@@ -7,7 +7,8 @@ public class WeaponManager : MonoBehaviour
     public static WeaponManager instance;
 
     public HomingLauncher homingLauncher;
-    public Weapon[] weapons;
+    public Weapon[] weaponsArray;
+    public List<Weapon> weaponsList;
 
     private void Awake()
     {
@@ -22,6 +23,6 @@ public class WeaponManager : MonoBehaviour
     }
     public void UpgradeWeapon(int weaponIndex)
     {
-        weapons[weaponIndex].WeaponUpGrade();
+        weaponsArray[weaponIndex].WeaponUpGrade();
     }
 }
