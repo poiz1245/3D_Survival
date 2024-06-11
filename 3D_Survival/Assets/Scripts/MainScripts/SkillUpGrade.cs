@@ -4,30 +4,31 @@ using UnityEngine;
 
 public class SkillUpGrade : MonoBehaviour
 {
-    public void SowrdUp()
+    public void MissileUp()
     {
         Time.timeScale = 1.0f;
         WeaponManager.instance.UpgradeWeapon(0);
         UIManager.Instance.buttonPanel.SetActive(false);
     }
-    public void AoEUp()
+    public void HomingLaucherUp()
     {
         Time.timeScale = 1.0f;
         WeaponManager.instance.UpgradeWeapon(1);
         UIManager.Instance.buttonPanel.SetActive(false);
     }
-    public void HomingLaucherUp()
+    public void SowrdUp()
     {
         Time.timeScale = 1.0f;
         WeaponManager.instance.UpgradeWeapon(2);
         UIManager.Instance.buttonPanel.SetActive(false);
     }
-    public void MissileUp()
+    public void AoEUp()
     {
         Time.timeScale = 1.0f;
         WeaponManager.instance.UpgradeWeapon(3);
         UIManager.Instance.buttonPanel.SetActive(false);
     }
+    
    
     public void PlayerMaxHpUp()
     {

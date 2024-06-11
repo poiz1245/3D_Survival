@@ -1,20 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
-using static HomingLauncher;
 
 public class AoE : Weapon
 {
     [SerializeField] float coolTime;
-    [SerializeField] ParticleSystem effact;
+    [SerializeField] ParticleSystem myParticleSystem;
 
     LayerMask targetLayer;
 
     public delegate void ObjectVisibilityChangedHandler(bool isSpawn);
     public event ObjectVisibilityChangedHandler OnObjectVisibilityChanged;
-
     public AoE(int level, float speed, float damage, float range, float coolTime) : base(level, speed, damage, range)
     {
         this.level = level;
@@ -27,6 +26,7 @@ public class AoE : Weapon
     {
         targetLayer = LayerMask.GetMask("Monster");
         OnObjectVisibilityChanged += HandleVisibilityChanged;
+
     }
     void OnVisibilityChanged(bool isVisible)
     {
@@ -35,8 +35,8 @@ public class AoE : Weapon
 
     private void HandleVisibilityChanged(bool isSpawn)
     {
-        effact.gameObject.SetActive(true);
-        InvokeRepeating("Attack", 0f, coolTime);
+        myParticleSystem.gameObject.SetActive(true);
+        InvokeRepeating("Attack", 3, coolTime);
     }
 
     void Attack()
@@ -61,28 +61,28 @@ public class AoE : Weapon
     public override void WeaponUpGrade()
     {
         base.WeaponUpGrade();
+        print(gameObject.name + "Î¨¥Í∏∞ ÏóÖÍ∑∏Î†àÏù¥Îìú ÏôÑÎ£å Level : " + level);
+
         if (level == 1)
         {
-            //º“»Ø
             OnVisibilityChanged(true);
         }
         else if (level == 2)
         {
-            //π¸¿ß¡ı∞°
-            range *= 1.5f;
-            effact.transform.localScale *= range;
+            range *= 1.2f;
+            myParticleSystem.gameObject.transform.localScale *= 1.2f;
         }
         else if (level == 3)
         {
-            //µ•πÃ¡ˆ¡ı∞°
             damage *= 2f;
         }
         else if (level == 4)
         {
-            //ƒ≈∏¿”∞®º“
-            var mainModule = effact.main;
+            myParticleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            var mainModule = myParticleSystem.GetComponent<ParticleSystem>().main;
             coolTime *= 0.5f;
             mainModule.duration *= coolTime;
+            myParticleSystem.Play();
 
         }
     }

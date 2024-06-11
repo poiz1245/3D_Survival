@@ -35,16 +35,6 @@ public class RangedMonster : MonoBehaviour
             }
         }
     }
-
-    /*public RangedMonster(float hp, float maxHp, int damage, float moveSpeed, float attackRange, int experienceAmount) : base(hp, maxHp, damage, moveSpeed, attackRange, experienceAmount)
-    {
-        this.hp = hp;
-        this.maxHp = maxHp;
-        this.moveSpeed = moveSpeed;
-        this.damage = damage;
-        this.attackRange = attackRange;
-        this.experienceAmount = experienceAmount;
-    }*/
     private void Awake()
     {
         collider = GetComponent<CapsuleCollider>();
@@ -86,11 +76,12 @@ public class RangedMonster : MonoBehaviour
             Move(velocityChange);
             Rotate(moveDir * rotationSpeed);
         }
-        else
+        else if (!isDead && findPlayer)
         {
             rigid.velocity = Vector3.zero;
             Rotate(moveDir * rotationSpeed);
         }
+
     }
     private void Update()
     {
@@ -100,15 +91,16 @@ public class RangedMonster : MonoBehaviour
         {
             hp = 0;
             monsterState = true;
+            collider.enabled = false;
+            rigid.isKinematic = true;
             Invoke("Die", 1.5f);
         }
     }
     private void Die()
     {
         gameObject.SetActive(false); 
-        collider.enabled = false;
-        rigid.isKinematic = true;
     }
+
     void DropExp(bool monsterState)
     {
         GameObject exp = GameManager.Instance.dropObjectPool.GetDropObject(1);
@@ -150,7 +142,6 @@ public class RangedMonster : MonoBehaviour
     public void GetDamage(float damage)
     {
         hp -= damage;
-        //base.GetDamage(damage);
     }
     public void ScanPlayer()
     {

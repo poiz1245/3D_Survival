@@ -21,6 +21,8 @@ public class Sword : Weapon
     public override void WeaponUpGrade()
     {
         base.WeaponUpGrade();
+        print(gameObject.name + "업그레이드 완료 Level : " + level);
+
         if (level == 1)
         {
             //sword 소환

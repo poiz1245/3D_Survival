@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] int currentExperience = 0;
 
-    LayerMask targetLayer;
     LayerMask dropObjectLayer;
     Rigidbody rigid;
     Animator anim;
@@ -30,7 +29,7 @@ public class Player : MonoBehaviour
     public delegate void PlayerLevelChanged(int level);
     public event PlayerLevelChanged OnPlayerLevelChanged;
 
-    public int plyaerLevel
+    public int playerLevel
     {
         get { return level; }
         set
@@ -46,7 +45,6 @@ public class Player : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
-        targetLayer = LayerMask.GetMask("Monster");
         dropObjectLayer = LayerMask.GetMask("Exp");
     }
     void Update()
@@ -123,7 +121,7 @@ public class Player : MonoBehaviour
     }
     void LevelUp()
     {
-        plyaerLevel++;
+        playerLevel++;
         currentExperience = 0;
         maxExperience += 50;
     }

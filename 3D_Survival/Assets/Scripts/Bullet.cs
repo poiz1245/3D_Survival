@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour
         this.damage = damage;
         this.speed = speed;
     }
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Monster"))
         {

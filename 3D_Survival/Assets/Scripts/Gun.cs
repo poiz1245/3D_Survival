@@ -27,6 +27,8 @@ public class Gun : Weapon
             BulletSpawn(1, level);
             spawnTime = spawnDelay;
         }
+
+        transform.rotation = GameManager.Instance.player.transform.rotation;
     }
     public void SetBullet(int index, int spawnPointIndex) //총알 스폰
     {
@@ -64,6 +66,8 @@ public class Gun : Weapon
     public override void WeaponUpGrade()
     {
         base.WeaponUpGrade();
+        print(gameObject.name + "무기 업그레이드 완료 Level : " + level);
+
         if (level == 1)
         {
             //level1 : 공속 증가
