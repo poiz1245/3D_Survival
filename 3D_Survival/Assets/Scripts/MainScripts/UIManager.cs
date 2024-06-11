@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     public GameObject buttonPanel;
     public List<GameObject> button;
     public Transform[] spots;
+    public Slider expBar;
 
     private void Awake()
     {
@@ -26,6 +27,11 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.player.OnPlayerLevelChanged += PlayerLevelUp;
+    }
+    private void Update()
+    {
+        float expPercent = GameManager.Instance.player.currentExperience / GameManager.Instance.player.maxExperience;
+        expBar.value = expPercent;
     }
     private void PlayerLevelUp(int level)
     {
@@ -51,7 +57,7 @@ public class UIManager : MonoBehaviour
     {
         List<int> indicesToRemove = new();
 
-        for(int i = 0; i < button.Count; i++) //Count 8
+        for (int i = 0; i < button.Count; i++) //Count 8
         {
             button[i].SetActive(false);
 
