@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MonsterPool : MonoBehaviour
 {
-    public GameObject[] monsterPrefabs;
+    [SerializeField] GameObject[] monsterPrefabs;
 
     List<GameObject>[] monsterPool;
 
@@ -26,6 +26,7 @@ public class MonsterPool : MonoBehaviour
     public GameObject GetMonster(int index)
     {
         GameObject select = null;
+
         foreach (GameObject obj in monsterPool[index])
         {
             if (!obj.activeSelf)
