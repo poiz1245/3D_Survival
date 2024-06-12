@@ -13,7 +13,7 @@ public class MonsterSpawner : MonoBehaviour
     [SerializeField] Transform[] spawnPoints;
 
     GameObject meleeMonster;
-    GameObject rangedMonster; 
+    GameObject rangedMonster;
     GameObject bossMonster;
 
     private bool isMaxStage = false;
@@ -21,27 +21,35 @@ public class MonsterSpawner : MonoBehaviour
     {
         int stage = GameManager.Instance.stage;
         int maxStage = GameManager.Instance.maxStage;
+        int rnd = Random.Range(0, spawnPoints.Length);
+
+        if (stage == 0)
+        {
+            meleeMonster = GameManager.Instance.monsterPool.GetMonster(0);
+            meleeMonster.transform.position = spawnPoints[rnd].position;
+        }
 
         if (stage == maxStage)
         {
             isMaxStage = true;
         }
-       
+
         if (!isMaxStage)
         {
             if (stage == 0 || stage % 2 == 0)
             {
                 StartCoroutine(MeleeMonsterSpawn(stage, meleeSpawnDelay));
             }
-            else if (stage % 2 != 0)
+            else if (stage != 0 && stage % 2 != 0)
             {
+                StartCoroutine(MeleeMonsterSpawn(stage, meleeSpawnDelay));
                 StartCoroutine(RangedMonsterSpawn(stage, rangedSpawnDelay));
             }
         }
 
         if (isMaxStage)
         {
-            BossMonsterSpawn(stage, 0);
+            BossMonsterSpawn();
         }
 
     }
@@ -56,9 +64,13 @@ public class MonsterSpawner : MonoBehaviour
             stageDelay = 0.5f;
         }
 
-        print(stageDelay);
+        if (index == 0)
+        {
+            meleeMonster = GameManager.Instance.monsterPool.GetMonster(0);
+            meleeMonster.transform.position = spawnPoints[rnd].position;
+        }
 
-        while (true)
+        while (!isMaxStage)
         {
             yield return new WaitForSeconds(stageDelay);
             meleeMonster = GameManager.Instance.monsterPool.GetMonster(0);
@@ -77,7 +89,7 @@ public class MonsterSpawner : MonoBehaviour
             stageDelay = 0.5f;
         }
 
-        while (true)
+        while (!isMaxStage)
         {
             yield return new WaitForSeconds(stageDelay);
             rangedMonster = GameManager.Instance.monsterPool.GetMonster(1);
@@ -85,15 +97,9 @@ public class MonsterSpawner : MonoBehaviour
         }
     }
 
-    void BossMonsterSpawn(int index, float spawnDelay)
+    void BossMonsterSpawn()
     {
         int rnd = Random.Range(0, spawnPoints.Length);
-        float stageDelay = spawnDelay - (index * 0.5f);
-
-        if (stageDelay <= 0)
-        {
-            stageDelay = 0.5f;
-        }
 
         bossMonster = GameManager.Instance.monsterPool.GetMonster(2);
         bossMonster.transform.position = spawnPoints[rnd].position;
