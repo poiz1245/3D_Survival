@@ -9,18 +9,28 @@ public class Reposition : MonoBehaviour
     public float repositionRange;
     LayerMask playerLayer;
     bool findPlayer = false;
-    public GameObject respawnArea;
+    private Transform playerTransform;
+
     private void Start()
     {
         playerLayer = LayerMask.GetMask("Player");
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null )
+        {
+            playerTransform = playerObject.transform;
+        }
     }
 
     private void Update()
     {
         ScanPlayer();
-        if (!findPlayer)
+
+        if (gameObject.activeSelf)
         {
-            MonsterReporition();
+            if (!findPlayer)
+            {
+                MonsterReporition();
+            }
         }
     }
 
@@ -39,10 +49,9 @@ public class Reposition : MonoBehaviour
 
     public void MonsterReporition()
     {
-        if (!findPlayer)
+        if (playerTransform != null) 
         {
-            Vector3 respawnPos = respawnArea.transform.position;
-            print(respawnPos);
+            Vector3 respawnPos = playerTransform.Find("respawnPos").transform.position;
             transform.position = respawnPos;
             findPlayer = true;
         }
