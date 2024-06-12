@@ -10,6 +10,7 @@ public class Monster : MonoBehaviour
     public float moveSpeed;
     public float attackRange;
     public int experienceAmount; // 기본 경험치 양
+    public GameObject particlePrefab;
 
     public Monster(float hp, float maxHp, int damage, float moveSpeed,  float attackRange, int experienceAmount)
     {

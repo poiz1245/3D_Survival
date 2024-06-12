@@ -15,6 +15,7 @@ public class BossMonster : MonoBehaviour
     public float moveSpeed;
     public float attackRange;
     public int experienceAmount;
+    public GameObject particlePrefab;
 
     Rigidbody rigid;
     Animator anim;
@@ -157,6 +158,8 @@ public class BossMonster : MonoBehaviour
     }
     public void GetDamage(float damage)
     {
+        GameObject myPrefabInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
+        ParticleSystem particleSystem = myPrefabInstance.GetComponent<ParticleSystem>();
         hp -= damage;
     }
     public void ScanPlayer()
