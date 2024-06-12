@@ -111,6 +111,13 @@ public class MonsterSpawner : MonoBehaviour
                     meleeMonster.transform.position = spawnPoints[rnd].position;
                     //rangedMonster.transform.position = spawnPoints[rnd].position;
                 }
+            case 10:
+                while (true)
+                {
+                    yield return new WaitForSeconds(stageDelay);
+                    meleeMonster = GameManager.Instance.monsterPool.GetMonster(2);
+                    meleeMonster.transform.position = spawnPoints[rnd].position;
+                }
             default:
                 yield return new WaitForSeconds(stageDelay);
                 meleeMonster = GameManager.Instance.monsterPool.GetMonster(0);
