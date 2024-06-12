@@ -2039,9 +2039,9 @@ Animator:
   m_GameObject: {fileID: 8755335473465688229}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 8a7f9b558a11967419f1b861d9b63d68, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 240ecd1070c0f9147af2f554f733e3f3, type: 2}
   m_CullingMode: 1
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -2063,10 +2063,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 0
-  maxHp: 100
+  maxHp: 1000
   damage: 0
-  moveSpeed: 0
-  attackRange: 0
+  moveSpeed: 7
+  attackRange: 1.5
   experienceAmount: 0
   bulletSpawnComplate: 0
 --- !u!114 &1970326649378449735
@@ -2081,7 +2081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7001f1bd2645a544cb381504b1799666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  repositionRange: 20
+  repositionRange: 30
 --- !u!136 &7042078797419320146
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2097,7 +2097,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2127,10 +2127,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!1 &8877402117540126031
 GameObject:

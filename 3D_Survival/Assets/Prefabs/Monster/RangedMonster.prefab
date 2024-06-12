@@ -1088,6 +1088,7 @@ Transform:
   - {fileID: 1345146171896240709}
   - {fileID: 3423152375936810742}
   - {fileID: 4701701518053956900}
+  - {fileID: 4869403313781976251}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &581492491751619698
@@ -1157,6 +1158,7 @@ MonoBehaviour:
   attackRange: 5
   experienceAmount: 10
   expSpawnPoint: {fileID: 4701701518053956900}
+  bulletSpawnPoint: {fileID: 4869403313781976251}
 --- !u!136 &1260233924614357775
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1916,6 +1918,37 @@ Transform:
   m_Children:
   - {fileID: 438559107498245037}
   m_Father: {fileID: 5409137763648442791}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6938554334871658957
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4869403313781976251}
+  m_Layer: 7
+  m_Name: BulletSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4869403313781976251
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6938554334871658957}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.076, z: 0.117}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3326155184184761714}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6990931431563947028
 GameObject:

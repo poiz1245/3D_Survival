@@ -28,6 +28,7 @@ public class Sword : Weapon
 
         if (level == 1)
         {
+            UIManager.Instance.rawImage[2].SetActive(true);
             swordLevel1.SetActive(true);
             UIManager.Instance.SetText(2, "추가로 무기를 획득합니다.");
         }

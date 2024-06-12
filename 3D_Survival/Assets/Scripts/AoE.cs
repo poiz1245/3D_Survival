@@ -82,6 +82,7 @@ public class AoE : Weapon
 
         if (level == 1)
         {
+            UIManager.Instance.rawImage[3].SetActive(true);
             OnVisibilityChanged(true);
             UIManager.Instance.SetText(3, "더 넓은 범위의 적을 공격합니다.");
         }

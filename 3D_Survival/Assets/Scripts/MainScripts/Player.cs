@@ -137,5 +137,6 @@ public class Player : MonoBehaviour
         playerLevel++;
         currentExperience = 0;
         maxExperience += 50;
+        hp += maxHp * 0.3f;
     }
 }

@@ -149,6 +149,7 @@ public class HomingLauncher : Weapon
 
         if (level == 1)
         {
+            UIManager.Instance.rawImage[1].SetActive(true);
             isSpawn = true;
             UIManager.Instance.SetText(1, "적을 추적하는 범위가 증가합니다.");
         }

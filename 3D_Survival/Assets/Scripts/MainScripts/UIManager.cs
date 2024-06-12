@@ -18,8 +18,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] List<GameObject> button;
     [SerializeField] Transform[] spots;
+    public GameObject[] rawImage;
     public Text[] upGradeText;
-    
+
 
     private void Awake()
     {

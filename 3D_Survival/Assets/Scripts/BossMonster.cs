@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 
@@ -23,6 +24,12 @@ public class BossMonster : MonoBehaviour
     float rotationSpeed = 100f;
     bool findPlayer = false;
     bool isDead = false;
+    float hpPercent;
+
+    bool stage1 = true;
+    bool stage2;
+    bool stage3;
+    bool stage4;
 
     public bool bulletSpawnComplate = false;
 
@@ -41,7 +48,8 @@ public class BossMonster : MonoBehaviour
             }
         }
     }
-    private void Awake()
+
+    private void Start()
     {
         collider = GetComponent<CapsuleCollider>();
         rigid = GetComponent<Rigidbody>();
@@ -51,20 +59,19 @@ public class BossMonster : MonoBehaviour
         monsterState = false;
         collider.enabled = true;
         rigid.isKinematic = false;
-    }
-    private void Start()
-    {
         playerLayer = LayerMask.GetMask("Player");
+
         OnMonsterStateChanged += GameClear;
-        Attack();
+        PatternStart();
     }
+
     private void OnEnable()
     {
-        hp = maxHp;
-        monsterState = false;
-        collider.enabled = true;
-        rigid.isKinematic = false;
-
+        /*        hp = maxHp;
+                monsterState = false;
+                collider.enabled = true;
+                rigid.isKinematic = false;
+        */
         OnMonsterStateChanged += DropExp;
     }
     private void OnDisable()
@@ -84,7 +91,7 @@ public class BossMonster : MonoBehaviour
             Move(velocityChange);
             Rotate(moveDir * rotationSpeed);
         }
-        else
+        else if (!isDead && findPlayer)
         {
             rigid.velocity = Vector3.zero;
             Rotate(moveDir * rotationSpeed);
@@ -92,23 +99,27 @@ public class BossMonster : MonoBehaviour
     }
     private void Update()
     {
-        //AnimationSetting();
+        AnimationSetting();
+
+        hpPercent = (hp / maxHp) * 100;
 
         if (hp <= 0)
         {
             hp = 0;
             monsterState = true;
-            Invoke("Die", 1.5f);
+            Die();
         }
     }
     private void Die()
     {
-        gameObject.SetActive(false);
-        collider.enabled = false;
+        //gameObject.SetActive(false);
+        //collider.enabled = false;
         rigid.isKinematic = true;
     }
     void GameClear(bool isDead)
     {
+        anim.SetBool("isDead", true);
+        anim.SetBool("isAttack", false);
         UIManager.Instance.GameClear(isDead);
     }
     void DropExp(bool monsterState)
@@ -123,23 +134,18 @@ public class BossMonster : MonoBehaviour
 
         exp.transform.position = transform.position;
     }
-    //private void AnimationSetting()
-    //{
-    //    if (hp <= 0)
-    //    {
-    //        anim.SetBool("isDead", true);
-    //        anim.SetBool("isAttack", false);
-    //    }
-    //    else if (findPlayer)
-    //    {
-    //        anim.SetBool("isAttack", true);
-    //    }
-    //    else
-    //    {
-    //        anim.SetBool("isDead", false);
-    //        anim.SetBool("isAttack", false);
-    //    }
-    //}
+    private void AnimationSetting()
+    {
+        if (findPlayer)
+        {
+            anim.SetBool("isAttack", true);
+        }
+        else
+        {
+            anim.SetBool("isDead", false);
+            anim.SetBool("isAttack", false);
+        }
+    }
     public void Rotate(Vector3 moveDir)
     {
         Quaternion deltaRotation = Quaternion.LookRotation(new Vector3(moveDir.x, rigid.velocity.y, moveDir.z));
@@ -165,33 +171,18 @@ public class BossMonster : MonoBehaviour
             findPlayer = false;
         }
     }
-    void Attack()
+    private void Attack()
     {
-        float perHp = (hp / maxHp) * 100;
-
+        GameManager.Instance.player.GetDamage(damage);
+    }
+    void PatternStart()
+    {
+        StartCoroutine(BossStage1Bullet());
         if (hp <= 0)
         {
             // 체력이 0이하인 경우 처리
             return;
         }
-
-        if (perHp >= 70f)
-        {
-            StartCoroutine(BossStage1Bullet());
-        }
-        else if (perHp >= 50f)
-        {
-            StartCoroutine(BossStage2Bullet());
-        }
-        else if ((perHp >= 30f))
-        {
-            StartCoroutine(BossStage3Bullet());
-        }
-        else
-        {
-            StartCoroutine(BossStage4Bullet());
-        }
-
     }
     IEnumerator BossStage1Bullet()
     {
@@ -202,7 +193,7 @@ public class BossMonster : MonoBehaviour
         float weightAngle = 0;
 
 
-        while (true)
+        while (stage1)
         {
             for (int i = 0; i < count; ++i)
             {
@@ -218,6 +209,8 @@ public class BossMonster : MonoBehaviour
 
 
                 GameObject clone = GameManager.Instance.bulletPool.GetBullet(3);
+                BossMonsterBullet bossMonsterBullet = clone.GetComponent<BossMonsterBullet>();
+                bossMonsterBullet.SetDamage(damage);
                 clone.transform.position = spawnPosition;
                 clone.transform.rotation = rotation;
                 clone.transform.Rotate(0f, 180f, 0f);
@@ -229,8 +222,13 @@ public class BossMonster : MonoBehaviour
 
             weightAngle += 1;
 
-            yield return new WaitForSeconds(3);
+            //yield return new WaitForSeconds(1);
             bulletSpawnComplate = false;
+            //체력 체크 조건 맞으면 다른 함수를 불러
+            if (hpPercent <= 70)
+            {
+                Stage1Stop();
+            }
         }
     }
 
@@ -243,7 +241,7 @@ public class BossMonster : MonoBehaviour
         float weightAngle = 0;
 
 
-        while (true)
+        while (stage2)
         {
             for (int i = 0; i < count; ++i)
             {
@@ -260,6 +258,8 @@ public class BossMonster : MonoBehaviour
 
 
                 GameObject clone = GameManager.Instance.bulletPool.GetBullet(3);
+                BossMonsterBullet bossMonsterBullet = clone.GetComponent<BossMonsterBullet>();
+                bossMonsterBullet.SetDamage(damage);
                 clone.transform.position = spawnPosition;
                 clone.transform.rotation = rotation;
                 clone.transform.Rotate(0f, 180f, 0f);
@@ -273,6 +273,11 @@ public class BossMonster : MonoBehaviour
 
             //yield return new WaitForSeconds(3);
             bulletSpawnComplate = false;
+
+            if (hpPercent <= 50)
+            {
+                Stage2Stop();
+            }
         }
     }
 
@@ -284,9 +289,9 @@ public class BossMonster : MonoBehaviour
         float intervalAngle = 360f / count;
         float weightAngle = 0;
 
-        attackRange += 10;      // [S]3페이즈 들어오면 공격범위 10 늘어나게
+        attackRange *= 2;      // [S]3페이즈 들어오면 공격범위 10 늘어나게
 
-        while (true)
+        while (stage3)
         {
             Vector3 playerPosition = GameManager.Instance.player.transform.position;
             for (int i = 0; i < count; ++i)
@@ -307,6 +312,8 @@ public class BossMonster : MonoBehaviour
                 Quaternion rotation = Quaternion.LookRotation(direction);
 
                 GameObject clone = GameManager.Instance.bulletPool.GetBullet(3);
+                BossMonsterBullet bossMonsterBullet = clone.GetComponent<BossMonsterBullet>();
+                bossMonsterBullet.SetDamage(damage);
                 clone.transform.position = spawnPosition;
                 clone.transform.rotation = rotation;
                 clone.transform.Rotate(0f, 180f, 0f);
@@ -320,11 +327,15 @@ public class BossMonster : MonoBehaviour
 
             weightAngle += 1;
 
-            yield return new WaitForSeconds(3);
+            //yield return new WaitForSeconds(3);
             bulletSpawnComplate = false;
+
+            if (hpPercent <= 30)
+            {
+                Stage3Stop();
+            }
         }
     }
-
     IEnumerator BossStage4Bullet()
     {
         print("4페이즈");
@@ -334,9 +345,9 @@ public class BossMonster : MonoBehaviour
         float weightAngle = 0; // 각도의 가중치
         float maxDistance = 10f; // 플레이어와의 최대 거리
 
-        attackRange += 10; // 3페이즈 들어오면 공격범위 10 늘어나게
+        attackRange += 3; // 3페이즈 들어오면 공격범위 10 늘어나게
 
-        while (true)
+        while (stage4)
         {
             Vector3 playerPosition = GameManager.Instance.player.transform.position;
 
@@ -357,6 +368,8 @@ public class BossMonster : MonoBehaviour
 
                 // 총알 생성 및 위치, 회전 설정
                 GameObject clone = GameManager.Instance.bulletPool.GetBullet(3);
+                BossMonsterBullet bossMonsterBullet = clone.GetComponent<BossMonsterBullet>();
+                bossMonsterBullet.SetDamage(damage);
                 clone.transform.position = spawnPosition;
                 clone.transform.rotation = rotation;
                 //clone.transform.Rotate(0f, 180f, 0f);
@@ -371,11 +384,31 @@ public class BossMonster : MonoBehaviour
 
             weightAngle += 1;
 
-            yield return new WaitForSeconds(3);
+            //yield return new WaitForSeconds(3);
             bulletSpawnComplate = false;
         }
     }
-
+    void Stage1Stop()
+    {
+        stage1 = false;
+        StopCoroutine(BossStage1Bullet());
+        stage2 = true;
+        StartCoroutine(BossStage2Bullet());
+    }
+    void Stage2Stop()
+    {
+        stage2 = false;
+        StopCoroutine(BossStage2Bullet());
+        stage3 = true;
+        StartCoroutine(BossStage3Bullet());
+    }
+    void Stage3Stop()
+    {
+        stage3 = false;
+        StopCoroutine(BossStage3Bullet());
+        stage4 = true;
+        StartCoroutine(BossStage4Bullet());
+    }
 
     IEnumerator MoveBulletBezier(Transform bulletTransform, Vector3 startPoint, Vector3 endPoint, Vector3 controlPoint)
     {
@@ -402,7 +435,6 @@ public class BossMonster : MonoBehaviour
         // 총알 이동 완료 후 파괴
         //Destroy(bulletTransform.gameObject);
     }
-
     Vector3 CalculateBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2)
     {
         // 베지어 곡선 포인트 계산
@@ -414,7 +446,6 @@ public class BossMonster : MonoBehaviour
         p += tt * p2;
         return p;
     }
-
     IEnumerator MoveBulletStraight(Transform bulletTransform, Vector3 direction)
     {
         float speed = 10f; // 총알의 이동 속도

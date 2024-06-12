@@ -12,6 +12,7 @@ public class RangedMonster : MonoBehaviour
     public int experienceAmount;
 
     [SerializeField] Transform expSpawnPoint;
+    [SerializeField] Transform bulletSpawnPoint;
 
     Rigidbody rigid;
     Animator anim;
@@ -161,7 +162,7 @@ public class RangedMonster : MonoBehaviour
     {
         MonsterBullet monsterBullet = GameManager.Instance.bulletPool.GetBullet(index).GetComponent<MonsterBullet>();
         monsterBullet.SetDamage(damage);
-        monsterBullet.transform.position = transform.position;
+        monsterBullet.transform.position = bulletSpawnPoint.transform.position;
         monsterBullet.transform.rotation = transform.rotation;
     }
     private void OnTriggerEnter(Collider other)
