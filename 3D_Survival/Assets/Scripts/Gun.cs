@@ -20,9 +20,9 @@ public class Gun : Weapon
 
     private void Update()
     {
-        spawnTime -= Time.fixedDeltaTime;
+        spawnTime -= Time.deltaTime;
 
-        if (spawnTime <= 0)
+        if (spawnTime <= 0 && Time.timeScale != 0)
         {
             BulletSpawn(1, level);
             spawnTime = spawnDelay;

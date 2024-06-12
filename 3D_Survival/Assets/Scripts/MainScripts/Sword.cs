@@ -15,7 +15,10 @@ public class Sword : Weapon
     }
     void Update()
     {
-        transform.Rotate(new Vector3(0, 1 * speed, 0));
+        if (Time.timeScale != 0)
+        {
+            transform.Rotate(new Vector3(0, 1 * speed, 0));
+        }
     }
 
     public override void WeaponUpGrade()
