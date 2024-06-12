@@ -116,6 +116,7 @@ public class Player : MonoBehaviour
     }
     public void GetDamage(float damage)
     {
+        print("플레이어 데미지 받음");
         if (hp > damage)
         {
             hp -= damage;

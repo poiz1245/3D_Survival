@@ -1293,7 +1293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   maxHp: 100
-  damage: 0
+  damage: 10
   moveSpeed: 5
   attackRange: 1.5
   experienceAmount: 10

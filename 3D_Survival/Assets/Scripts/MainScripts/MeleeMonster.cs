@@ -156,14 +156,16 @@ public class MeleeMonster : MonoBehaviour
             findPlayer = false;
         }
     }
-    private void Attack()
+    public void Attack()
     {
         GameManager.Instance.player.GetDamage(damage);
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            print("aa");
             GameManager.Instance.player.GetDamage(damage);
         }
     }
