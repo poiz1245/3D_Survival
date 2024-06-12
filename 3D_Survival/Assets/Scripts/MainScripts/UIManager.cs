@@ -9,9 +9,10 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     public GameObject buttonPanel;
-    public List<GameObject> button;
-    public Transform[] spots;
-    public Slider expBar;
+    public Text[] upGradeText;
+    [SerializeField] List<GameObject> button;
+    [SerializeField] Transform[] spots;
+    [SerializeField] Slider expBar;
 
     private void Awake()
     {
@@ -32,6 +33,10 @@ public class UIManager : MonoBehaviour
     {
         float expPercent = GameManager.Instance.player.currentExperience / GameManager.Instance.player.maxExperience;
         expBar.value = expPercent;
+    }
+    public void SetText(int index, string text)
+    {
+        upGradeText[index].text = text;
     }
     private void PlayerLevelUp(int level)
     {
