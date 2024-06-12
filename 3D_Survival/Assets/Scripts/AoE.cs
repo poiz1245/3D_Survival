@@ -47,13 +47,30 @@ public class AoE : Weapon
         {
             MeleeMonster meleeMonster = target.GetComponent<MeleeMonster>();
             RangedMonster rangedMonster = target.GetComponent<RangedMonster>();
+            BossMonster bossMonster = target.GetComponent<BossMonster>();
             if (meleeMonster != null)
             {
                 meleeMonster.GetDamage(damage);
+                if (level == 4)
+                {
+                    meleeMonster.moveSpeed *= 0.5f;
+                }
             }
-            if(rangedMonster != null)
+            if (rangedMonster != null)
             {
                 rangedMonster.GetDamage(damage);
+                if (level == 4)
+                {
+                    rangedMonster.moveSpeed *= 0.5f;
+                }
+            }
+            if (bossMonster != null)
+            {
+                bossMonster.GetDamage(damage);
+                if (level == 4)
+                {
+                    bossMonster.moveSpeed *= 0.5f;
+                }
             }
         }
     }
@@ -65,27 +82,24 @@ public class AoE : Weapon
 
         if (level == 1)
         {
+            UIManager.Instance.rawImage[3].SetActive(true);
             OnVisibilityChanged(true);
-            UIManager.Instance.SetText(2, "더 넓은 범위의 적을 공격합니다.");
+            UIManager.Instance.SetText(3, "더 넓은 범위의 적을 공격합니다.");
         }
         else if (level == 2)
         {
             range *= 1.2f;
             myParticleSystem.gameObject.transform.localScale *= 1.2f;
-            UIManager.Instance.SetText(2, "더 강하게 적을 공격합니다.");
-        }
-        else if (level == 3)
-        {
-            damage *= 2f;
-            //레벨4가 될 때 어떻게 업그레이들 할 지 다시 정해야함
+            UIManager.Instance.SetText(3, "더 강하게 적을 공격합니다.");
+        }                              
+        else if (level == 3)           
+        {                              
+            damage *= 2f;              
+            UIManager.Instance.SetText(3, "주변의 적을 느리게 합니다.");
         }
         else if (level == 4)
         {
-            myParticleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            var mainModule = myParticleSystem.GetComponent<ParticleSystem>().main;
-            coolTime *= 0.5f;
-            mainModule.duration *= coolTime;
-            myParticleSystem.Play();
+            return;
 
         }
     }

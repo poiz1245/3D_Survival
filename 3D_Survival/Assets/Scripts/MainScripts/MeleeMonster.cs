@@ -158,13 +158,7 @@ public class MeleeMonster : MonoBehaviour
     }
     private void Attack()
     {
-        Collider playerCollider = GameObject.FindWithTag("Player").GetComponent<Collider>();
-        Player player = playerCollider.gameObject.GetComponent<Player>();
-        if (player != null)
-        {
-            player.GetDamage(damage);
-        }
-        gameObject.SetActive(false);
+        GameManager.Instance.player.GetDamage(damage);
     }
     private void OnTriggerEnter(Collider other)
     {
