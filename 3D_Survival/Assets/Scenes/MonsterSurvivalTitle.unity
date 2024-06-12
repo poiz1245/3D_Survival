@@ -353,7 +353,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: MonsterSurvival
+  m_text: FIghter  Survival
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cc9ca318379913349876fe6271b426e6, type: 2}
   m_sharedMaterial: {fileID: 3810958687005423258, guid: cc9ca318379913349876fe6271b426e6,
@@ -944,10 +944,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD654\uBA74\uC744 \uD06C\uB9AD\uD574\uC11C \uAC8C\uC784\uC744 \uC2DC\uC791\uD558\uC138\uC694."
+  m_text: "\uD654\uBA74\uC744 \uD074\uB9AD\uD574\uC11C \uAC8C\uC784\uC744 \uC2DC\uC791\uD558\uC138\uC694."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: cc9ca318379913349876fe6271b426e6, type: 2}
-  m_sharedMaterial: {fileID: 3810958687005423258, guid: cc9ca318379913349876fe6271b426e6,
+  m_fontAsset: {fileID: 11400000, guid: aa44892904a88a442ac838f62520d53a, type: 2}
+  m_sharedMaterial: {fileID: 2168920010603973621, guid: aa44892904a88a442ac838f62520d53a,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -972,13 +972,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 43.2
+  m_fontSizeBase: 43.2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
