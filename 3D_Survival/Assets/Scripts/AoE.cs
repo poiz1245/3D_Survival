@@ -66,15 +66,18 @@ public class AoE : Weapon
         if (level == 1)
         {
             OnVisibilityChanged(true);
+            UIManager.Instance.SetText(2, "더 넓은 범위의 적을 공격합니다.");
         }
         else if (level == 2)
         {
             range *= 1.2f;
             myParticleSystem.gameObject.transform.localScale *= 1.2f;
+            UIManager.Instance.SetText(2, "더 강하게 적을 공격합니다.");
         }
         else if (level == 3)
         {
             damage *= 2f;
+            //레벨4가 될 때 어떻게 업그레이들 할 지 다시 정해야함
         }
         else if (level == 4)
         {

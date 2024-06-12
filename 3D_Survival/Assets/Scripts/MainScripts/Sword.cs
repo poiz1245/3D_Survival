@@ -25,22 +25,21 @@ public class Sword : Weapon
 
         if (level == 1)
         {
-            //sword 소환
             swordLevel1.SetActive(true);
+            UIManager.Instance.SetText(2, "추가로 무기를 획득합니다.");
         }
         else if (level == 2)
         {
-            //sword추가 소환
             swordLevel2.SetActive(true);
+            UIManager.Instance.SetText(1, "더 빠르게 적을 공격합니다.");
         }
         else if (level == 3)
         {
-            //회전스피드 2배증가
             speed *= 2;
+            UIManager.Instance.SetText(1, "더 넓은 범위의 적을 공격합니다.");
         }
         else if (level == 4)
         {
-            //크기증가
             range *= 2;
             gameObject.transform.localScale *= range;
         }
