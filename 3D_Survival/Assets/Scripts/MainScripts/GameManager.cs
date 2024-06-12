@@ -12,9 +12,7 @@ public class GameManager : MonoBehaviour
     public DropObjectPool dropObjectPool;
     public Player player;
 
-
-    [SerializeField] int maxStage;
-
+    public int maxStage;
 
     float stageTime;
 
