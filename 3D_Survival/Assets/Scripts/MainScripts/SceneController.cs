@@ -7,11 +7,13 @@ public class SceneController : MonoBehaviour
 {
     public void LoadGameScene()
     {
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene("Main");
     }
 
     public void LoadTitleScene()
     {
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene("MonsterSurvivalTitle");
     }
 }
