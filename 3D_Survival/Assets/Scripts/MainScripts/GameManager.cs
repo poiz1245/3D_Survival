@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +17,7 @@ public class GameManager : MonoBehaviour
 
     float stageTime;
 
-
+    public TimeSpan timeSpan;
     public float gameTime { get; private set; }
     public int stage { get; private set; }
     private void Awake()
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         gameTime += Time.deltaTime;
+        timeSpan = TimeSpan.FromSeconds(gameTime);
 
         stageTime += Time.deltaTime;
 

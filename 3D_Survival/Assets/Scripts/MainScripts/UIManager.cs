@@ -13,6 +13,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject gameClearPanel;
     [SerializeField] Slider expBar;
     [SerializeField] Slider HpBar;
+    [SerializeField] Text timer;
+
 
     [SerializeField] List<GameObject> button;
     [SerializeField] Transform[] spots;
@@ -37,11 +39,19 @@ public class UIManager : MonoBehaviour
     }
     private void Update()
     {
+        TimerSetting();
+
         float expPercent = GameManager.Instance.player.currentExperience / GameManager.Instance.player.maxExperience;
         float hpPercent = GameManager.Instance.player.hp / GameManager.Instance.player.maxHp;
         expBar.value = expPercent;
         HpBar.value = hpPercent;
     }
+    private void TimerSetting()
+    {
+        string timeText = string.Format("{0:00}:{1:00}:{2:00}", GameManager.Instance.timeSpan.Minutes, GameManager.Instance.timeSpan.Seconds, (int)GameManager.Instance.timeSpan.Milliseconds / 10);
+        timer.text = timeText;
+    }
+
     public void SetText(int index, string text)
     {
         upGradeText[index].text = text;
