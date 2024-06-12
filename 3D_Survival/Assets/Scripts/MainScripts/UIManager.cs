@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] List<GameObject> button;
     [SerializeField] Transform[] spots;
     [SerializeField] Slider expBar;
+    [SerializeField] Slider HpBar;
 
     private void Awake()
     {
@@ -32,7 +33,9 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         float expPercent = GameManager.Instance.player.currentExperience / GameManager.Instance.player.maxExperience;
+        float hpPercent = GameManager.Instance.player.hp / GameManager.Instance.player.maxHp;
         expBar.value = expPercent;
+        HpBar.value = hpPercent;
     }
     public void SetText(int index, string text)
     {
