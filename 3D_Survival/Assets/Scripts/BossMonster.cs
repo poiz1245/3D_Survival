@@ -83,15 +83,10 @@ public class BossMonster : MonoBehaviour
             Move(velocityChange);
             Rotate(moveDir * rotationSpeed);
         }
-        else
-        {
-            rigid.velocity = Vector3.zero;
-            Rotate(moveDir * rotationSpeed);
-        }
     }
     private void Update()
     {
-        //AnimationSetting();
+        AnimationSetting();
 
         if (hp <= 0)
         {
@@ -118,23 +113,23 @@ public class BossMonster : MonoBehaviour
 
         exp.transform.position = transform.position;
     }
-    //private void AnimationSetting()
-    //{
-    //    if (hp <= 0)
-    //    {
-    //        anim.SetBool("isDead", true);
-    //        anim.SetBool("isAttack", false);
-    //    }
-    //    else if (findPlayer)
-    //    {
-    //        anim.SetBool("isAttack", true);
-    //    }
-    //    else
-    //    {
-    //        anim.SetBool("isDead", false);
-    //        anim.SetBool("isAttack", false);
-    //    }
-    //}
+    private void AnimationSetting()
+    {
+        if (hp <= 0)
+        {
+            anim.SetBool("isDead", true);
+            anim.SetBool("isAttack", false);
+        }
+        else if (findPlayer)
+        {
+            anim.SetBool("isAttack", true);
+        }
+        else
+        {
+            anim.SetBool("isDead", false);
+            anim.SetBool("isAttack", false);
+        }
+    }
     public void Rotate(Vector3 moveDir)
     {
         Quaternion deltaRotation = Quaternion.LookRotation(new Vector3(moveDir.x, rigid.velocity.y, moveDir.z));
