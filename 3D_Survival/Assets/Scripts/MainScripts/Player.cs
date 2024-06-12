@@ -7,7 +7,6 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
-    //public float monsterScanRadius;
     public int level = 1;
     public float hp;
     public float maxHp;
@@ -29,6 +28,8 @@ public class Player : MonoBehaviour
     public delegate void PlayerLevelChanged(int level);
     public event PlayerLevelChanged OnPlayerLevelChanged;
 
+    public delegate void PlayerStateChanged(bool isDead);
+    public event PlayerStateChanged OnPlayerStateChanged;
     public int playerLevel
     {
         get { return level; }
@@ -41,22 +42,26 @@ public class Player : MonoBehaviour
             }
         }
     }
+    void DeadStateChanged(bool isDead)
+    {
+        OnPlayerStateChanged?.Invoke(isDead);
+    }
+    void Die(bool isDead)
+    {
+        gameObject.SetActive(false);
+    }
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
         dropObjectLayer = LayerMask.GetMask("Exp");
+        OnPlayerStateChanged += Die;
     }
     void Update()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
         AnimSet();
-
-        if (hp <= 0)
-        {
-            gameObject.SetActive(false);
-        }
     }
     private void FixedUpdate()
     {
@@ -109,7 +114,15 @@ public class Player : MonoBehaviour
     }
     public void GetDamage(float damage)
     {
-        hp -= damage;
+        if (hp > damage)
+        {
+            hp -= damage;
+        }
+        else if (hp <= damage)
+        {
+            hp -= damage;
+            DeadStateChanged(true);
+        }
     }
     public void AddExperience(int amount)
     {
