@@ -31,12 +31,12 @@ public class Sword : Weapon
         else if (level == 2)
         {
             swordLevel2.SetActive(true);
-            UIManager.Instance.SetText(1, "더 빠르게 적을 공격합니다.");
+            UIManager.Instance.SetText(2, "더 빠르게 적을 공격합니다.");
         }
         else if (level == 3)
         {
             speed *= 2;
-            UIManager.Instance.SetText(1, "더 넓은 범위의 적을 공격합니다.");
+            UIManager.Instance.SetText(2, "더 넓은 범위의 적을 공격합니다.");
         }
         else if (level == 4)
         {
@@ -58,6 +58,11 @@ public class Sword : Weapon
             if (monsterRanged != null)
             {
                 monsterRanged.GetDamage(damage);
+            }
+            BossMonster bossMonster = other.gameObject.GetComponent<BossMonster>();
+            if (bossMonster != null)
+            {
+                bossMonster.GetDamage(damage);
             }
         }
     }

@@ -47,6 +47,7 @@ public class AoE : Weapon
         {
             MeleeMonster meleeMonster = target.GetComponent<MeleeMonster>();
             RangedMonster rangedMonster = target.GetComponent<RangedMonster>();
+            BossMonster bossMonster = target.GetComponent<BossMonster>();
             if (meleeMonster != null)
             {
                 meleeMonster.GetDamage(damage);
@@ -63,6 +64,14 @@ public class AoE : Weapon
                     rangedMonster.moveSpeed *= 0.5f;
                 }
             }
+            if (bossMonster != null)
+            {
+                bossMonster.GetDamage(damage);
+                if (level == 4)
+                {
+                    bossMonster.moveSpeed *= 0.5f;
+                }
+            }
         }
     }
 
@@ -74,18 +83,18 @@ public class AoE : Weapon
         if (level == 1)
         {
             OnVisibilityChanged(true);
-            UIManager.Instance.SetText(2, "더 넓은 범위의 적을 공격합니다.");
+            UIManager.Instance.SetText(3, "더 넓은 범위의 적을 공격합니다.");
         }
         else if (level == 2)
         {
             range *= 1.2f;
             myParticleSystem.gameObject.transform.localScale *= 1.2f;
-            UIManager.Instance.SetText(2, "더 강하게 적을 공격합니다.");
-        }
-        else if (level == 3)
-        {
-            damage *= 2f;
-            UIManager.Instance.SetText(2, "주변의 적을 느리게 합니다.");
+            UIManager.Instance.SetText(3, "더 강하게 적을 공격합니다.");
+        }                              
+        else if (level == 3)           
+        {                              
+            damage *= 2f;              
+            UIManager.Instance.SetText(3, "주변의 적을 느리게 합니다.");
         }
         else if (level == 4)
         {

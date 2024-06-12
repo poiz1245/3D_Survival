@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
   
     private void Start()
     {
-        monsterSpawner.SpawnMonster();
+        //monsterSpawner.SpawnMonster();
     }
 
     private void Update()
@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
         gameTime += Time.deltaTime;
 
         stageTime += Time.deltaTime;
+
         if (stageTime >= 5 && stage != maxStage)
         {
             stage++;

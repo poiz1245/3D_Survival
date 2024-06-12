@@ -77,6 +77,12 @@ public class HomingMissile : MonoBehaviour
             {
                 monsterRanged.GetDamage(damage);
             }
+
+            BossMonster bossMonster = other.gameObject.GetComponent<BossMonster>();
+            if (bossMonster != null)
+            {
+                bossMonster.GetDamage(damage);
+            }
             gameObject.SetActive(false);
         }
     }

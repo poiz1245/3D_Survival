@@ -55,6 +55,7 @@ public class BossMonster : MonoBehaviour
     private void Start()
     {
         playerLayer = LayerMask.GetMask("Player");
+        OnMonsterStateChanged += GameClear;
         Attack();
     }
     private void OnEnable()
@@ -105,6 +106,10 @@ public class BossMonster : MonoBehaviour
         gameObject.SetActive(false);
         collider.enabled = false;
         rigid.isKinematic = true;
+    }
+    void GameClear(bool isDead)
+    {
+        UIManager.Instance.GameClear(isDead);
     }
     void DropExp(bool monsterState)
     {

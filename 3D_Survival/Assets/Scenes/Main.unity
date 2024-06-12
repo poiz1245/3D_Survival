@@ -3920,7 +3920,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f08008ddcac3e4d865a6402feb3738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnDelay: 5
+  meleeSpawnDelay: 3.5
+  rangedSpawnDelay: 7.5
   spawnPoints:
   - {fileID: 577248028}
   - {fileID: 301718807}

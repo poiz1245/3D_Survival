@@ -19,6 +19,7 @@ public class MonsterSpawner : MonoBehaviour
     private bool isMaxStage = false;
     public void SpawnMonster()
     {
+        print("몬스터 소환");
         int stage = GameManager.Instance.stage;
         int maxStage = GameManager.Instance.maxStage;
 
@@ -30,6 +31,7 @@ public class MonsterSpawner : MonoBehaviour
         if (!isMaxStage)
         {
             print("현재 스테이지:" + stage);
+
             if (stage == 0 || stage % 2 == 0)
             {
                 StartCoroutine(MeleeMonsterSpawn(stage, meleeSpawnDelay));
@@ -51,7 +53,7 @@ public class MonsterSpawner : MonoBehaviour
     IEnumerator MeleeMonsterSpawn(int index, float spawnDelay)
     {
         int rnd = Random.Range(0, spawnPoints.Length);
-        float stageDelay = spawnDelay - (index * 0.5f);
+        float stageDelay = spawnDelay - (index * 0.3f);
 
         while (true)
         {

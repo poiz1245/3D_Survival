@@ -60,12 +60,17 @@ public class HomingLauncher : Weapon
         {
             MeleeMonster meleeMonster = changedTarget.GetComponent<MeleeMonster>();
             RangedMonster rangedMonster = changedTarget.GetComponent<RangedMonster>();
+            BossMonster bossMonster = changedTarget.GetComponent<BossMonster>();
 
             if (meleeMonster != null && meleeMonster.hp <= 0)
             {
                 changedTarget = null;
             }
             if (rangedMonster != null && rangedMonster.hp <= 0)
+            {
+                changedTarget = null;
+            }
+            if (bossMonster != null && bossMonster.hp <= 0)
             {
                 changedTarget = null;
             }
@@ -104,6 +109,18 @@ public class HomingLauncher : Weapon
                         closestDistance = distance;
                         closestTargetPos = rangedMonster.transform;
                         closestTargetObject = rangedMonster.gameObject;
+                    }
+                }
+
+                BossMonster bossMonster= target.GetComponent<BossMonster>();
+                if (bossMonster != null)
+                {
+                    float distance = Vector3.Distance(transform.position, bossMonster.transform.position);
+                    if (distance < closestDistance && bossMonster.hp > 0)
+                    {
+                        closestDistance = distance;
+                        closestTargetPos = bossMonster.transform;
+                        closestTargetObject = bossMonster.gameObject;
                     }
                 }
             }
