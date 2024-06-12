@@ -9,11 +9,14 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     public GameObject buttonPanel;
-    public Text[] upGradeText;
-    [SerializeField] List<GameObject> button;
-    [SerializeField] Transform[] spots;
+    [SerializeField] GameObject gameOverPanel;
     [SerializeField] Slider expBar;
     [SerializeField] Slider HpBar;
+
+    [SerializeField] List<GameObject> button;
+    [SerializeField] Transform[] spots;
+    public Text[] upGradeText;
+    
 
     private void Awake()
     {
@@ -29,6 +32,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.player.OnPlayerLevelChanged += PlayerLevelUp;
+        GameManager.Instance.player.OnPlayerStateChanged += PlayerDead;
     }
     private void Update()
     {
@@ -40,6 +44,11 @@ public class UIManager : MonoBehaviour
     public void SetText(int index, string text)
     {
         upGradeText[index].text = text;
+    }
+    void PlayerDead(bool isDead)
+    {
+        buttonPanel.SetActive(!isDead);
+        gameOverPanel.SetActive(isDead);
     }
     private void PlayerLevelUp(int level)
     {
