@@ -8,15 +8,19 @@ public class ExpObject : MonoBehaviour
     public float attractSpeed;
    
     [SerializeField] GameObject light;
-
-    
+    //
+    [SerializeField] AudioClip pickupSound; // 오디오 클립을 할당할 수 있는 필드
+    private AudioSource audioSource; // AudioSource 컴포넌트를 저장할 변수
+    //
     float rotationSpeed = 100f;
     int amount;
     Transform playerTransform;
     private void Awake()
     {
         playerTransform = GameManager.Instance.player.transform;
-
+        //
+        audioSource = GetComponent<AudioSource>(); // AudioSource 컴포넌트 가져오기
+        //
     }
     private void Update()
     {
@@ -33,7 +37,17 @@ public class ExpObject : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             GameManager.Instance.player.AddExperience(amount);
+            //
+            PlayPickupSound(); // 소리 재생
+            //
             gameObject.SetActive(false);
+        }
+    }
+    private void PlayPickupSound()
+    {
+        if (pickupSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(pickupSound);
         }
     }
     public void MoveToPlayer()
