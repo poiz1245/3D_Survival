@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
 
     public GameObject buttonPanel;
     [SerializeField] GameObject gameOverPanel;
+    [SerializeField] GameObject gameClearPanel;
     [SerializeField] Slider expBar;
     [SerializeField] Slider HpBar;
 
@@ -31,8 +32,11 @@ public class UIManager : MonoBehaviour
     }
     private void Start()
     {
+        BossMonster bossMonster = GameManager.Instance.monsterPool.monsterPrefabs[2].GetComponent<BossMonster>();
+
         GameManager.Instance.player.OnPlayerLevelChanged += PlayerLevelUp;
-        GameManager.Instance.player.OnPlayerStateChanged += PlayerDead;
+        GameManager.Instance.player.OnPlayerStateChanged += GameOver;
+        bossMonster.OnMonsterStateChanged += GameClear;
     }
     private void Update()
     {
@@ -45,7 +49,12 @@ public class UIManager : MonoBehaviour
     {
         upGradeText[index].text = text;
     }
-    void PlayerDead(bool isDead)
+    void GameClear(bool bossDead)
+    {
+        buttonPanel.SetActive(!bossDead);
+        gameClearPanel.SetActive(bossDead);
+    }
+    void GameOver(bool isDead)
     {
         buttonPanel.SetActive(!isDead);
         gameOverPanel.SetActive(isDead);

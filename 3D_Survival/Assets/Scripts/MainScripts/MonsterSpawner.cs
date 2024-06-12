@@ -117,6 +117,7 @@ public class MonsterSpawner : MonoBehaviour
                     yield return new WaitForSeconds(stageDelay);
                     meleeMonster = GameManager.Instance.monsterPool.GetMonster(2);
                     meleeMonster.transform.position = spawnPoints[rnd].position;
+                    StopCoroutine("StageMonsterSpawn");
                 }
             default:
                 yield return new WaitForSeconds(stageDelay);
