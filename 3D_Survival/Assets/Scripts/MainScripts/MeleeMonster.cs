@@ -11,6 +11,7 @@ public class MeleeMonster : MonoBehaviour
     public float moveSpeed;
     public float attackRange;
     public int experienceAmount;
+    public GameObject particlePrefab;
 
     [SerializeField] Transform expSpawnPoint;
 
@@ -141,6 +142,8 @@ public class MeleeMonster : MonoBehaviour
     }
     public void GetDamage(float damage)
     {
+        GameObject myPrefabInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
+        ParticleSystem particleSystem = myPrefabInstance.GetComponent<ParticleSystem>();
         hp -= damage;
     }
     void ScanPlayer()
