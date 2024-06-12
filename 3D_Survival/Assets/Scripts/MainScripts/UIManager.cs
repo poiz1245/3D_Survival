@@ -14,7 +14,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] Slider expBar;
     [SerializeField] Slider HpBar;
     [SerializeField] Text timer;
-
+    [SerializeField] GameObject playerWinObject;
+    [SerializeField] GameObject playerDiedObject;
 
     [SerializeField] List<GameObject> button;
     [SerializeField] Transform[] spots;
@@ -61,14 +62,14 @@ public class UIManager : MonoBehaviour
     {
         buttonPanel.SetActive(!bossDead);
         gameClearPanel.SetActive(bossDead);
-
+        playerWinObject.SetActive(true);
         Time.timeScale = 0f;
     }
     void GameOver(bool isDead)
     {
         buttonPanel.SetActive(!isDead);
         gameOverPanel.SetActive(isDead);
-
+        playerDiedObject.SetActive(true);
         Time.timeScale = 0f;
     }
     private void PlayerLevelUp(int level)

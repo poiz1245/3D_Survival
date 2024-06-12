@@ -16,7 +16,9 @@ public class Player : MonoBehaviour
     public float maxExperience = 100;
     public float currentExperience = 0;
 
+    
     [SerializeField] float moveSpeed;
+    [SerializeField] AudioSource deadSound;
 
     LayerMask dropObjectLayer;
     Rigidbody rigid;
@@ -114,6 +116,7 @@ public class Player : MonoBehaviour
     }
     public void GetDamage(float damage)
     {
+        print("플레이어 데미지 받음");
         if (hp > damage)
         {
             hp -= damage;
@@ -121,6 +124,7 @@ public class Player : MonoBehaviour
         else if (hp <= damage)
         {
             hp -= damage;
+            deadSound.Play();
             DeadStateChanged(true);
         }
     }

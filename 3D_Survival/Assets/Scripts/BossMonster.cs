@@ -16,6 +16,7 @@ public class BossMonster : MonoBehaviour
     public float attackRange;
     public int experienceAmount;
     public GameObject particlePrefab;
+    public AudioSource audioSource;
 
     Rigidbody rigid;
     Animator anim;
@@ -160,6 +161,7 @@ public class BossMonster : MonoBehaviour
     {
         GameObject myPrefabInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
         ParticleSystem particleSystem = myPrefabInstance.GetComponent<ParticleSystem>();
+        audioSource.Play();
         hp -= damage;
     }
     public void ScanPlayer()

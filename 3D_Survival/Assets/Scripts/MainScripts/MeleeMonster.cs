@@ -12,6 +12,7 @@ public class MeleeMonster : MonoBehaviour
     public float attackRange;
     public int experienceAmount;
     public GameObject particlePrefab;
+    public AudioSource audioSource;
 
     [SerializeField] Transform expSpawnPoint;
 
@@ -143,7 +144,8 @@ public class MeleeMonster : MonoBehaviour
     public void GetDamage(float damage)
     {
         GameObject myPrefabInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
-        ParticleSystem particleSystem = myPrefabInstance.GetComponent<ParticleSystem>();
+       //articleSystem particleSystem = myPrefabInstance.GetComponent<ParticleSystem>();
+        audioSource.Play();
         hp -= damage;
     }
     void ScanPlayer()
@@ -159,14 +161,16 @@ public class MeleeMonster : MonoBehaviour
             findPlayer = false;
         }
     }
-    private void Attack()
+    public void Attack()
     {
         GameManager.Instance.player.GetDamage(damage);
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            print("aa");
             GameManager.Instance.player.GetDamage(damage);
         }
     }
