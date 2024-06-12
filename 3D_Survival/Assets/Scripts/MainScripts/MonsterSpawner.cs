@@ -17,11 +17,17 @@ public class MonsterSpawner : MonoBehaviour
     GameObject bossMonster;
 
     private bool isMaxStage = false;
-    
     public void SpawnMonster()
     {
         int stage = GameManager.Instance.stage;
         int maxStage = GameManager.Instance.maxStage;
+        int rnd = Random.Range(0, spawnPoints.Length);
+
+        if (stage == 0)
+        {
+            meleeMonster = GameManager.Instance.monsterPool.GetMonster(0);
+            meleeMonster.transform.position = spawnPoints[rnd].position;
+        }
 
         if (stage == maxStage)
         {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -31,10 +32,11 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
   
     private void Start()
     {
-        //monsterSpawner.SpawnMonster();
+        monsterSpawner.SpawnMonster();
     }
 
     private void Update()
