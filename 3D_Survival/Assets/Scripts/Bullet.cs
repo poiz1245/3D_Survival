@@ -35,6 +35,7 @@ public class Bullet : MonoBehaviour
         {
             MeleeMonster meleeMonster = other.gameObject.GetComponent<MeleeMonster>();
             RangedMonster monsterRanged = other.gameObject.GetComponent<RangedMonster>();
+            BossMonster bossMonster = other.gameObject.GetComponent<BossMonster>();
 
             if (meleeMonster != null)
             {
@@ -43,6 +44,10 @@ public class Bullet : MonoBehaviour
             if (monsterRanged != null)
             {
                 monsterRanged.GetDamage(damage);
+            }
+            if (bossMonster != null)
+            {
+                bossMonster.GetDamage(damage);
             }
 
             gameObject.SetActive(false);

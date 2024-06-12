@@ -9,10 +9,18 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     public GameObject buttonPanel;
-    public Text[] upGradeText;
+    [SerializeField] GameObject gameOverPanel;
+    [SerializeField] GameObject gameClearPanel;
+    [SerializeField] Slider expBar;
+    [SerializeField] Slider HpBar;
+    [SerializeField] Text timer;
+
+
     [SerializeField] List<GameObject> button;
     [SerializeField] Transform[] spots;
-    [SerializeField] Slider expBar;
+    public GameObject[] rawImage;
+    public Text[] upGradeText;
+
 
     private void Awake()
     {
@@ -28,15 +36,40 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.player.OnPlayerLevelChanged += PlayerLevelUp;
+        GameManager.Instance.player.OnPlayerStateChanged += GameOver;
     }
     private void Update()
     {
+        TimerSetting();
+
         float expPercent = GameManager.Instance.player.currentExperience / GameManager.Instance.player.maxExperience;
+        float hpPercent = GameManager.Instance.player.hp / GameManager.Instance.player.maxHp;
         expBar.value = expPercent;
+        HpBar.value = hpPercent;
     }
+    private void TimerSetting()
+    {
+        string timeText = string.Format("{0:00}:{1:00}:{2:00}", GameManager.Instance.timeSpan.Minutes, GameManager.Instance.timeSpan.Seconds, (int)GameManager.Instance.timeSpan.Milliseconds / 10);
+        timer.text = timeText;
+    }
+
     public void SetText(int index, string text)
     {
         upGradeText[index].text = text;
+    }
+    public void GameClear(bool bossDead)
+    {
+        buttonPanel.SetActive(!bossDead);
+        gameClearPanel.SetActive(bossDead);
+
+        Time.timeScale = 0f;
+    }
+    void GameOver(bool isDead)
+    {
+        buttonPanel.SetActive(!isDead);
+        gameOverPanel.SetActive(isDead);
+
+        Time.timeScale = 0f;
     }
     private void PlayerLevelUp(int level)
     {

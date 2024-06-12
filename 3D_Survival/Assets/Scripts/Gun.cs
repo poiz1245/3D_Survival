@@ -20,9 +20,9 @@ public class Gun : Weapon
 
     private void Update()
     {
-        spawnTime -= Time.fixedDeltaTime;
+        spawnTime -= Time.deltaTime;
 
-        if (spawnTime <= 0)
+        if (spawnTime <= 0 && Time.timeScale != 0)
         {
             BulletSpawn(1, level);
             spawnTime = spawnDelay;
@@ -71,6 +71,7 @@ public class Gun : Weapon
         if (level == 1)
         {
             //레벨이 0에서 1로 올라갈 때 들어와서 공속 50%증가
+            UIManager.Instance.rawImage[0].SetActive(true);
             spawnDelay *= 0.5f;
             UIManager.Instance.SetText(0, "다른 방향의 적을 추가로 공격합니다."); //다음 레벨업 할 때 표시될 text 세팅
         }

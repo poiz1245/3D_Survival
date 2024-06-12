@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5644808888496469258}
-  - component: {fileID: 7861911213894370004}
   - component: {fileID: 1886757522946777714}
   m_Layer: 0
   m_Name: AoE
@@ -34,18 +33,6 @@ Transform:
   - {fileID: 7725317485432504773}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7861911213894370004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7662713971316861176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0affefa3bded35419fcdda7a422df8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1886757522946777714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,13 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 072c03e21d7289a42b87f645d7cfbc41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  particle: {fileID: 6385599400732669886}
-  aoeRadius: 5
-  damage: 20
+  level: 0
+  speed: 0
+  damage: 30
+  range: 5
   coolTime: 2
+  myParticleSystem: {fileID: 7182717352712406727}
 --- !u!1001 &3231548943576385160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -101,7 +87,7 @@ PrefabInstance:
     - target: {fileID: 3056184392828457411, guid: 867c572a5be680d42a042d2349f10143,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3056184392828457411, guid: 867c572a5be680d42a042d2349f10143,
         type: 3}
@@ -121,7 +107,7 @@ PrefabInstance:
     - target: {fileID: 5090179730832646364, guid: 867c572a5be680d42a042d2349f10143,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5182820693866792781, guid: 867c572a5be680d42a042d2349f10143,
         type: 3}
@@ -203,6 +189,11 @@ PrefabInstance:
       propertyPath: InitialModule.size3D
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5726018809045565519, guid: 867c572a5be680d42a042d2349f10143,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].time
+      value: 0.42
+      objectReference: {fileID: 0}
     - target: {fileID: 8262427872422423092, guid: 867c572a5be680d42a042d2349f10143,
         type: 3}
       propertyPath: InitialModule.startSize.scalar
@@ -213,14 +204,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: Red energy explosion
       objectReference: {fileID: 0}
+    - target: {fileID: 8378648546881499446, guid: 867c572a5be680d42a042d2349f10143,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 867c572a5be680d42a042d2349f10143, type: 3}
---- !u!1 &6385599400732669886 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8378648546881499446, guid: 867c572a5be680d42a042d2349f10143,
+--- !u!198 &7182717352712406727 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5726018809045565519, guid: 867c572a5be680d42a042d2349f10143,
     type: 3}
   m_PrefabInstance: {fileID: 3231548943576385160}
   m_PrefabAsset: {fileID: 0}

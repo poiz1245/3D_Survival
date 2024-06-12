@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:3D_Survival/Assets/AudioSource.meta
 guid: bda7f7b753508504aa16178473feac41
 folderAsset: yes
+========
+guid: 327b6b27538d2bc4e807d69ec1817339
+>>>>>>>> 3fab314149e3813809d5ad80e76c4a2c0358cac8:3D_Survival/Assets/Model/Polygonmaker/Polygonmaker - Shader/URP/Shaders URP.unitypackage.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
