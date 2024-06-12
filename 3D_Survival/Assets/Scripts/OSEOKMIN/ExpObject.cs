@@ -6,15 +6,17 @@ using UnityEngine;
 public class ExpObject : MonoBehaviour
 {
     public float attractSpeed;
-
+   
     [SerializeField] GameObject light;
 
+    
     float rotationSpeed = 100f;
     int amount;
     Transform playerTransform;
     private void Awake()
     {
         playerTransform = GameManager.Instance.player.transform;
+
     }
     private void Update()
     {
