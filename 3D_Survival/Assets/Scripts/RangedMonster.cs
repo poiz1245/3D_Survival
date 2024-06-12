@@ -11,6 +11,7 @@ public class RangedMonster : MonoBehaviour
     public float attackRange;
     public int experienceAmount;
     public GameObject particlePrefab;
+    public AudioSource audioSource;
 
     [SerializeField] Transform expSpawnPoint;
     [SerializeField] Transform bulletSpawnPoint;
@@ -147,6 +148,7 @@ public class RangedMonster : MonoBehaviour
     {
         GameObject myPrefabInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
         ParticleSystem particleSystem = myPrefabInstance.GetComponent<ParticleSystem>();
+        audioSource.Play();
         hp -= damage;
     }
     public void ScanPlayer()
