@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:3D_Survival/Assets/Prefabs/HitEffect.prefab.meta
 guid: 970888c1c4b8fd54fbc2723e34da4b15
 PrefabImporter:
+========
+guid: 4f26e25a5579acb47b7686d59e029895
+DefaultImporter:
+>>>>>>>> 77cac06a55d70f1c8e412a44e742b51f5ae0c593:3D_Survival/Assets/Scenes/ItemHaveSound.unity.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
