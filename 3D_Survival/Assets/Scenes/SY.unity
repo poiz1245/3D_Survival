@@ -432,7 +432,7 @@ MonoBehaviour:
   monsterPrefabs:
   - {fileID: 7614642148526892867, guid: fdc0fbc51767faa48975925d7164fb27, type: 3}
   - {fileID: 3438864095953657720, guid: ba6f17ce4007f55468d97c9a7280a9d9, type: 3}
-  - {fileID: 4814316663439043509, guid: d481e4f3655cfaa44b8de91e8dc47f37, type: 3}
+  - {fileID: 8755335473465688229, guid: 8a2c3dcb52685ff47bc5ab950075c0f2, type: 3}
 --- !u!4 &110080152
 Transform:
   m_ObjectHideFlags: 0
@@ -1667,10 +1667,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefabs:
-  - {fileID: 168984090651000656, guid: bda8d7edeaa13d74fbc7f274504ea54a, type: 3}
+  - {fileID: 6558931288433585014, guid: 8394b36a0526375419efa258de4a6314, type: 3}
   - {fileID: 1212175587910648882, guid: 61f96e02f36193d458438075fb6f88a7, type: 3}
   - {fileID: 4459958788177297525, guid: 324730d13eb79874d997f9d859319cdb, type: 3}
-  - {fileID: 8265322084124814397, guid: c284d9c38e3e83543bd2916d6fd327f1, type: 3}
+  - {fileID: 5446238631803529172, guid: c284d9c38e3e83543bd2916d6fd327f1, type: 3}
 --- !u!4 &463252343
 Transform:
   m_ObjectHideFlags: 0
@@ -2570,6 +2570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonPanel: {fileID: 1849882187}
+  upGradeText: []
   button:
   - {fileID: 1846171428}
   - {fileID: 384680775}
@@ -2618,7 +2619,7 @@ MonoBehaviour:
   bulletPool: {fileID: 463252342}
   dropObjectPool: {fileID: 2003685049}
   player: {fileID: 678853112}
-  maxStage: 1
+  maxStage: 10
 --- !u!4 &884382182
 Transform:
   m_ObjectHideFlags: 0
@@ -3034,8 +3035,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f08008ddcac3e4d865a6402feb3738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeSpawnDelay: 5
-  rangedSpawnDelay: 10
+  meleeSpawnDelay: 3
+  rangedSpawnDelay: 7
   spawnPoints:
   - {fileID: 577248028}
   - {fileID: 301718807}
