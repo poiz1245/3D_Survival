@@ -31,18 +31,13 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        //player.OnPlayerLevelChanged += PlayerLevelUp;
-
     }
-    /*private void PlayerLevelUp(int level)
-    {
-        Time.timeScale = 0;
-    }*/
+  
     private void Start()
     {
         monsterSpawner.SpawnMonster();
     }
+
     private void Update()
     {
         gameTime += Time.deltaTime;
