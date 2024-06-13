@@ -2243,7 +2243,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.47185794, y: -0.000000021454227, z: 0.000000011481954, w: 0.88167465}
+  m_LocalRotation: {x: 0.47185794, y: 0.000000021454222, z: -0.0000000114819505, w: 0.88167465}
   m_LocalPosition: {x: 0, y: 16, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5065,8 +5065,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
-  hp: 100
-  maxHp: 100
+  hp: 10000
+  maxHp: 10000
   playerAttackPower: 100
   playerShield: 10
   objectScanRadius: 2
@@ -5689,8 +5689,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 39183956feb9eae41bfa7ab33da3ceed, type: 3}
-  m_PlayOnAwake: 0
+  m_audioClip: {fileID: 8300000, guid: b4507eb56109b804da267a31bbecdc82, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -8013,7 +8013,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1063835738}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.47185794, y: -0.000000021454227, z: 0.000000011481954, w: 0.88167465}
+  m_LocalRotation: {x: 0.47185794, y: 0.000000021454222, z: -0.0000000114819505, w: 0.88167465}
   m_LocalPosition: {x: 0, y: 16, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -13365,8 +13365,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2132426178}
-  - component: {fileID: 2132426177}
   - component: {fileID: 2132426176}
+  - component: {fileID: 2132426177}
   - component: {fileID: 2132426179}
   m_Layer: 0
   m_Name: SoundManager
@@ -13388,8 +13388,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonClickSound: {fileID: 2132426177}
-  deadSound: {fileID: 8052198374586031053}
-  winSound: {fileID: 778715011}
   monsterDeadSound: {fileID: 2132426179}
   buttons:
   - {fileID: 1846171430}
@@ -13400,6 +13398,7 @@ MonoBehaviour:
   - {fileID: 100934284}
   - {fileID: 490751691}
   - {fileID: 413576215}
+  themeMusic: {fileID: 621336111}
 --- !u!82 &2132426177
 AudioSource:
   m_ObjectHideFlags: 0
@@ -65206,7 +65205,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: dec304ee4648bf945ba6de49da2e199b, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 0.7
   m_Pitch: 1
   Loop: 0

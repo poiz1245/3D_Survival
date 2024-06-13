@@ -61,7 +61,7 @@ public class UIManager : MonoBehaviour
     }
     public void GameClear(bool bossDead)
     {
-        SoundManager.Instance.GameWin();
+        SoundManager.Instance.GameClear();
         buttonPanel.SetActive(!bossDead);
         gameClearPanel.SetActive(bossDead);
         playerWinObject.SetActive(true);
