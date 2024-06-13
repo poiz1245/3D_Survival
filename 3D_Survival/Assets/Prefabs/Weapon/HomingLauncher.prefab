@@ -46,6 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 0
   speed: 10
-  damage: 20
+  damage: 10
   range: 5
-  fireDelay: 0.2
+  fireDelay: 0.3

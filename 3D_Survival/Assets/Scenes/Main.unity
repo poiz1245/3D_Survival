@@ -4065,7 +4065,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -4.999878, y: 0}
+  m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &563291267
@@ -7733,7 +7733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f08008ddcac3e4d865a6402feb3738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeSpawnDelay: 3.5
+  meleeSpawnDelay: 2.5
   rangedSpawnDelay: 7.5
   spawnPoints:
   - {fileID: 577248028}
@@ -10226,9 +10226,9 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 100
-  m_Range: 12.2
-  m_SpotAngle: 111.81993
+  m_Intensity: 374.4
+  m_Range: 34.6
+  m_SpotAngle: 80.86447
   m_InnerSpotAngle: 0
   m_CookieSize: 10
   m_Shadows:
@@ -10285,7 +10285,7 @@ Transform:
   m_GameObject: {fileID: 1642012329}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 8.5, z: 2.02}
+  m_LocalPosition: {x: 0, y: 15.27, z: 2.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -23518,7 +23518,7 @@ PrefabInstance:
     - target: {fileID: 1507652895602619334, guid: 22ff8732f7ff2cf47b4f9e1b204934b9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.500002
+      value: 15.27
       objectReference: {fileID: 0}
     - target: {fileID: 1507652895602619334, guid: 22ff8732f7ff2cf47b4f9e1b204934b9,
         type: 3}
