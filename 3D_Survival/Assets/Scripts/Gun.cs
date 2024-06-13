@@ -17,9 +17,14 @@ public class Gun : Weapon
         this.range = range;
         this.spawnDelay = 0.5f;
     }
-
+    private void Start()
+    {
+        float power = GameManager.Instance.player.playerAttackPower * 0.1f;
+        damage += power;
+    }
     private void Update()
     {
+        print(damage);
         spawnTime -= Time.deltaTime;
 
         if (spawnTime <= 0 && Time.timeScale != 0)
@@ -29,6 +34,10 @@ public class Gun : Weapon
         }
 
         transform.rotation = GameManager.Instance.player.transform.rotation;
+    }
+    public override void SetPower()
+    {
+        base.SetPower();
     }
     public void SetBullet(int index, int spawnPointIndex) //총알 스폰
     {
@@ -71,7 +80,6 @@ public class Gun : Weapon
         if (level == 1)
         {
             //레벨이 0에서 1로 올라갈 때 들어와서 공속 50%증가
-            UIManager.Instance.rawImage[0].SetActive(true);
             spawnDelay *= 0.5f;
             UIManager.Instance.SetText(0, "다른 방향의 적을 추가로 공격합니다."); //다음 레벨업 할 때 표시될 text 세팅
         }

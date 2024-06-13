@@ -40,6 +40,7 @@ public class SkillUpGrade : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         GameManager.Instance.player.playerAttackPower *= 1.1f;
+        WeaponManager.instance.SetPower();
         UIManager.Instance.buttonPanel.SetActive(false);
     }
     public void PlayerShieldUp()

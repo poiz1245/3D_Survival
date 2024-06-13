@@ -20,4 +20,10 @@ public class Weapon : MonoBehaviour
     {
         level++;
     }
+
+    public virtual void SetPower()
+    {
+        float power = GameManager.Instance.player.playerAttackPower / 100;
+        damage += power;
+    }
 }

@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] List<GameObject> button;
     [SerializeField] Transform[] spots;
-    public GameObject[] rawImage;
+    public GameObject[] inventoryRawImage;
     public Text[] upGradeText;
 
 
@@ -38,6 +38,7 @@ public class UIManager : MonoBehaviour
     {
         GameManager.Instance.player.OnPlayerLevelChanged += PlayerLevelUp;
         GameManager.Instance.player.OnPlayerStateChanged += GameOver;
+        inventoryRawImage[0].SetActive(true);
     }
     private void Update()
     {

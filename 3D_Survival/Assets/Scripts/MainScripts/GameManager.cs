@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
 
         stageTime += Time.deltaTime;
 
-        if (stageTime >= 5 && stage != maxStage)
+        if (stageTime >= 30 && stage != maxStage)
         {
             stage++;
             monsterSpawner.SpawnMonster();

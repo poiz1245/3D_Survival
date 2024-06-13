@@ -17,7 +17,7 @@ public class Bullet : MonoBehaviour
         aliveTime += Time.deltaTime;
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
-        if(aliveTime >5)
+        if(aliveTime >1)
         {
             gameObject.SetActive(false);
             aliveTime = 0;

@@ -223,7 +223,7 @@ public class BossMonster : MonoBehaviour
             }
             bulletSpawnComplate = true;
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(3f);
 
             weightAngle += 1;
 
@@ -328,7 +328,7 @@ public class BossMonster : MonoBehaviour
             }
             bulletSpawnComplate = true;
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(3f);
 
             weightAngle += 1;
 
@@ -385,7 +385,7 @@ public class BossMonster : MonoBehaviour
 
             bulletSpawnComplate = true;
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(3f);
 
             weightAngle += 1;
 

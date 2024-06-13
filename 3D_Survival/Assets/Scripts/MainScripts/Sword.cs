@@ -8,10 +8,18 @@ public class Sword : Weapon
     [SerializeField] GameObject swordLevel2;
     public Sword(int level, float speed, float damage, float range) : base(level, speed, damage, range)
     {
+        float power = GameManager.Instance.player.playerAttackPower / 100;
+        damage += damage * power;
+
         this.level = level;
         this.speed = speed;
         this.damage = damage;
         this.range = range;
+    }
+    private void Start()
+    {
+        float power = GameManager.Instance.player.playerAttackPower * 0.1f;
+        damage += power;
     }
     void Update()
     {
@@ -20,7 +28,10 @@ public class Sword : Weapon
             transform.Rotate(new Vector3(0, 1 * speed, 0));
         }
     }
-
+    public override void SetPower()
+    {
+        base.SetPower();
+    }
     public override void WeaponUpGrade()
     {
         base.WeaponUpGrade();
@@ -28,7 +39,7 @@ public class Sword : Weapon
 
         if (level == 1)
         {
-            UIManager.Instance.rawImage[2].SetActive(true);
+            UIManager.Instance.inventoryRawImage[2].SetActive(true);
             swordLevel1.SetActive(true);
             UIManager.Instance.SetText(2, "추가로 무기를 획득합니다.");
         }

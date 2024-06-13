@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using Unity.VisualScripting;
-using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class AoE : Weapon
 {
@@ -21,11 +21,16 @@ public class AoE : Weapon
         this.damage = damage;
         this.coolTime = coolTime;
     }
-
+    public override void SetPower()
+    {
+        base.SetPower();
+    }
     private void Start()
     {
         targetLayer = LayerMask.GetMask("Monster");
         OnObjectVisibilityChanged += HandleVisibilityChanged;
+        float power = GameManager.Instance.player.playerAttackPower * 0.1f;
+        damage += power;
 
     }
     void OnVisibilityChanged(bool isVisible)
@@ -82,7 +87,7 @@ public class AoE : Weapon
 
         if (level == 1)
         {
-            UIManager.Instance.rawImage[3].SetActive(true);
+            UIManager.Instance.inventoryRawImage[3].SetActive(true);
             OnVisibilityChanged(true);
             UIManager.Instance.SetText(3, "더 넓은 범위의 적을 공격합니다.");
         }
@@ -91,10 +96,10 @@ public class AoE : Weapon
             range *= 1.2f;
             myParticleSystem.gameObject.transform.localScale *= 1.2f;
             UIManager.Instance.SetText(3, "더 강하게 적을 공격합니다.");
-        }                              
-        else if (level == 3)           
-        {                              
-            damage *= 2f;              
+        }
+        else if (level == 3)
+        {
+            damage *= 2f;
             UIManager.Instance.SetText(3, "주변의 적을 느리게 합니다.");
         }
         else if (level == 4)

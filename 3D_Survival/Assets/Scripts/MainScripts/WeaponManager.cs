@@ -12,7 +12,7 @@ public class WeaponManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -24,5 +24,13 @@ public class WeaponManager : MonoBehaviour
     public void UpgradeWeapon(int weaponIndex)
     {
         weaponsArray[weaponIndex].WeaponUpGrade();
+    }
+
+    public void SetPower()
+    {
+        for (int i = 0; i < weaponsArray.Length; i++)
+        {
+            weaponsArray[i].SetPower();
+        }
     }
 }

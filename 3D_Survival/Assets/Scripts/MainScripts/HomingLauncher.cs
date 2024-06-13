@@ -31,14 +31,20 @@ public class HomingLauncher : Weapon
     public Transform nearestTargetPos { get; private set; }
     public HomingLauncher(int level, float speed, float damage, float range, float fireDelay) : base(level, speed, damage, range)
     {
+      
+
         this.level = level;
         this.speed = speed;
         this.damage = damage;
         this.range = range;
         this.fireDelay = fireDelay;
     }
+  
     private void Start()
     {
+        float power = GameManager.Instance.player.playerAttackPower * 0.1f;
+        damage += power;
+
         targetLayer = LayerMask.GetMask("Monster");
         findTarget = false;
     }
@@ -75,6 +81,10 @@ public class HomingLauncher : Weapon
                 changedTarget = null;
             }
         }
+    }
+    public override void SetPower()
+    {
+        base.SetPower();
     }
     void ScanTargets()
     {
@@ -149,7 +159,7 @@ public class HomingLauncher : Weapon
 
         if (level == 1)
         {
-            UIManager.Instance.rawImage[1].SetActive(true);
+            UIManager.Instance.inventoryRawImage[1].SetActive(true);
             isSpawn = true;
             UIManager.Instance.SetText(1, "적을 추적하는 범위가 증가합니다.");
         }
