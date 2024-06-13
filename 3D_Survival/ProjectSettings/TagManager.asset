@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Monster
   - Area
+  - BulletRange
   layers:
   - Default
   - TransparentFX
