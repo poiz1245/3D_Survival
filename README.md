@@ -27,10 +27,40 @@
   ◼ AoE
   - Physics.OverlapColiider 사용하여 정해진 반경 내의 몬스터를 감지하여 쿨타임 마다 GetDamage() 호출
   - 레벨 4일 때 반경 내의 몬스터 이동속도 감소
-  
-  
-  
+    
 ### 3. 추적시스템 구현
+- 주변의 가장 가까운 몬스터를 감지하여 공격하거나, 몬스터가 플레이어를 감지하여 공격하기 위해 사용
+- 아래와 같은 폼으로 필요한 상황에 따라 조금씩 변환하여 사용하였음
+- 타겟의 위치 정보를 참조하여 타겟 방향으로 이동할 수 있도록 함
+```
+ void ScanTargets()
+    {
+        Collider[] targets = Physics.OverlapSphere(transform.position, range, targetLayer);
+
+        if (targets.Length > 0)
+        {
+            float closestDistance = Mathf.Infinity;
+            foreach (Collider target in targets)
+            {
+                MeleeMonster meleeMonster = target.GetComponent<MeleeMonster>();
+                if (meleeMonster != null)
+                {
+                    float distance = Vector3.Distance(transform.position, meleeMonster.transform.position);
+                    if (distance < closestDistance && meleeMonster.hp > 0)
+                    {
+                        closestDistance = distance;
+                        closestTargetObject = meleeMonster.gameObject;
+                    }
+                }
+             }
+            nearestTarget = closestTargetObject;
+        }
+        else
+        {
+            nearestTarget = null;
+        }
+    }
+```
 ### 4. 무한맵 구현
 ### 5. 플레이어와 몬스터 움직임 구현
 ### 6. UI 및 사운드
