@@ -12,7 +12,8 @@ public class MeleeMonster : MonoBehaviour
     public float attackRange;
     public int experienceAmount;
     public GameObject particlePrefab;
-    public AudioSource audioSource;
+    public AudioSource hitSound;
+    public AudioSource deathSound;
 
     [SerializeField] Transform expSpawnPoint;
 
@@ -101,6 +102,7 @@ public class MeleeMonster : MonoBehaviour
     }
     void Die()
     {
+        deathSound.Play();
         gameObject.SetActive(false);
     }
     void DropExp(bool monsterState)
@@ -145,7 +147,7 @@ public class MeleeMonster : MonoBehaviour
     {
         GameObject myPrefabInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
        //articleSystem particleSystem = myPrefabInstance.GetComponent<ParticleSystem>();
-        audioSource.Play();
+        hitSound.Play();
         hp -= damage;
     }
     void ScanPlayer()

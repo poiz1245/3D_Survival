@@ -16,7 +16,8 @@ public class BossMonster : MonoBehaviour
     public float attackRange;
     public int experienceAmount;
     public GameObject particlePrefab;
-    public AudioSource audioSource;
+    public AudioSource hitSound;
+    public AudioSource deathSound;
 
     Rigidbody rigid;
     Animator anim;
@@ -117,6 +118,7 @@ public class BossMonster : MonoBehaviour
         //gameObject.SetActive(false);
         //collider.enabled = false;
         rigid.isKinematic = true;
+        deathSound.Play();
     }
     void GameClear(bool isDead)
     {
@@ -161,7 +163,7 @@ public class BossMonster : MonoBehaviour
     {
         GameObject myPrefabInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
         ParticleSystem particleSystem = myPrefabInstance.GetComponent<ParticleSystem>();
-        audioSource.Play();
+        hitSound.Play();
         hp -= damage;
     }
     public void ScanPlayer()
