@@ -17,7 +17,6 @@ public class BossMonster : MonoBehaviour
     public int experienceAmount;
     public GameObject particlePrefab;
     public AudioSource hitSound;
-    public AudioSource deathSound;
 
     Rigidbody rigid;
     Animator anim;
@@ -70,11 +69,6 @@ public class BossMonster : MonoBehaviour
 
     private void OnEnable()
     {
-        /*        hp = maxHp;
-                monsterState = false;
-                collider.enabled = true;
-                rigid.isKinematic = false;
-        */
         OnMonsterStateChanged += DropExp;
     }
     private void OnDisable()
@@ -108,20 +102,17 @@ public class BossMonster : MonoBehaviour
 
         if (hp <= 0)
         {
-            hp = 0;
-            deathSound.Play();
             monsterState = true;
-            Die();
         }
     }
     private void Die()
     {
-        //gameObject.SetActive(false);
-        //collider.enabled = false;
         rigid.isKinematic = true;
     }
     void GameClear(bool isDead)
     {
+        hp = 0;
+        Die();
         anim.SetBool("isDead", true);
         anim.SetBool("isAttack", false);
         UIManager.Instance.GameClear(isDead);
