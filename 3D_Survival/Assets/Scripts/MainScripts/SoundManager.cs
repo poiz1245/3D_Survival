@@ -5,20 +5,46 @@ using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] AudioSource audioSource;
+    public static SoundManager Instance;
+    [SerializeField] AudioSource buttonClickSound;
+    [SerializeField] AudioSource deadSound;
+    [SerializeField] AudioSource winSound;
+    [SerializeField] AudioSource monsterDeadSound;
     [SerializeField] Button[] buttons;
 
+
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(Instance);
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
+        GameManager.Instance.player.OnPlayerStateChanged += GameOver;
         for (int i = 0; i < buttons.Length; i++)
         {
             buttons[i].onClick.AddListener(SoundPlay);
         }
     }
-
+    void GameOver(bool gameOver)
+    {
+        deadSound.Play();
+    }
+    public void GameWin()
+    {
+        winSound.Play();
+    }
     void SoundPlay()
     {
-        audioSource.Play();
+        buttonClickSound.Play();
     }
+
+
 }
