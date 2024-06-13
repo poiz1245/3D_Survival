@@ -96,10 +96,10 @@ public class RangedMonster : MonoBehaviour
         if (hp <= 0)
         {
             hp = 0;
+            deathSound.Play();
             monsterState = true;
             collider.enabled = false;
             rigid.isKinematic = true;
-            deathSound.Play();
             Invoke("Die", 1.5f);
         }
     }
@@ -149,8 +149,21 @@ public class RangedMonster : MonoBehaviour
     public void GetDamage(float damage)
     {
         GameObject myPrefabInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
-        ParticleSystem particleSystem = myPrefabInstance.GetComponent<ParticleSystem>();
         hitSound.Play();
+
+        if (hp <= damage)
+        {
+            hp -= damage;
+
+            deathSound.Play();
+            hp = 0;
+            monsterState = true;
+            collider.enabled = false;
+            rigid.isKinematic = true;
+            Invoke("Die", 1.5f);
+            return;
+        }
+
         hp -= damage;
     }
     public void ScanPlayer()

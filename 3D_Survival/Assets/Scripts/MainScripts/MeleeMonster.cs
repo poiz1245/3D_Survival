@@ -90,19 +90,10 @@ public class MeleeMonster : MonoBehaviour
     private void Update()
     {
         AnimationSetting();
-
-        if (hp <= 0)
-        {
-            hp = 0;
-            monsterState = true;
-            collider.enabled = false;
-            rigid.isKinematic = true;
-            deathSound.Play();
-            Invoke("Die", 1.5f);
-        }
     }
     void Die()
     {
+
         gameObject.SetActive(false);
     }
     void DropExp(bool monsterState)
@@ -148,6 +139,20 @@ public class MeleeMonster : MonoBehaviour
         GameObject myPrefabInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
         //articleSystem particleSystem = myPrefabInstance.GetComponent<ParticleSystem>();
         hitSound.Play();
+
+        if (hp <= damage)
+        {
+            hp -=damage;
+
+            deathSound.Play();
+            hp = 0;
+            monsterState = true;
+            collider.enabled = false;
+            rigid.isKinematic = true;
+            Invoke("Die", 1.5f);
+            return;
+        }
+
         hp -= damage;
     }
     void ScanPlayer()
@@ -172,7 +177,6 @@ public class MeleeMonster : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            print("aa");
             GameManager.Instance.player.GetDamage(damage);
         }
     }
