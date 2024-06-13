@@ -14,6 +14,7 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
+
     }
     private void OnBecameInvisible()
     {
@@ -45,6 +46,13 @@ public class Bullet : MonoBehaviour
                 bossMonster.GetDamage(damage);
             }
 
+            gameObject.SetActive(false);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("BulletRange"))
+        {
             gameObject.SetActive(false);
         }
     }
