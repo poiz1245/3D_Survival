@@ -25,7 +25,7 @@ public class Sword : Weapon
     {
         if (Time.timeScale != 0)
         {
-            transform.Rotate(new Vector3(0, 1 * speed, 0));
+            transform.Rotate(new Vector3(0, 1 * speed * Time.deltaTime, 0));
         }
     }
     public override void SetPower()

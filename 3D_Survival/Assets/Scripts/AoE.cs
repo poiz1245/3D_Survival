@@ -74,7 +74,7 @@ public class AoE : Weapon
                 bossMonster.GetDamage(damage);
                 if (level == 4)
                 {
-                    bossMonster.moveSpeed *= 0.5f;
+                    //bossMonster.moveSpeed *= 0.5f;
                 }
             }
         }

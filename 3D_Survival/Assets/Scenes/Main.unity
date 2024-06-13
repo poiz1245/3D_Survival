@@ -3530,7 +3530,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1675638952}
         m_TargetAssemblyTypeName: SkillUpGrade, Assembly-CSharp
-        m_MethodName: PlayerScanRangeUp
+        m_MethodName: PlayerShieldUp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3950,6 +3950,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e4c5d6869c01e74787357dff2407ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &535094786
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4710579317432648360, guid: 8a2c3dcb52685ff47bc5ab950075c0f2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.0227394
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710579317432648360, guid: 8a2c3dcb52685ff47bc5ab950075c0f2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.00000047683716
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710579317432648360, guid: 8a2c3dcb52685ff47bc5ab950075c0f2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.46896
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710579317432648360, guid: 8a2c3dcb52685ff47bc5ab950075c0f2,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710579317432648360, guid: 8a2c3dcb52685ff47bc5ab950075c0f2,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710579317432648360, guid: 8a2c3dcb52685ff47bc5ab950075c0f2,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710579317432648360, guid: 8a2c3dcb52685ff47bc5ab950075c0f2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710579317432648360, guid: 8a2c3dcb52685ff47bc5ab950075c0f2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710579317432648360, guid: 8a2c3dcb52685ff47bc5ab950075c0f2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4710579317432648360, guid: 8a2c3dcb52685ff47bc5ab950075c0f2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8755335473465688229, guid: 8a2c3dcb52685ff47bc5ab950075c0f2,
+        type: 3}
+      propertyPath: m_Name
+      value: BossMonster
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8a2c3dcb52685ff47bc5ab950075c0f2, type: 3}
 --- !u!1 &539628102
 GameObject:
   m_ObjectHideFlags: 0
@@ -5003,6 +5071,7 @@ GameObject:
   - component: {fileID: 678853113}
   - component: {fileID: 678853112}
   - component: {fileID: 678853114}
+  - component: {fileID: 678853115}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -5065,8 +5134,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
-  hp: 10000
-  maxHp: 10000
+  hp: 100
+  maxHp: 100
   playerAttackPower: 100
   playerShield: 10
   objectScanRadius: 2
@@ -5197,6 +5266,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &678853115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678853107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fa467b8af9e9ba46a4113399eb66eb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &680011826
 GameObject:
   m_ObjectHideFlags: 0
@@ -28558,7 +28639,7 @@ PrefabInstance:
     - target: {fileID: 5083141763600382736, guid: 797c78cfff16f77428c4aa140bf44e0b,
         type: 3}
       propertyPath: speed
-      value: 2
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5083141763600382736, guid: 797c78cfff16f77428c4aa140bf44e0b,
         type: 3}
@@ -70596,3 +70677,4 @@ SceneRoots:
   - {fileID: 1642012332}
   - {fileID: 678853111}
   - {fileID: 351984259}
+  - {fileID: 535094786}

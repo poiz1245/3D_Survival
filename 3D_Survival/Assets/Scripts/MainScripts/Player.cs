@@ -132,6 +132,11 @@ public class Player : MonoBehaviour
     }
     public void AddExperience(int amount)
     {
+        if(level >= 50)
+        {
+            return;
+        }
+
         currentExperience += amount;
         if (currentExperience >= maxExperience)
         {
@@ -147,7 +152,7 @@ public class Player : MonoBehaviour
 
         if (hp <= maxHp)
         {
-            hp += maxHp * 0.3f;
+            hp += maxHp * 0.1f;
 
             if (hp > maxHp)
             {
