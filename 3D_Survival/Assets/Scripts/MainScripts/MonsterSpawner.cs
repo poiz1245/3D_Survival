@@ -56,7 +56,8 @@ public class MonsterSpawner : MonoBehaviour
 
     IEnumerator MeleeMonsterSpawn(int index, float spawnDelay)
     {
-        int rnd = Random.Range(0, spawnPoints.Length);
+        //int[] rnd = new int[5];
+        int rnd;
         float stageDelay = spawnDelay - (index * 0.5f);
 
         if (stageDelay <= 0)
@@ -67,14 +68,28 @@ public class MonsterSpawner : MonoBehaviour
         if (index == 0)
         {
             meleeMonster = GameManager.Instance.monsterPool.GetMonster(0);
-            meleeMonster.transform.position = spawnPoints[rnd].position;
+            meleeMonster.transform.position = spawnPoints[0].position;
         }
 
         while (!isMaxStage)
         {
             yield return new WaitForSeconds(stageDelay);
+            for (int i = 0; i < 5; i++)
+            {
+                rnd = Random.Range(0, spawnPoints.Length);
+                meleeMonster = GameManager.Instance.monsterPool.GetMonster(0);
+                meleeMonster.transform.position = spawnPoints[rnd].position;
+            }
+
+/*            meleeMonster = GameManager.Instance.monsterPool.GetMonster(0);
             meleeMonster = GameManager.Instance.monsterPool.GetMonster(0);
-            meleeMonster.transform.position = spawnPoints[rnd].position;
+            meleeMonster = GameManager.Instance.monsterPool.GetMonster(0);
+            meleeMonster = GameManager.Instance.monsterPool.GetMonster(0);
+            meleeMonster = GameManager.Instance.monsterPool.GetMonster(0);
+            meleeMonster.transform.position = spawnPoints[rnd[1]].position;
+            meleeMonster.transform.position = spawnPoints[rnd[2]].position;
+            meleeMonster.transform.position = spawnPoints[rnd[3]].position;
+            meleeMonster.transform.position = spawnPoints[rnd[4]].position;*/
         }
 
     }
@@ -82,6 +97,7 @@ public class MonsterSpawner : MonoBehaviour
     IEnumerator RangedMonsterSpawn(int index, float spawnDelay)
     {
         int rnd = Random.Range(0, spawnPoints.Length);
+
         float stageDelay = spawnDelay - (index * 0.5f);
 
         if (stageDelay <= 0)
