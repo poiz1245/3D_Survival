@@ -97,12 +97,12 @@ public class MeleeMonster : MonoBehaviour
             monsterState = true;
             collider.enabled = false;
             rigid.isKinematic = true;
+            deathSound.Play();
             Invoke("Die", 1.5f);
         }
     }
     void Die()
     {
-        deathSound.Play();
         gameObject.SetActive(false);
     }
     void DropExp(bool monsterState)
@@ -146,7 +146,7 @@ public class MeleeMonster : MonoBehaviour
     public void GetDamage(float damage)
     {
         GameObject myPrefabInstance = Instantiate(particlePrefab, transform.position, Quaternion.identity);
-       //articleSystem particleSystem = myPrefabInstance.GetComponent<ParticleSystem>();
+        //articleSystem particleSystem = myPrefabInstance.GetComponent<ParticleSystem>();
         hitSound.Play();
         hp -= damage;
     }

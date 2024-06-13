@@ -109,6 +109,7 @@ public class BossMonster : MonoBehaviour
         if (hp <= 0)
         {
             hp = 0;
+            deathSound.Play();
             monsterState = true;
             Die();
         }
@@ -118,7 +119,6 @@ public class BossMonster : MonoBehaviour
         //gameObject.SetActive(false);
         //collider.enabled = false;
         rigid.isKinematic = true;
-        deathSound.Play();
     }
     void GameClear(bool isDead)
     {

@@ -99,13 +99,13 @@ public class RangedMonster : MonoBehaviour
             monsterState = true;
             collider.enabled = false;
             rigid.isKinematic = true;
+            deathSound.Play();
             Invoke("Die", 1.5f);
         }
     }
     private void Die()
     {
-        deathSound.Play();
-        gameObject.SetActive(false); 
+        gameObject.SetActive(false);
     }
 
     void DropExp(bool monsterState)
