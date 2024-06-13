@@ -2064,9 +2064,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 0
-  maxHp: 1000
+  maxHp: 10000
   damage: 10
-  moveSpeed: 7
+  moveSpeed: 5
   attackRange: 1.5
   experienceAmount: 0
   particlePrefab: {fileID: 5024009746357069194, guid: eab10063bbd5c3040ae0d536849220c6,

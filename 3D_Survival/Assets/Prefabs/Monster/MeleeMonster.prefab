@@ -1297,7 +1297,7 @@ MonoBehaviour:
   damage: 10
   moveSpeed: 5
   attackRange: 1.5
-  experienceAmount: 10
+  experienceAmount: 40
   particlePrefab: {fileID: 5024009746357069194, guid: eab10063bbd5c3040ae0d536849220c6,
     type: 3}
   audioSource: {fileID: 2956517962791622282}
