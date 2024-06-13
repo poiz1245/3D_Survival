@@ -6,23 +6,19 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    
+
     float speed;
     float damage;
     float aliveTime;
 
     private void Update()
     {
-        aliveTime += Time.deltaTime;
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
-
-        if(aliveTime >1)
-        {
-            gameObject.SetActive(false);
-            aliveTime = 0;
-        }
     }
-
+    private void OnBecameInvisible()
+    {
+        gameObject.SetActive(false);
+    }
     public void SetStatus(float damage, float speed)
     {
         this.damage = damage;
