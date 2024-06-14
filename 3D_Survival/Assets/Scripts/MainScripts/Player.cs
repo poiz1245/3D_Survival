@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] float moveSpeed;
     [SerializeField] AudioSource levelUpSound;
-
+    [SerializeField] Joystick joystick;
     LayerMask dropObjectLayer;
     Rigidbody rigid;
     Animator anim;
@@ -67,18 +67,16 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 moveDir = new Vector3(horizontalInput, rigid.velocity.y, verticalInput);
-
         Vector3 targetVelocity = moveDir.normalized * moveSpeed;
         Vector3 velocityChange = (targetVelocity - rigid.velocity);
-
         Movement(velocityChange);
         Rotation(moveDir);
-        ScanDropObject();
 
+        ScanDropObject();
     }
     private void AnimSet()
     {
-        if (horizontalInput != 0f || verticalInput != 0f)
+        if (horizontalInput != 0f || verticalInput != 0f || joystick.Horizontal != 0f | joystick.Vertical != 0f)
         {
             anim.SetBool("isRun", true);
         }
@@ -132,7 +130,7 @@ public class Player : MonoBehaviour
     }
     public void AddExperience(int amount)
     {
-        if(level >= 50)
+        if (level >= 50)
         {
             return;
         }
